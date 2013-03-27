@@ -1,0 +1,18 @@
+* Build stand-alone JAR:
+  - include dependencies to:
+    > scala library jar
+    > imagej library jar
+
+* Create dedicated Afterimage website:
+  - upload jar to a repo
+  - generate scaladoc documentation
+  - setup www.attitude.net/afterimage website with some basic info & links (jar, doc, attitude)
+
+* Add support more C64 file formats:
+  - http://unusedino.de/ec64/technical/aay/c64/frmmain.htm
+  - http://codebase64.org/doku.php?id=base:c64_grafix_files_specs_list_v0.03
+
+* Add new class: Selection (which can be manipulated -> translate/move within a current image)
+
+* Useful info about creating stand-alone executable JARs:
+  - http://blog.yuvimasory.com/2010/09/creating-standalone-executable-jar-with.html
