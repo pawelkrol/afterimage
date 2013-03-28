@@ -1,27 +1,37 @@
 attitude-afterimage
 ===================
 
-`Afterimage` is a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications, entirely written in [Scala](http://www.scala-lang.org/). It supports reading, translating, displaying, converting, and writing picture data from/to miscellaneous CBM image files.
+[Afterimage](http://www.cactus.jawnet.pl/afterimage/) is a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications, entirely written in [Scala](http://www.scala-lang.org/). It supports reading, translating, displaying, converting, and writing picture data from/to miscellaneous CBM image files.
 
 VERSION
 -------
 
 Version 0.01 (2013-03-27)
 
+PREREQUISITES
+-------------
+
+Besides `scala-library-2.9.2` and `scalatest_2.9.2-1.9.1`, some of the [Afterimage](http://www.cactus.jawnet.pl/afterimage/) functionalities rely upon the following Java image processing toolkit: `imagej-1.46`.
+
+Dependency management is normally handled automatically by your build tool.
+
 INSTALLATION
 ------------
 
-To build and install this library type the following:
+You can automatically download and install this library by adding the following dependency information to your `build.sbt` configuration file:
+
+    libraryDependencies += "org.c64.attitude" % "afterimage" % "0.01"
+
+In order to compile and build this library directly from the source code type the following:
 
     $ git clone git://github.com/pawelkrol/attitude-afterimage.git
     $ cd attitude-afterimage/
     $ sbt clean update compile test package
-    $ cp target/afterimage-0.01.jar <PROJECT_DIR>
 
 EXAMPLES
 --------
 
-Convert KoalPainter image to FacePainter format:
+Convert KoalaPainter image to FacePainter format:
 
     import org.c64.attitude.Afterimage.File.File
     import org.c64.attitude.Afterimage.Format.FacePainter
