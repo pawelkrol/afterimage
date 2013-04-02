@@ -44,10 +44,9 @@ object Palette {
 
   private def build(name: String) = {
     val filename = "/palettes/%s.json".format(name)
-    val config = getClass().getResource(filename).toString.replace("file:", "")
+    val inputStream = getClass().getResourceAsStream(filename)
 
-    val file = new java.io.File(config)
-    val source = scala.io.Source.fromFile(file)(scala.io.Codec.ISO8859)
+    val source = scala.io.Source.fromInputStream(inputStream)(scala.io.Codec.ISO8859)
 
     val palette = JSON.parseFull(source.mkString) match {
       case Some(data) => data match {
