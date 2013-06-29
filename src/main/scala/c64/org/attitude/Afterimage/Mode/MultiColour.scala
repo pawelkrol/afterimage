@@ -13,13 +13,13 @@ import Mode.Data.Row.{MultiColourRow,Row}
   * @param border optional single byte of image border colour
   * @param bckgrd single byte of image background colour
   */
-class MultiColour(
+case class MultiColour(
   val bitmap: Bitmap,
   val screen: Screen,
   val colors: Screen,
   val border: Option[Byte],
   val bckgrd: Byte
-) extends Mode {
+) extends CBM {
 
   /** An actual pixel width of this MultiColour image. */
   val width = MultiColour.maxWidth
@@ -119,6 +119,15 @@ class MultiColour(
       bckgrd
     )
   ).toArray
+
+  def canEqual(that: Any) = that.isInstanceOf[MultiColour]
+
+  override def equals(other: Any) = other match {
+    case that: MultiColour =>
+      (that canEqual this) && (this.bitmap == that.bitmap) && (this.screen == that.screen) && (this.colors == that.colors) && (this.border == that.border) && (this.bckgrd == that.bckgrd)
+    case _ =>
+      false
+  }
 }
 
 /** Factory for [[org.c64.attitude.Afterimage.Mode.MultiColour]] instances. */
@@ -137,6 +146,15 @@ object MultiColour {
     "colors" -> 0x03e8
   )
 
+  /** Creates an empty MultiColour image. */
+  def apply(): MultiColour =
+    MultiColour(
+      bitmap = Array.fill(MultiColour.size("bitmap")){0x00},
+      screen = Array.fill(MultiColour.size("screen")){0x00},
+      colors = Array.fill(MultiColour.size("colors")){0x00},
+      bckgrd = 0x00
+    )
+
   /** Creates a new MultiColour image with a given bitmap data and screen, background and border colours.
     *
     * @param bitmap array of 8000 raw bytes with image bitmap data
@@ -145,8 +163,8 @@ object MultiColour {
     * @param bckgrd single byte of image background colour
     * @param border single byte of image border colour
     */
-  def apply(bitmap: Array[Byte], screen: Array[Byte], colors: Array[Byte], bckgrd: Byte, border: Byte) =
-    new MultiColour(
+  def apply(bitmap: Array[Byte], screen: Array[Byte], colors: Array[Byte], bckgrd: Byte, border: Byte): MultiColour =
+    MultiColour(
       Bitmap(bitmap, Bitmap.maxCols, Bitmap.maxRows),
       Screen(screen, Screen.maxCols, Screen.maxRows),
       Screen(colors, Screen.maxCols, Screen.maxRows),
@@ -161,8 +179,8 @@ object MultiColour {
     * @param colors array of 1000 raw bytes with image colors data
     * @param bckgrd single byte of image background colour
     */
-  def apply(bitmap: Array[Byte], screen: Array[Byte], colors: Array[Byte], bckgrd: Byte) =
-    new MultiColour(
+  def apply(bitmap: Array[Byte], screen: Array[Byte], colors: Array[Byte], bckgrd: Byte): MultiColour =
+    MultiColour(
       Bitmap(bitmap, Bitmap.maxCols, Bitmap.maxRows),
       Screen(screen, Screen.maxCols, Screen.maxRows),
       Screen(colors, Screen.maxCols, Screen.maxRows),

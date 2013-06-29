@@ -31,4 +31,14 @@ class FileTest extends Suite {
     val name = getClass.getResource("/images/desolate-deev.aas").toString.replace("file:", "")
     assert(File.load(name).isInstanceOf[HiRes])
   }
+
+  def testImportHiResPNGFile {
+    val name = getClass.getResource("/images/desolate-deev.png").toString.replace("file:", "")
+    assert(File.convert(name, Import.HiRes()).isInstanceOf[HiRes])
+  }
+
+  def testImportMultiColourPNGFile {
+    val name = getClass.getResource("/images/frighthof83-yazoo.png").toString.replace("file:", "")
+    assert(File.convert(name, Import.MultiColour(backgroundColour = 0x00)).isInstanceOf[MultiColour])
+  }
 }

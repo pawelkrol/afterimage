@@ -6,7 +6,7 @@ import Mode.Data.Bitmap
 import Mode.Data.Row.Row
 
 /** Generic CBM image data. */
-trait Mode {
+trait CBM {
 
   /** Plain hi-resolution bitmap data of the image. */
   val bitmap: Bitmap
@@ -69,4 +69,14 @@ trait Mode {
     val screenY = (y & 0xf8) >> 3
     (screenX, screenY)
   }
+}
+
+/** Generic CBM image properties. */
+object CBM {
+
+  /** Total pixel width of a CBM image. */
+  val width = 320
+
+  /** Total pixel height of a CBM image. */
+  val height = 200
 }

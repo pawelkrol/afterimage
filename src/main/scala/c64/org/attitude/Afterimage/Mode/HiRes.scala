@@ -12,11 +12,11 @@ import Util.Util
   * @param screen optional screen colours data of an image
   * @param border optional single byte of image border colour
   */
-class HiRes(
+case class HiRes(
   val bitmap: Bitmap,
   val screen: Option[Screen],
   val border: Option[Byte]
-) extends Mode {
+) extends CBM {
 
   /** An actual pixel width of this HiRes image. */
   val width = HiRes.maxWidth
@@ -145,7 +145,7 @@ class HiRes(
   /** A fallback method returning default screen colour values (1000 bytes filled with 0xbc). */
   val emptyScreen = Array.fill(numCharRows * numCharCols){HiRes.defaultScreenValue}
 
-  /** Returns image data as an array of multicolour rows ([[org.c64.attitude.Afterimage.Mode.Data.MultiColourRow]] objects).
+  /** Returns image data as an array of hires rows ([[org.c64.attitude.Afterimage.Mode.Data.HiResRow]] objects).
     *
     * Note that fetching rows data from an image slice will also always return an array of full rows with 40 columns length each!
     */
@@ -161,6 +161,15 @@ class HiRes(
         Row.getScreenRow(row, screenData, numCharCols)
       )
     ).toArray
+  }
+
+  def canEqual(that: Any) = that.isInstanceOf[HiRes]
+
+  override def equals(other: Any) = other match {
+    case that: HiRes =>
+      (that canEqual this) && (this.bitmap == that.bitmap) && (this.screen == that.screen) && (this.border == that.border)
+    case _ =>
+      false
   }
 }
 
@@ -188,12 +197,18 @@ object HiRes {
   /** Default byte value of a HiRes screen data. */
   val defaultScreenValue = ((defaultColour << 4) | defaultBackground).toByte
 
+  /** Creates an empty HiRes image. */
+  def apply(): HiRes =
+    HiRes(
+      bitmap = Array.fill(HiRes.size("bitmap")){0x00}
+    )
+
   /** Creates a new HiRes image with a given bitmap data.
     *
     * @param bitmap array of 8000 raw bytes with image bitmap data
     */
-  def apply(bitmap: Array[Byte]) =
-    new HiRes(
+  def apply(bitmap: Array[Byte]): HiRes =
+    HiRes(
       Bitmap(bitmap, Bitmap.maxCols, Bitmap.maxRows),
       None,
       None
@@ -204,8 +219,8 @@ object HiRes {
     * @param bitmap array of 8000 raw bytes with image bitmap data
     * @param border single byte of image border colour
     */
-  def apply(bitmap: Array[Byte], border: Byte) =
-    new HiRes(
+  def apply(bitmap: Array[Byte], border: Byte): HiRes =
+    HiRes(
       Bitmap(bitmap, Bitmap.maxCols, Bitmap.maxRows),
       None,
       Some(border)
@@ -217,8 +232,8 @@ object HiRes {
     * @param screen array of 1000 raw bytes with image screen data
     * @param border single byte of image border colour
     */
-  def apply(bitmap: Array[Byte], screen: Array[Byte], border: Byte) =
-    new HiRes(
+  def apply(bitmap: Array[Byte], screen: Array[Byte], border: Byte): HiRes =
+    HiRes(
       Bitmap(bitmap, Bitmap.maxCols, Bitmap.maxRows),
       Some(Screen(screen, Screen.maxCols, Screen.maxRows)),
       Some(border)
@@ -229,8 +244,8 @@ object HiRes {
     * @param bitmap array of 8000 raw bytes with image bitmap data
     * @param screen array of 1000 raw bytes with image screen data
     */
-  def apply(bitmap: Array[Byte], screen: Array[Byte]) =
-    new HiRes(
+  def apply(bitmap: Array[Byte], screen: Array[Byte]): HiRes =
+    HiRes(
       Bitmap(bitmap, Bitmap.maxCols, Bitmap.maxRows),
       Some(Screen(screen, Screen.maxCols, Screen.maxRows)),
       None

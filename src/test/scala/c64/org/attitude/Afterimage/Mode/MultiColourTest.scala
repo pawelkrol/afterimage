@@ -159,4 +159,10 @@ class MultiColourTest extends Suite {
     assert(multiColourImage.pixel(8, 0) == 0x00)
     assert(multiColourImage.pixel(11, 7) == 0x00)
   }
+
+  def testEmptyMultiColourImage {
+
+    val multiColourImage = MultiColour()
+    assert(multiColourImage.isInstanceOf[MultiColour])
+  }
 }

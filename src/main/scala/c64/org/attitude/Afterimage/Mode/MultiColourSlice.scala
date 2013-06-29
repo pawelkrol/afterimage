@@ -75,7 +75,7 @@ class MultiColourSlice(
 /** Factory for [[org.c64.attitude.Afterimage.Mode.MultiColourSlice]] instances. */
 object MultiColourSlice {
 
-  /** Creates a new HiResSlice image section of a well-defined dimensions with a given bitmap data and optional screen colours.
+  /** Creates a new MultiColourSlice image section of a well-defined dimensions with a given bitmap data and optional screen colours.
     *
     * @param bitmap plain hi-resolution bitmap data of an image (it needs to be in line with given slice dimensions)
     * @param screen screen portion of colours data of an image (it needs to be in line with given slice dimensions)

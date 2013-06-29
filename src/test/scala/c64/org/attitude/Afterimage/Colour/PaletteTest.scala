@@ -2,8 +2,11 @@ package org.c64.attitude.Afterimage
 package Colour
 
 import org.scalatest.Suite
+import org.scalatest.matchers.ShouldMatchers
 
-class PaletteTest extends Suite {
+class PaletteTest extends Suite with ShouldMatchers {
+
+  private val palette = Palette("default")
 
   def getBlackColour =
     Colour(0x00.toByte, 0x00.toByte, 0x00.toByte, Some("black"))
@@ -20,13 +23,11 @@ class PaletteTest extends Suite {
   }
 
   def testLoadDefaultPalette {
-    val palette = Palette("default")
     assert(palette.isInstanceOf[Palette])
   }
 
   def testCheckDefaultPalette {
-    val palette = Palette("default")
-    assert(palette(0) == getBlackColour)
+    palette(0) should equal(getBlackColour)
   }
 
   def testLoadInvalidPalette {
@@ -36,60 +37,49 @@ class PaletteTest extends Suite {
   }
 
   def testGetRedColourIndexFromDefaultPalette {
-    val palette = Palette("default")
-    assert(palette.get(getRedColour) == 0x02)
+    palette.get(getRedColour) should equal(0x02)
   }
 
   def testGetBlueColourIndexFromDefaultPalette {
-    val palette = Palette("default")
-    assert(palette.get(getBlueColour) == 0x06)
+    palette.get(getBlueColour) should equal(0x06)
   }
 
   def testGetBlackColourIndexFromDefaultPalette {
-    val palette = Palette("default")
-    assert(palette.get(getBlackColour) == 0x00)
+    palette.get(getBlackColour) should equal(0x00)
   }
 
   def testGetRedColourValueFromDefaultPalette {
-    val palette = Palette("default")
-    assert(palette(0x02) == getRedColour)
+    palette(0x02) should equal(getRedColour)
   }
 
   def testGetBlueColourValueFromDefaultPalette {
-    val palette = Palette("default")
-    assert(palette(0x06) == getBlueColour)
+    palette(0x06) should equal(getBlueColour)
   }
 
   def testGetBlackColourValueFromDefaultPalette {
-    val palette = Palette("default")
-    assert(palette(0x00) == getBlackColour)
+    palette(0x00) should equal(getBlackColour)
   }
 
   def testGetHTMLRedColourIndexFromDefaultPalette {
-    val palette = Palette("default")
     val htmlRed = Colour(0xff.toByte, 0x00.toByte, 0x00.toByte, Some("red"))
-    assert(palette.get(htmlRed) == 0x00)
+    palette.get(htmlRed) should equal(0x02)
   }
 
   def testGetHTMLBlueColourIndexFromDefaultPalette {
-    val palette = Palette("default")
     val htmlBlue = Colour(0x00.toByte, 0x00.toByte, 0xff.toByte, Some("blue"))
-    assert(palette.get(htmlBlue) == 0x00)
+    palette.get(htmlBlue) should equal(0x06)
   }
 
   def testGetHTMLGreenColourIndexFromDefaultPalette {
-    val palette = Palette("default")
     val htmlGreen = Colour(0x00.toByte, 0xff.toByte, 0x00.toByte, Some("green"))
-    assert(palette.get(htmlGreen) == 0x00)
+    palette.get(htmlGreen) should equal(0x05)
   }
 
   def testGetImageJRedPixelColourFromDefaultPalette {
-    val palette = Palette("default")
-    assert(palette.pixel(0x02) == 0x0068372b)
+    palette.pixel(0x02) should equal(0x0068372b)
   }
 
   def testGetImageJBluePixelColourFromDefaultPalette {
-    val palette = Palette("default")
-    assert(palette.pixel(0x06) == 0x00352879)
+    palette.pixel(0x06) should equal(0x00352879)
   }
 }

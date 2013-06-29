@@ -1,3 +1,19 @@
+--
+
+* Import images from PNG format
+
+val picture = File.load("images/image.png", "hires")
+val picture = File.load("images/image.png", "multicolour", backgroundColour)
+
+class Importer
+
+1. Find the most common background colour or get defined one
+2. Analyse all 8x8 pixel fragments of an image to get proper colours
+3. Create objects of a selected type:
+   * new MultiColour(bitmap, screen, colors, border, bckgrd)
+
+--
+
 * Build stand-alone JAR:
   - include dependencies to:
     > scala library jar

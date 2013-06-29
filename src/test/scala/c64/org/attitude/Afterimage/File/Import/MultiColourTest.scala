@@ -1,0 +1,44 @@
+package org.c64.attitude.Afterimage
+package File.Import
+
+import ij.ImagePlus
+import ij.process.ColorProcessor
+
+import java.awt.Color.black
+
+import org.scalatest.Suite
+import org.scalatest.matchers.ShouldMatchers
+
+class MultiColourTest extends Suite with ShouldMatchers {
+
+  private val fileImportMultiColour = File.Import.MultiColour(backgroundColour = 0x00)
+
+  private val blackMultiColourImage = Mode.MultiColour(
+    bitmap = Array.fill[Byte](Mode.MultiColour.size("bitmap"))(0x00.toByte),
+    screen = Array.fill[Byte](Mode.MultiColour.size("screen"))(0x00.toByte),
+    colors = Array.fill[Byte](Mode.MultiColour.size("colors"))(0x00.toByte),
+    bckgrd = 0x00.toByte
+  )
+
+  private val emptyImagePlus = {
+
+    val width = Mode.CBM.width
+    val height = Mode.CBM.height
+
+    val ip = new ColorProcessor(width, height)
+    ip.setColor(black)
+    ip.fill()
+    new ImagePlus("MultiColour Image Converter", ip)
+  }
+
+  def testFileImportMultiColourInitialization {
+
+    fileImportMultiColour should equal (File.Import.MultiColour(backgroundColour = 0x00))
+  }
+
+  def testFileImportMultiColourConversion {
+
+    val convertedMultiColourImage = fileImportMultiColour.convert(emptyImagePlus).asInstanceOf[Mode.MultiColour]
+    convertedMultiColourImage should equal (blackMultiColourImage)
+  }
+}

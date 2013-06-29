@@ -8,7 +8,7 @@ package Mode.Data
   * @param cols screen width counted as a number of 8x8 character columns
   * @param rows screen height counted as a number of 8x8 character rows
   */
-class Screen(data: Array[Byte], cols: Int, rows: Int) {
+case class Screen(data: Array[Byte], cols: Int, rows: Int) {
 
   if (cols < 1 || cols > Screen.maxCols || rows < 1 || rows > Screen.maxRows)
     throw new InvalidScreenDataSizeException("%dx%d".format(cols, rows))
@@ -107,6 +107,15 @@ class Screen(data: Array[Byte], cols: Int, rows: Int) {
     * @param y Y coordinate of the screen colour
     */
   def apply(x: Int, y: Int): Byte = get(x, y)
+
+  def canEqual(that: Any) = that.isInstanceOf[Screen]
+
+  override def equals(other: Any) = other match {
+    case that: Screen =>
+      (that canEqual this) && (this.data.toList == that.data.toList) && (this.cols == that.cols) && (this.rows == that.rows)
+    case _ =>
+      false
+  }
 }
 
 /** Factory for [[org.c64.attitude.Afterimage.Mode.Data.Screen]] instances. */
@@ -121,14 +130,10 @@ object Screen {
   private val maxSize = maxCols * maxRows
 
   /** Creates a default (empty) screen of a maximum possible size. */
-  def apply() =
-    new Screen(Array.fill(maxSize){0x00}, maxCols, maxRows)
+  def apply(): Screen =
+    Screen(Array.fill(maxSize){0x00}, maxCols, maxRows)
 
   /** Creates a default (empty) screen of a given size. */
-  def apply(cols: Int, rows: Int) =
-    new Screen(Array.fill(cols * rows){0x00}, cols, rows)
-
-  /** Creates a new screen  of a given size and populates it with provided data. */
-  def apply(data: Array[Byte], cols: Int, rows: Int) =
-    new Screen(data, cols, rows)
+  def apply(cols: Int, rows: Int): Screen =
+    Screen(Array.fill(cols * rows){0x00}, cols, rows)
 }

@@ -156,4 +156,10 @@ class HiResTest extends Suite {
       new HiRes(bitmapSlice, Some(screenSlice), Some(border))
     }
   }
+
+  def testEmptyHiResImage {
+
+    val hiResImage = HiRes()
+    assert(hiResImage.isInstanceOf[HiRes])
+  }
 }

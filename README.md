@@ -1,12 +1,12 @@
 attitude-afterimage
 ===================
 
-[Afterimage](http://www.cactus.jawnet.pl/afterimage/) is a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications, entirely written in [Scala](http://www.scala-lang.org/). It supports reading, translating, displaying, converting, and writing picture data from/to miscellaneous CBM image files.
+[Afterimage](http://www.cactus.jawnet.pl/afterimage/) is a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications, entirely written in [Scala](http://www.scala-lang.org/). It supports reading, translating, displaying, converting, and writing picture data from/to miscellaneous CBM image files. Since version 0.02 it also provides functionality to import (convert) pictures directly from TIFF, BMP, DICOM, FITS, PGM, GIF, JPEG, and PNG files.
 
 VERSION
 -------
 
-Version 0.02-SNAPSHOT (2013-04-02)
+Version 0.02-SNAPSHOT (2013-06-30)
 
 PREREQUISITES
 -------------
@@ -41,7 +41,7 @@ Convert KoalaPainter image to FacePainter format:
 
     FacePainter(picture.asInstanceOf[MultiColour]).save("images/image.fcp")
 
-Preview Art Studio image:
+Preview Art Studio image using a default colour palette:
 
     import org.c64.attitude.Afterimage.Colour.Palette
     import org.c64.attitude.Afterimage.File.File
@@ -53,7 +53,7 @@ Preview Art Studio image:
 
     image.show()
 
-Save Advanced Art Studio image to PNG file:
+Save Advanced Art Studio image to PNG file using a default colour palette:
 
     import org.c64.attitude.Afterimage.Colour.Palette
     import org.c64.attitude.Afterimage.File.File
@@ -84,6 +84,20 @@ Generate dreamass-compatible source code string with HiRes image row data:
 
     val sourceCode = row.toCode("image_row_data_01")
 
+Import 320x200 pixels PNG file and convert image data directly to HiRes mode:
+
+    import org.c64.attitude.Afterimage.File.File
+    import org.c64.attitude.Afterimage.File.Import.HiRes
+
+    val picture = File.convert("images/image.png", HiRes())
+
+Import 320x200 pixels JPEG file and convert image data directly to MultiColour mode:
+
+    import org.c64.attitude.Afterimage.File.File
+    import org.c64.attitude.Afterimage.File.Import.MultiColour
+
+    val picture = File.convert("images/image.jpg", MultiColour(backgroundColour = 0x00))
+
 FEATURES
 --------
 
@@ -96,6 +110,17 @@ The list of currently supported CBM file format specifications includes:
 * Hires Bitmap `.hpi`
 * Face Painter `.fcp`
 * Koala Painter `.kla`
+
+The list of PC file format specifications suitable for conversion includes:
+
+* TIFF `.tiff`, `.tif`
+* BMP `.bmp`, `.dib`
+* DICOM `.dcm`
+* FITS `.fits`, `.fit`, `.fts`
+* PGM `.pgm`
+* GIF `.gif`
+* JPEG `.jpg`, `.jpeg`, `.jpe`, `.jif`, `.jfif`, `.jfi`
+* PNG `.png`
 
 The list of currently writable PC file format specifications includes:
 

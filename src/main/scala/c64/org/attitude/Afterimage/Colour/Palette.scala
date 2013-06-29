@@ -9,7 +9,7 @@ import scala.util.parsing.json.JSONObject
   * @constructor create a new colour palette with a set of 16 colours
   * @param colours definition of 16 colour mappings (C64 from/to RGB)
   */
-class Palette(colours: Array[Colour]) {
+case class Palette(colours: Array[Colour]) {
 
   if (colours.length != 16)
     throw new InvalidNumberOfPaletteColours(colours.length)
@@ -37,6 +37,15 @@ class Palette(colours: Array[Colour]) {
     * @param colour RGB colour to be resolved into the closest matching C64 hue
     */
   def get(colour: Colour) = colours.zipWithIndex.minBy(_._1.delta_to(colour))._2
+
+  def canEqual(that: Any) = that.isInstanceOf[Palette]
+
+  override def equals(other: Any) = other match {
+    case that: Palette =>
+      (that canEqual this) && (this.colours.toList == that.colours.toList)
+    case _ =>
+      false
+  }
 }
 
 /** Factory for [[org.c64.attitude.Afterimage.Colour.Palette]] instances. */

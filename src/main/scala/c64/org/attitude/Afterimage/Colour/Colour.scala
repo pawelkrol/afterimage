@@ -3,6 +3,8 @@ package Colour
 
 import java.lang.Math.sqrt
 
+import Util.Util.byte2uint
+
 /** Simple RGB colour abstraction with additional colour comparison methods.
   *
   * @constructor create a new RGB colour definition
@@ -13,9 +15,13 @@ import java.lang.Math.sqrt
   */
 case class Colour(red: Byte, green: Byte, blue: Byte, name: Option[String]) {
 
-  private val vector = Vector(red, green, blue)
+  private val r = byte2uint(red)
+  private val g = byte2uint(green)
+  private val b = byte2uint(blue)
 
-  private def diffVector(vec: Vector[Byte]) =
+  private val vector = Vector(r, g, b)
+
+  private def diffVector(vec: Vector[Int]) =
     this.vector.zip(vec).map(pair => pair._1 - pair._2)
 
   private def vectorLength(vec: Vector[Int]) =
@@ -28,7 +34,16 @@ case class Colour(red: Byte, green: Byte, blue: Byte, name: Option[String]) {
   def delta_to(that: Colour) = vectorLength(diffVector(that.vector))
 
   /** Returns ImageJ's pixel colour for an RGB colour. */
-  val pixel: Int = 256 * 256 * red + 256 * green + blue
+  val pixel: Int = 256 * 256 * r + 256 * g + b
+
+  def canEqual(that: Any) = that.isInstanceOf[Colour]
+
+  override def equals(other: Any) = other match {
+    case that: Colour =>
+      (that canEqual this) && (this.red == that.red) && (this.green == that.green) && (this.blue == that.blue)
+    case _ =>
+      false
+  }
 }
 
 /** Factory for [[org.c64.attitude.Afterimage.Colour.Colour]] instances. */

@@ -5,7 +5,7 @@ import java.io.{File,PrintStream}
 
 import Config.Offset
 import Memory.Address
-import Mode.{HiRes,Mode,MultiColour}
+import Mode.{CBM,HiRes,MultiColour}
 import Mode.Data.{Bitmap,Screen}
 
 /** CBM graphic format abstraction functioning as a base class for miscellaneous image formats providing data validation options as well as convenient access to the file loading address and data bytes. */
@@ -56,7 +56,7 @@ trait Format {
     *
     * @return a new instance of any `Mode`-inherited class with the image mode determined by the file data
     */
-  def extractData(): Mode = {
+  def extractData(): CBM = {
 
     config match {
       case hiRes: Config.HiRes => {

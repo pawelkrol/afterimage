@@ -2,8 +2,9 @@ package org.c64.attitude.Afterimage
 package Colour
 
 import org.scalatest.Suite
+import org.scalatest.matchers.ShouldMatchers
 
-class ColourTest extends Suite {
+class ColourTest extends Suite with ShouldMatchers {
 
   def getRedColour =
     Colour(0x68.toByte, 0x37.toByte, 0x2b.toByte, Some("red"))
@@ -35,12 +36,12 @@ class ColourTest extends Suite {
 
   def testDistanceBetweenRedAndBlue {
     val delta = getRedColour.delta_to(getBlueColour)
-    assert((delta * 100).round * 0.01 == 94.39)
+    (delta * 100).round * 0.01 should equal(94.39)
   }
 
   def testDistanceBetweenRedAndLightRed {
     val delta = getRedColour.delta_to(getLightRedColour)
-    assert((delta * 100).round * 0.01 == 216.46)
+    (delta * 100).round * 0.01 should equal(83.19)
   }
 
   def testDefaultColourCreate {
@@ -48,10 +49,10 @@ class ColourTest extends Suite {
   }
 
   def testGetImageJRedPixelColour {
-    assert(getRedColour.pixel == 0x0068372b)
+    getRedColour.pixel should equal(0x0068372b)
   }
 
   def testGetImageJBluePixelColour {
-    assert(getBlueColour.pixel == 0x00352879)
+    getBlueColour.pixel should equal(0x00352879)
   }
 }

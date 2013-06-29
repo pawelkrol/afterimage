@@ -8,7 +8,7 @@ package Mode.Data
   * @param cols bitmap width counted as a number of 8x8 character columns
   * @param rows bitmap height counted as a number of 8x8 character rows
   */
-class Bitmap(data: Array[Byte], cols: Int, rows: Int) {
+case class Bitmap(data: Array[Byte], cols: Int, rows: Int) {
 
   if (cols < 1 || cols > Bitmap.maxCols || rows < 1 || rows > Bitmap.maxRows)
     throw new InvalidBitmapDataSizeException("%dx%d".format(cols, rows))
@@ -126,6 +126,15 @@ class Bitmap(data: Array[Byte], cols: Int, rows: Int) {
 
     new Bitmap(data, cols, rows)
   }
+
+  def canEqual(that: Any) = that.isInstanceOf[Bitmap]
+
+  override def equals(other: Any) = other match {
+    case that: Bitmap =>
+      (that canEqual this) && (this.data.toList == that.data.toList) && (this.cols == that.cols) && (this.rows == that.rows)
+    case _ =>
+      false
+  }
 }
 
 /** Factory for [[org.c64.attitude.Afterimage.Mode.Data.Bitmap]] instances. */
@@ -142,14 +151,10 @@ object Bitmap {
   private val maxSize = maxCols * maxRows * bytesPerChar
 
   /** Creates a default (empty) bitmap of a maximum possible size. */
-  def apply() =
-    new Bitmap(Array.fill(maxSize){0x00}, maxCols, maxRows)
+  def apply(): Bitmap =
+    Bitmap(Array.fill(maxSize){0x00}, maxCols, maxRows)
 
   /** Creates a default (empty) bitmap of a given size. */
-  def apply(cols: Int, rows: Int) =
-    new Bitmap(Array.fill(cols * rows * bytesPerChar){0x00}, cols, rows)
-
-  /** Creates a new bitmap of a given size and populates it with provided data. */
-  def apply(data: Array[Byte], cols: Int, rows: Int) =
-    new Bitmap(data, cols, rows)
+  def apply(cols: Int, rows: Int): Bitmap =
+    Bitmap(Array.fill(cols * rows * bytesPerChar){0x00}, cols, rows)
 }

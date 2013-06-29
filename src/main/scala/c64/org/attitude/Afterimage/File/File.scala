@@ -1,9 +1,11 @@
 package org.c64.attitude.Afterimage
 package File
 
+import ij.ImagePlus
+
 import Format.{AdvancedArtStudio,ArtStudio,Config,FacePainter,HiResBitmap,KoalaPainter}
 import Memory.Address
-import Mode.Mode
+import Mode.CBM
 
 /** Factory for instances derived from [[org.c64.attitude.Afterimage.Mode.Mode]]. */
 object File {
@@ -11,9 +13,9 @@ object File {
   /** Loads image data from file.
     *
     * @param name CBM image file name
-    * @return a new instance of any class derived from `Mode` with the image mode determined by the file data
+    * @return a new instance of a class derived from `Mode` with the image mode determined by the file data
     */
-  def load(name: String): Mode = {
+  def load(name: String): CBM = {
 
     val file = new java.io.File(name)
     val source = scala.io.Source.fromFile(file)(scala.io.Codec.ISO8859).toArray
@@ -60,4 +62,12 @@ object File {
 
     throw new InvalidImageDataException("recognized graphics")
   }
+
+  /** Imports image data from file.
+    *
+    * @param name PC image file name
+    * @param mode image converter to use while processing image data
+    * @return a new instance of a class derived from `Mode` with the image mode determined by a converter used to import data
+    */
+  def convert(name: String, mode: Import.Mode): CBM = mode.convert(new ImagePlus(name))
 }

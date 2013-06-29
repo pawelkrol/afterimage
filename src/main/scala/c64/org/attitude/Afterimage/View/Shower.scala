@@ -5,13 +5,13 @@ import ij.ImagePlus
 import ij.process.ColorProcessor
 
 import Colour.{Colour,Palette}
-import Mode.{HiRes,Mode,MultiColour}
+import Mode.{CBM,HiRes,MultiColour}
 
 /** Image displayer based on the `ImageJ` library. */
 trait Shower {
 
   /** Picture to be used as a source of data for generating image preview. */
-  val picture: Mode
+  val picture: CBM
 
   /** Colour palette to be used when displaying a picture. */
   val palette: Palette
