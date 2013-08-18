@@ -39,7 +39,7 @@ class ImageTest extends Suite {
     val name = getClass.getResource("/images/niemanazwy-bimber.hpi").toString.replace("file:", "")
     val picture = File.load(name)
     val palette = Palette("default")
-    val image = Image(picture.asInstanceOf[HiRes].invert, palette).show()
+    Image(picture.asInstanceOf[HiRes].invert, palette).show()
   }
 
   @Ignore
@@ -48,7 +48,7 @@ class ImageTest extends Suite {
     val name = getClass.getResource("/images/frighthof83-yazoo.fcp").toString.replace("file:", "")
     val picture = File.load(name)
     val palette = Palette("default")
-    val image = Image(picture, palette).show()
+    Image(picture, palette).show()
   }
 
   @Ignore
@@ -58,7 +58,7 @@ class ImageTest extends Suite {
     val picture = File.load(name)
     val palette = Palette("default")
     val slice = picture.asInstanceOf[HiRes].slice(96, 72, 184, 88)
-    val image = Image(slice, palette).show()
+    Image(slice, palette).show()
   }
 
   @Ignore
@@ -68,6 +68,6 @@ class ImageTest extends Suite {
     val picture = File.load(name)
     val palette = Palette("default")
     val slice = picture.asInstanceOf[MultiColour].slice(0, 7)
-    val image = Image(slice, palette).show()
+    Image(slice, palette).show()
   }
 }

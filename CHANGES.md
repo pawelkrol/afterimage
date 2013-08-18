@@ -7,6 +7,7 @@ Revision history for `Afterimage`, a Commodore 64 graphics library with a built-
 --------------------------
 
 * Enhancement: importing image files with colour schemes other than RGB is now possible due to an immediate data conversion into an RGB format right after constructing an ImagePlus object from a file prior to an actual image data processing (previously images saved with a colour palette of 8-bit depth resulted in construction of empty pictures, because of inability to get correct colour data)
+* Optimization: algorithm converting PC image files into C64 hires mode now considers most frequent colour as a background colour
 
 0.02 (2013-06-30)
 -----------------

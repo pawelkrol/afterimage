@@ -14,7 +14,7 @@ class HiResTest extends Suite with ShouldMatchers {
   private val fileImportHiRes = File.Import.HiRes()
 
   private val blackHiResImage = Mode.HiRes(
-    bitmap = Array.fill[Byte](Mode.HiRes.size("bitmap"))(0xff.toByte),
+    bitmap = Array.fill[Byte](Mode.HiRes.size("bitmap"))(0x00.toByte),
     screen = Array.fill[Byte](Mode.HiRes.size("screen"))(0x00.toByte)
   )
 

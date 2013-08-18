@@ -1,7 +1,6 @@
 package org.c64.attitude.Afterimage
 package File.Import
 
-import org.scalatest.Ignore
 import org.scalatest.Suite
 import org.scalatest.matchers.ShouldMatchers
 
@@ -21,7 +20,7 @@ class PieceTest extends Suite with ShouldMatchers {
   def testEmptyPieceToHiResConversion {
 
     emptyPiece.toHiRes(palette) should equal (Tuple2[Seq[Byte], Byte](
-      Seq.fill[Byte](0x08)(0xff.toByte),
+      Seq.fill[Byte](0x08)(0x00.toByte),
       0x00
     ))
   }
@@ -43,8 +42,8 @@ class PieceTest extends Suite with ShouldMatchers {
     ))
 
     cbmPiece.toHiRes(palette) should equal (Tuple2[Seq[Byte], Byte](
-      Seq[Int](0x33, 0x33, 0xcc, 0xcc, 0x33, 0x33, 0xcc, 0xcc).map(_.toByte),
-      0xd5.toByte
+      Seq[Int](0xcc, 0xcc, 0x33, 0x33, 0xcc, 0xcc, 0x33, 0x33).map(_.toByte),
+      0x5d.toByte
     ))
   }
 
@@ -66,8 +65,8 @@ class PieceTest extends Suite with ShouldMatchers {
     ))
 
     cbmPiece.toHiRes(palette) should equal (Tuple2[Seq[Byte], Byte](
-      Seq[Int](0x80, 0xc0, 0xe0, 0xf0, 0xf8, 0xfc, 0xfe, 0xff).map(_.toByte),
-      0x27.toByte
+      Seq[Int](0x7f, 0x3f, 0x1f, 0x0f, 0x07, 0x03, 0x01, 0x00).map(_.toByte),
+      0x72.toByte
     ))
   }
 

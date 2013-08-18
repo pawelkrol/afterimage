@@ -66,7 +66,7 @@ class Piece(
   def toHiRes(palette: Palette): Tuple2[Seq[Byte], Byte] = {
 
     val top2Colours = findTopNColours(palette, 2)
-    val (colourC64, bckgrdC64) = (top2Colours(0), top2Colours(1))
+    val (bckgrdC64, colourC64) = (top2Colours(0), top2Colours(1))
 
     val colour = palette(colourC64)
     val bckgrd = palette(bckgrdC64)
@@ -88,10 +88,10 @@ class Piece(
         val (byte, bitMask) = result
 
         val newByte =
-          if (column(x) == colourC64)
-            byte | bitMask
-          else
+          if (column(x) == bckgrdC64)
             byte
+          else
+            byte | bitMask
 
         (newByte, bitMask >> 1)
       })._1.toByte

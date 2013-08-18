@@ -4,8 +4,12 @@ package File.Import
 import ij.ImagePlus
 import ij.process.ImageConverter
 
+import org.scalatest.Ignore
 import org.scalatest.Suite
 import org.scalatest.matchers.ShouldMatchers
+
+import Colour.Palette
+import View.Image
 
 class FileImport extends Suite with ShouldMatchers {
 
@@ -39,5 +43,14 @@ class FileImport extends Suite with ShouldMatchers {
     picture.pixel(x = 0, y = 29) should equal (0x00)
     picture.pixel(x = 0, y = 42) should equal (0x00)
     picture.pixel(x = 0, y = 43) should equal (0x01)
+  }
+
+  @Ignore
+  def testConvertedImageHiResShowerView {
+
+    val mode = HiRes()
+    val picture = File.File.convert(name, mode)
+    val palette = Palette("default")
+    Image(picture.asInstanceOf[Mode.HiRes], palette).show()
   }
 }
