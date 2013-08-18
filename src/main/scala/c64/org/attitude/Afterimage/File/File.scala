@@ -2,6 +2,7 @@ package org.c64.attitude.Afterimage
 package File
 
 import ij.ImagePlus
+import ij.process.ImageConverter
 
 import Format.{AdvancedArtStudio,ArtStudio,Config,FacePainter,HiResBitmap,KoalaPainter}
 import Memory.Address
@@ -69,5 +70,16 @@ object File {
     * @param mode image converter to use while processing image data
     * @return a new instance of a class derived from `Mode` with the image mode determined by a converter used to import data
     */
-  def convert(name: String, mode: Import.Mode): CBM = mode.convert(new ImagePlus(name))
+  def convert(name: String, mode: Import.Mode): CBM = {
+
+    // Construct an ImagePlus object from a file specified by a path:
+    val imagePlus = new ImagePlus(name)
+
+    // Convert an ImagePlus object to RGB:
+    val imageConverter = new ImageConverter(imagePlus)
+    imageConverter.convertToRGB()
+
+    // Convert an ImagePlus object to one of Afterimage's CBM modes:
+    mode.convert(imagePlus)
+  }
 }

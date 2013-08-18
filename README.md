@@ -6,7 +6,7 @@ attitude-afterimage
 VERSION
 -------
 
-Version 0.02 (2013-06-30)
+Version 0.03-SNAPSHOT (2013-08-18)
 
 PREREQUISITES
 -------------
@@ -20,7 +20,7 @@ INSTALLATION
 
 You can automatically download and install this library by adding the following dependency information to your `build.sbt` configuration file:
 
-    libraryDependencies += "org.c64.attitude" % "afterimage" % "0.02"
+    libraryDependencies += "org.c64.attitude" % "afterimage" % "0.03-SNAPSHOT"
 
 In order to compile and build this library directly from the source code type the following:
 

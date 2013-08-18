@@ -15,7 +15,12 @@ trait Mode {
     */
   def createImage(from: Seq[Seq[Piece]]): Mode.CBM
 
-  private def splitInto8x8Pieces(img: ImagePlus): Seq[Seq[Piece]] =
+  /** Splits picture into 8x8 bit pieces of image data.
+    *
+    * @param img ImagePlus object
+    * @return a two-dimensional array of 8x8 pixels large pieces of image data
+    */
+  def splitInto8x8Pieces(img: ImagePlus): Seq[Seq[Piece]] =
 
     (0x00 until Mode.CBM.width / 0x08).map(x => {
       (0x00 until Mode.CBM.height / 0x08).map(y => {

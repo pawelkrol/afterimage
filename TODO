@@ -1,3 +1,9 @@
+--
+
+Refactor all exceptions thrown into RuntimeException: there is no need to have so many exception classes, especially for the fact I do not handle them in any specific way.
+
+--
+
 * Build stand-alone JAR:
   - include dependencies to:
     > scala library jar
@@ -16,3 +22,5 @@
 
 * Useful info about creating stand-alone executable JARs:
   - http://blog.yuvimasory.com/2010/09/creating-standalone-executable-jar-with.html
+
+--

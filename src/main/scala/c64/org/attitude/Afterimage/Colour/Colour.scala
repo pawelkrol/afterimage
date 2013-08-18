@@ -36,6 +36,8 @@ case class Colour(red: Byte, green: Byte, blue: Byte, name: Option[String]) {
   /** Returns ImageJ's pixel colour for an RGB colour. */
   val pixel: Int = 256 * 256 * r + 256 * g + b
 
+  override def toString = "Colour($%02x,$%02x,$%02x,%s)".format(r, g, b, name)
+
   def canEqual(that: Any) = that.isInstanceOf[Colour]
 
   override def equals(other: Any) = other match {

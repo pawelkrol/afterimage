@@ -160,6 +160,17 @@ class Piece(
     (bitmap, screen.toByte, colors.toByte)
   }
 
+  override def toString = {
+
+    val colours = (0 until 8).map(x => {
+      (0 until 8).map(y => {
+        "[x=%d,y=%d] => %s".format(x, y, pixels(x)(y))
+      }).mkString("\n  ")
+    }).mkString("\n  ")
+
+    "Piece(pixels = \n  %s\n)".format(colours)
+  }
+
   def canEqual(that: Any) = that.isInstanceOf[Piece]
 
   override def equals(other: Any) = other match {

@@ -3,6 +3,11 @@ CHANGES
 
 Revision history for `Afterimage`, a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications, entirely written in [Scala](http://www.scala-lang.org/).
 
+0.03-SNAPSHOT (2013-08-18)
+--------------------------
+
+* Enhancement: importing image files with colour schemes other than RGB is now possible due to an immediate data conversion into an RGB format right after constructing an ImagePlus object from a file prior to an actual image data processing (previously images saved with a colour palette of 8-bit depth resulted in construction of empty pictures, because of inability to get correct colour data)
+
 0.02 (2013-06-30)
 -----------------
 
