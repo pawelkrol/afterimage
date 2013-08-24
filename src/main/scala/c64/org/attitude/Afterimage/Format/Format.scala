@@ -91,7 +91,8 @@ trait Format {
         val colorsData = data.slice(multiColour.colors, multiColour.colors + MultiColour.size("colors"))
         val colors = Screen(colorsData, Screen.maxCols, Screen.maxRows)
 
-        val bckgrd = data(multiColour.bckgrd)
+        // Make sure that background colour is not initialized with value >$0f:
+        val bckgrd = (data(multiColour.bckgrd).toInt & 0x0f).toByte
 
         val border = multiColour match {
           case advancedArtStudio: Config.AdvancedArtStudio => None

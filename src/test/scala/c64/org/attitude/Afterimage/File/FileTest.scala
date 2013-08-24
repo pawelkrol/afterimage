@@ -2,19 +2,28 @@ package org.c64.attitude.Afterimage
 package File
 
 import org.scalatest.Suite
+import org.scalatest.matchers.ShouldMatchers
+
+import Colour.Palette
 
 import Mode.{HiRes,MultiColour}
 
-class FileTest extends Suite {
+class FileTest extends Suite with ShouldMatchers {
 
   def testLoadFacePainterFile {
     val name = getClass.getResource("/images/frighthof83-yazoo.fcp").toString.replace("file:", "")
     assert(File.load(name).isInstanceOf[MultiColour])
   }
 
-  def testLoadKoalaPainterFile {
+  def testLoadKoalaPainterFileV1 {
     val name = getClass.getResource("/images/frighthof83-yazoo.kla").toString.replace("file:", "")
     assert(File.load(name).isInstanceOf[MultiColour])
+  }
+
+  def testLoadKoalaPainterFileV2 {
+    val name = getClass.getResource("/images/metal.kla").toString.replace("file:", "")
+    val picture = File.load(name).asInstanceOf[MultiColour]
+    picture.pixel(0, 0) should equal (0x00)
   }
 
   def testLoadAdvancedArtStudioFile {

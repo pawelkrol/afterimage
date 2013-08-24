@@ -2,11 +2,12 @@ package org.c64.attitude.Afterimage
 package View
 
 import ij.ImagePlus
-import org.scalatest.{Ignore,Suite}
+
+import org.scalatest.{Ignore, Suite}
 
 import Colour.Palette
 import File.File
-import Mode.{HiRes,MultiColour}
+import Mode.{HiRes, MultiColour}
 
 class ImageTest extends Suite {
 

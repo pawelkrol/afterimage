@@ -6,6 +6,8 @@ import org.scalatest.matchers.ShouldMatchers
 
 class ColourTest extends Suite with ShouldMatchers {
 
+  private val palette = Palette("default")
+
   def getRedColour =
     Colour(0x68.toByte, 0x37.toByte, 0x2b.toByte, Some("red"))
 
@@ -42,6 +44,20 @@ class ColourTest extends Suite with ShouldMatchers {
   def testDistanceBetweenRedAndLightRed {
     val delta = getRedColour.delta_to(getLightRedColour)
     (delta * 100).round * 0.01 should equal(83.19)
+  }
+
+  def testDistanceBetweenBandziorRedAndPaletteRed {
+    val bandziorRed = Colour(0x89.toByte, 0x40.toByte, 0x36.toByte, Some("red"))
+    val paletteRed = palette(0x02)
+    val delta = bandziorRed.delta_to(paletteRed)
+    (delta * 100).round * 0.01 should equal(35.93)
+  }
+
+  def testDistanceBetweenBandziorRedAndPaletteOrange {
+    val bandziorRed = Colour(0x89.toByte, 0x40.toByte, 0x36.toByte, Some("red"))
+    val paletteOrange = palette(0x08)
+    val delta = bandziorRed.delta_to(paletteOrange)
+    (delta * 100).round * 0.01 should equal(34.50)
   }
 
   def testDefaultColourCreate {

@@ -52,5 +52,6 @@ class FileImport extends Suite with ShouldMatchers {
     val picture = File.File.convert(name, mode)
     val palette = Palette("default")
     Image(picture.asInstanceOf[Mode.HiRes], palette).show()
+    0 should equal (1)
   }
 }
