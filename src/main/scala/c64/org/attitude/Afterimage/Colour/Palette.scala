@@ -78,7 +78,7 @@ object Palette {
       build(name)
     }
     catch {
-      case _ => throw new InvalidColourPaletteTemplate(name)
+      case _: Throwable => throw new InvalidColourPaletteTemplate(name)
     }
   }
 }

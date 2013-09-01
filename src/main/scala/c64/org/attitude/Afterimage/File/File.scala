@@ -8,7 +8,7 @@ import Format.{AdvancedArtStudio,ArtStudio,Config,FacePainter,HiResBitmap,KoalaP
 import Memory.Address
 import Mode.CBM
 
-/** Factory for instances derived from [[org.c64.attitude.Afterimage.Mode.Mode]]. */
+/** Factory for instances derived from [[org.c64.attitude.Afterimage.Mode.CBM]]. */
 object File {
 
   /** Loads image data from file.
@@ -30,35 +30,35 @@ object File {
       return FacePainter(addr, data).extractData()
     }
     catch {
-      case _ =>
+      case _: Throwable =>
     }
 
     try {
       return KoalaPainter(addr, data).extractData()
     }
     catch {
-      case _ =>
+      case _: Throwable =>
     }
 
     try {
       return AdvancedArtStudio(addr, data).extractData()
     }
     catch {
-      case _ =>
+      case _: Throwable =>
     }
 
     try {
       return ArtStudio(addr, data).extractData()
     }
     catch {
-      case _ =>
+      case _: Throwable =>
     }
 
     try {
       return HiResBitmap(addr, data).extractData()
     }
     catch {
-      case _ =>
+      case _: Throwable =>
     }
 
     throw new InvalidImageDataException("recognized graphics")

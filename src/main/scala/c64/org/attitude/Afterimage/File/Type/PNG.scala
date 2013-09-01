@@ -30,7 +30,7 @@ class PNG(
   }
 }
 
-/** Factory for [[org.c64.attitude.Afterimage.File.Format.PNG]] instances. */
+/** Factory for [[org.c64.attitude.Afterimage.File.Type.PNG]] instances. */
 object PNG {
 
   /** Saves images in PNG format using the ImageIO classes. */

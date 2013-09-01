@@ -6,12 +6,12 @@ attitude-afterimage
 VERSION
 -------
 
-Version 0.03-SNAPSHOT (2013-08-24)
+Version 0.03-SNAPSHOT (2013-09-01)
 
 PREREQUISITES
 -------------
 
-Besides `scala-library-2.9.2` and `scalatest_2.9.2-1.9.1`, some of the [Afterimage](http://www.cactus.jawnet.pl/afterimage/) functionalities rely upon the following Java image processing toolkit: `imagej-1.46`.
+Besides `scala-library-2.10.2` and `scalatest_2.10.2-1.9.1`, some of the [Afterimage](http://www.cactus.jawnet.pl/afterimage/) functionalities rely upon the following Java image processing toolkit: `imagej-1.46`.
 
 Dependency management is normally handled automatically by your build tool.
 
@@ -131,6 +131,6 @@ COPYRIGHT AND LICENCE
 
 Copyright (C) 2013 by Pawel Krol.
 
-This library is free open source software; you can redistribute it and/or modify it under the same terms as Scala itself, either Scala version 2.9.2 or, at your option, any later version of Scala you may have available.
+This library is free open source software; you can redistribute it and/or modify it under the same terms as Scala itself, either Scala version 2.10.2 or, at your option, any later version of Scala you may have available.
 
 PLEASE NOTE THAT IT COMES WITHOUT A WARRANTY OF ANY KIND!

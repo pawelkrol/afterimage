@@ -2,7 +2,7 @@ name := "afterimage"
 
 version := "0.03-SNAPSHOT"
 
-scalaVersion := "2.9.2"
+scalaVersion := "2.10.2"
 
 libraryDependencies ++= Seq(
   "gov.nih.imagej" % "imagej" % "1.46",

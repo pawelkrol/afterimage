@@ -145,7 +145,7 @@ case class HiRes(
   /** A fallback method returning default screen colour values (1000 bytes filled with 0xbc). */
   val emptyScreen = Array.fill(numCharRows * numCharCols){HiRes.defaultScreenValue}
 
-  /** Returns image data as an array of hires rows ([[org.c64.attitude.Afterimage.Mode.Data.HiResRow]] objects).
+  /** Returns image data as an array of hires rows ([[org.c64.attitude.Afterimage.Mode.Data.Row.HiResRow]] objects).
     *
     * Note that fetching rows data from an image slice will also always return an array of full rows with 40 columns length each!
     */

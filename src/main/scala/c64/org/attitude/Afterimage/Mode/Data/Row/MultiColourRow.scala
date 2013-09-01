@@ -92,7 +92,7 @@ class MultiColourRow(
   }
 }
 
-/** Factory for [[org.c64.attitude.Afterimage.Mode.Data.Row.MultiColour]] instances. */
+/** Factory for [[org.c64.attitude.Afterimage.Mode.Data.Row.MultiColourRow]] instances. */
 object MultiColourRow {
 
   /** Creates a new multicolour row from a MultiColour image data.

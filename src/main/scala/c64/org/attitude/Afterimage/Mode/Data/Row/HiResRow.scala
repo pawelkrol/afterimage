@@ -114,7 +114,7 @@ class HiResRow(
   }
 }
 
-/** Factory for [[org.c64.attitude.Afterimage.Mode.Data.Row.HiRes]] instances. */
+/** Factory for [[org.c64.attitude.Afterimage.Mode.Data.Row.HiResRow]] instances. */
 object HiResRow {
 
   /** Creates a new hires row from a HiRes image data.

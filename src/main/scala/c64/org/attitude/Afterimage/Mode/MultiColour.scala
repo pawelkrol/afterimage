@@ -107,7 +107,7 @@ case class MultiColour(
     MultiColourSlice(newBitmap, newScreen, newColors, border, bckgrd, widthRounded, newHeight)
   }
 
-  /** Returns image data as an array of multicolour rows ([[org.c64.attitude.Afterimage.Mode.Data.MultiColourRow]] objects).
+  /** Returns image data as an array of multicolour rows ([[org.c64.attitude.Afterimage.Mode.Data.Row.MultiColourRow]] objects).
     *
     * Note that fetching rows data from an image slice will also always return an array of full rows with 40 columns length each!
     */
