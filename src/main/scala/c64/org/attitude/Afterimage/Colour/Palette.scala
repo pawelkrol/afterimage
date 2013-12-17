@@ -52,12 +52,25 @@ case class Palette(colours: Array[Colour]) {
 object Palette {
 
   private def build(name: String) = {
+
     val filename = "/palettes/%s.json".format(name)
     val inputStream = getClass().getResourceAsStream(filename)
 
-    val source = scala.io.Source.fromInputStream(inputStream)(scala.io.Codec.ISO8859)
+    val source = scala.io.Source.fromInputStream(inputStream)(scala.io.Codec.UTF8)
 
-    val palette = JSON.parseFull(source.mkString) match {
+    parse(source.mkString)
+  }
+
+  private def load(file: String) = {
+
+    val source = scala.io.Source.fromFile(file)(scala.io.Codec.UTF8)
+
+    parse(source.mkString)
+  }
+
+  private def parse(source: String) = {
+
+    val palette = JSON.parseFull(source) match {
       case Some(data) => data match {
         case colours: Map[String,List[Map[String,Any]]] => colours("palette")
         case _ => throw new RuntimeException
@@ -69,16 +82,51 @@ object Palette {
     new Palette(colours)
   }
 
+  /** Creates a colour palette from a given JSON configuration file or as
+    * a fallback from a pre-configured template name (if file does not exist
+    * and template name does not match any predefined colour palette template
+    * names, a runtime exception will be throw).
+    *
+    * @param name JSON configuration file or template name
+    */
+  def apply(name: String) = {
+    try {
+      fromFile(name)
+    }
+    catch {
+      case _: Throwable =>
+        try {
+          fromTemplate(name)
+        }
+        catch {
+          case _: Throwable => throw new InvalidColourPalette(name)
+        }
+    }
+  }
+
   /** Creates a colour palette from a given template name.
     *
     * @param name template name, one of the currently available names: default
     */
-  def apply(name: String) = {
+  def fromTemplate(name: String) = {
     try {
       build(name)
     }
     catch {
       case _: Throwable => throw new InvalidColourPaletteTemplate(name)
+    }
+  }
+
+  /** Creates a colour palette from a given JSON configuration file.
+    *
+    * @param name JSON configuration file with a customised colour palette
+    */
+  def fromFile(name: String) = {
+    try {
+      load(name)
+    }
+    catch {
+      case _: Throwable => throw new InvalidColourPaletteFilename(name)
     }
   }
 }

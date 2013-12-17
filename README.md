@@ -106,6 +106,9 @@ Import 320x200 pixels JPEG file and convert image data directly to MultiColour m
 
     val picture = File.convert("images/image.jpg", MultiColour(backgroundColour = 0x00))
 
+SCRIPTING
+---------
+
 Using [Afterimage](http://www.cactus.jawnet.pl/afterimage/) as a standalone library is possible, given that all required dependencies are provided on a classpath. In the following example three PNG pictures named `image-0.png`, `image-1.png` and `image-2.png` are converted into three FacePainter images named `0.fcp`, `1.fcp` and `2.fcp` using a simple Scala script:
 
     import org.c64.attitude.Afterimage.Colour.Palette
@@ -118,7 +121,7 @@ Using [Afterimage](http://www.cactus.jawnet.pl/afterimage/) as a standalone libr
 
     List("0", "1", "2").foreach { num => {
       val importMode = Import.MultiColour(backgroundColour = 0x01, palette)
-      val picture = File.convert("winter-cropped-" + num + ".png", importMode)
+      val picture = File.convert("image-" + num + ".png", importMode)
       FacePainter(picture.asInstanceOf[Mode.MultiColour]).save(num + ".fcp")
     } }
 
@@ -127,6 +130,36 @@ Assuming an above script has been saved into a `convert.scala` file, it can be e
     $ export AFTERIMAGE=/home/pkrol/.ivy2/cache/org.c64.attitude/afterimage/jars/afterimage-0.03-SNAPSHOT.jar
     $ export IMAGEJ=/home/pkrol/.ivy2/cache/gov.nih.imagej/imagej/jars/imagej-1.46.jar
     $ scala -classpath ${AFTERIMAGE}:${IMAGEJ} convert.scala
+
+CUSTOMISATION
+-------------
+
+Applying a customised colour palette is accomplished by specifying a JSON configuration file name as a `Pallete` parameter instead of a pre-defined template name:
+
+    val palette = Palette("custom-palette.json")
+
+Colour palette is expected to be a text file defined in a JSON format along the following lines:
+
+    {
+        "palette": [
+            { "red": 0,   "green": 0,   "blue": 0,   "name": "black"       },
+            { "red": 255, "green": 255, "blue": 255, "name": "white"       },
+            { "red": 104, "green": 55,  "blue": 43,  "name": "red"         },
+            { "red": 112, "green": 164, "blue": 178, "name": "cyan"        },
+            { "red": 111, "green": 61,  "blue": 134, "name": "purple"      },
+            { "red": 88,  "green": 141, "blue": 67,  "name": "green"       },
+            { "red": 53,  "green": 40,  "blue": 121, "name": "blue"        },
+            { "red": 184, "green": 199, "blue": 111, "name": "yellow"      },
+            { "red": 111, "green": 79,  "blue": 37,  "name": "orange"      },
+            { "red": 67,  "green": 57,  "blue": 0,   "name": "brown"       },
+            { "red": 154, "green": 103, "blue": 89,  "name": "light red"   },
+            { "red": 68,  "green": 68,  "blue": 68,  "name": "dark grey"   },
+            { "red": 108, "green": 108, "blue": 108, "name": "grey"        },
+            { "red": 154, "green": 210, "blue": 132, "name": "light green" },
+            { "red": 108, "green": 94,  "blue": 181, "name": "light blue"  },
+            { "red": 149, "green": 149, "blue": 149, "name": "light grey"  }
+        ]
+    }
 
 FEATURES
 --------

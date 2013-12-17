@@ -30,8 +30,16 @@ class InvalidPaletteColourIndexValue(index: Int) extends AfterimageException {
   override def getMessage() = "Invalid palette colour index: got %d, but expected an integer between 0 and 15".format(index)
 }
 
+class InvalidColourPalette(name: String) extends AfterimageException {
+  override def getMessage() = "Invalid colour palette: %s (no such file or template found)".format(name)
+}
+
 class InvalidColourPaletteTemplate(name: String) extends AfterimageException {
   override def getMessage() = "Invalid colour palette template: check %s configuration".format(name)
+}
+
+class InvalidColourPaletteFilename(name: String) extends AfterimageException {
+  override def getMessage() = "Invalid colour palette setup: malformed JSON data in %s file".format(name)
 }
 
 class InvalidPixelCoordinates(coord: String, maxim: String) extends AfterimageException {

@@ -1,6 +1,8 @@
 package org.c64.attitude.Afterimage
 package Colour
 
+import java.io.File
+
 import org.scalatest.Suite
 import org.scalatest.matchers.ShouldMatchers
 
@@ -31,8 +33,14 @@ class PaletteTest extends Suite with ShouldMatchers {
   }
 
   def testLoadInvalidPalette {
-    intercept[InvalidColourPaletteTemplate] {
+    intercept[InvalidColourPalette] {
       Palette("invalid")
+    }
+  }
+
+  def testDirectLoadInvalidPalette {
+    intercept[InvalidColourPaletteTemplate] {
+      Palette.fromTemplate("invalid")
     }
   }
 
@@ -81,5 +89,20 @@ class PaletteTest extends Suite with ShouldMatchers {
 
   def testGetImageJBluePixelColourFromDefaultPalette {
     palette.pixel(0x06) should equal(0x00352879)
+  }
+
+  def testLoadPaletteFromFileSuccess {
+    val fileName = "%s/src/test/resources/palettes/custom.json".format(new File(".").getAbsolutePath())
+    assert(Palette(fileName).isInstanceOf[Palette])
+  }
+
+  def testLoadPaletteFromFileFailure {
+    val fileName = "%s/src/test/resources/palettes/invalid.json".format(new File(".").getAbsolutePath())
+    intercept[InvalidColourPalette] { Palette(fileName) }
+  }
+
+  def testDirectLoadPaletteFromFileFailure {
+    val fileName = "%s/src/test/resources/palettes/invalid.json".format(new File(".").getAbsolutePath())
+    intercept[InvalidColourPaletteFilename] { Palette.fromFile(fileName) }
   }
 }
