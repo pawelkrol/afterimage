@@ -1,8 +1,8 @@
 package org.c64.attitude.Afterimage
 package Colour
 
-import scala.util.parsing.json.JSON
-import scala.util.parsing.json.JSONObject
+import org.json4s.JObject
+import org.json4s.native.JsonMethods.parse
 
 /** Colour palette which maps C64 colours from/to RGB colours.
   *
@@ -58,27 +58,27 @@ object Palette {
 
     val source = scala.io.Source.fromInputStream(inputStream)(scala.io.Codec.UTF8)
 
-    parse(source.mkString)
+    parseJSON(source.mkString)
   }
 
   private def load(file: String) = {
 
     val source = scala.io.Source.fromFile(file)(scala.io.Codec.UTF8)
 
-    parse(source.mkString)
+    parseJSON(source.mkString)
   }
 
-  private def parse(source: String) = {
+  private def parseJSON(source: String) = {
 
-    val palette = JSON.parseFull(source) match {
-      case Some(data) => data match {
-        case colours: Map[String,List[Map[String,Any]]] => colours("palette")
+    val palette = (parse(source) \ "palette").children
+
+    val colours = palette.map(item => {
+      item match {
+        case colour: JObject => Colour(colour.values)
         case _ => throw new RuntimeException
       }
-      case None => throw new RuntimeException
-    }
+    }).toArray
 
-    val colours = palette.map(Colour(_)).toArray
     new Palette(colours)
   }
 

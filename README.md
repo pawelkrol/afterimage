@@ -6,12 +6,12 @@ attitude-afterimage
 VERSION
 -------
 
-Version 0.03-SNAPSHOT (2013-12-17)
+Version 0.03-SNAPSHOT (2014-07-14)
 
 PREREQUISITES
 -------------
 
-Besides `scala-library-2.10.2` and `scalatest_2.10.2-1.9.1`, some of the [Afterimage](http://www.cactus.jawnet.pl/afterimage/) functionalities rely upon the following Java image processing toolkit: `imagej-1.46`.
+Besides `scala-library-2.11.1` and `scalatest_2.11.1-2.2.0`, some of the [Afterimage](http://www.cactus.jawnet.pl/afterimage/) functionalities rely upon the following Java image processing toolkit: `imagej-1.46`.
 
 Dependency management is normally handled automatically by your build tool.
 
@@ -19,9 +19,7 @@ Dependency management is normally handled automatically by your build tool.
 
 If you plan on using [Afterimage](http://www.cactus.jawnet.pl/afterimage/) within your program, you have to provide all required dependencies yourself (and the standard Scala library as well, if your project is not developed in Scala, but Java instead). Consult `libraryDependencies` property of a `build.sbt` configuration file for the most recent details.
 
-Default [Afterimage](http://www.cactus.jawnet.pl/afterimage/) configuration requires [Scala](http://www.scala-lang.org/) runtime version 2.10.2. Note that compiling against a different version of the standard Scala library than you are using at runtime will lead to the following runtime exception (with a corresponding call stack) upon execution of your program:
-
-    java.lang.NoSuchMethodError: scala.Predef$.augmentString(Ljava/lang/String;)Ljava/lang/String;
+Default [Afterimage](http://www.cactus.jawnet.pl/afterimage/) configuration requires [Scala](http://www.scala-lang.org/) runtime version 2.11.1. Note that compiling against a different version of the standard Scala library than you are using at runtime would lead to a runtime exception upon execution of your program.
 
 INSTALLATION
 ------------
@@ -136,6 +134,8 @@ CUSTOMISATION
 
 Applying a customised colour palette is accomplished by specifying a JSON configuration file name as a `Pallete` parameter instead of a pre-defined template name:
 
+    import org.c64.attitude.Afterimage.Colour.Palette
+
     val palette = Palette("custom-palette.json")
 
 Colour palette is expected to be a text file defined in a JSON format along the following lines:
@@ -192,8 +192,8 @@ The list of currently writable PC file format specifications includes:
 COPYRIGHT AND LICENCE
 ---------------------
 
-Copyright (C) 2013 by Pawel Krol.
+Copyright (C) 2013, 2014 by Pawel Krol.
 
-This library is free open source software; you can redistribute it and/or modify it under the same terms as Scala itself, either Scala version 2.10.2 or, at your option, any later version of Scala you may have available.
+This library is free open source software; you can redistribute it and/or modify it under the same terms as Scala itself, either Scala version 2.11.1 or, at your option, any later version of Scala you may have available.
 
 PLEASE NOTE THAT IT COMES WITHOUT A WARRANTY OF ANY KIND!

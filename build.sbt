@@ -2,11 +2,12 @@ name := "afterimage"
 
 version := "0.03-SNAPSHOT"
 
-scalaVersion := "2.10.2"
+scalaVersion := "2.11.1"
 
 libraryDependencies ++= Seq(
   "gov.nih.imagej" % "imagej" % "1.46",
-  "org.scalatest" %% "scalatest" % "1.9.1" % "test"
+  "org.json4s" %% "json4s-native" % "3.2.10",
+  "org.scalatest" %% "scalatest" % "2.2.0" % "test"
 )
 
 // Disable using the Scala version in output paths and artifacts:
