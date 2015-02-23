@@ -127,7 +127,8 @@ Assuming an above script has been saved into a `convert.scala` file, it can be e
 
     $ export AFTERIMAGE=/home/pkrol/.ivy2/cache/org.c64.attitude/afterimage/jars/afterimage-0.03-SNAPSHOT.jar
     $ export IMAGEJ=/home/pkrol/.ivy2/cache/gov.nih.imagej/imagej/jars/imagej-1.46.jar
-    $ scala -classpath ${AFTERIMAGE}:${IMAGEJ} convert.scala
+    $ export JSON_4S=/home/pkrol/.ivy2/cache/org.json4s/json4s-ast_2.11/jars/json4s-ast_2.11-3.2.10.jar:/home/pkrol/.ivy2/cache/org.json4s/json4s-core_2.11/jars/json4s-core_2.11-3.2.10.jar:/home/pkrol/.ivy2/cache/org.json4s/json4s-native_2.11/jars/json4s-native_2.11-3.2.10.jar
+    $ scala -classpath ${AFTERIMAGE}:${IMAGEJ}:$(JSON_4S) convert.scala
 
 CUSTOMISATION
 -------------
