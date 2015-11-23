@@ -130,4 +130,31 @@ class PieceTest extends Suite with ShouldMatchers {
       0x01.toByte
     ))
   }
+
+  def testMultiColourConversionWithCustomPalette {
+
+    val customPalette = Palette("vice")
+
+    val black = Colour(0x00.toByte, 0x00.toByte, 0x00.toByte, Some("black"))
+    val blue = Colour(0x48.toByte, 0x3a.toByte, 0xaa.toByte, Some("blue"))
+    val cyan = Colour(0x84.toByte, 0xc5.toByte, 0xcc.toByte, Some("cyan"))
+    val lightBlue = Colour(0x86.toByte, 0x7a.toByte, 0xde.toByte, Some("light blue"))
+
+    val cbmPiece = Piece(pixels = Seq[Seq[Colour]](
+      Seq[Colour](blue,      lightBlue, lightBlue, lightBlue, blue,  blue, lightBlue, blue),
+      Seq[Colour](blue,      lightBlue, lightBlue, lightBlue, blue,  blue, lightBlue, blue),
+      Seq[Colour](lightBlue, lightBlue, blue,      blue,      black, blue, blue,      lightBlue),
+      Seq[Colour](lightBlue, lightBlue, blue,      blue,      black, blue, blue,      lightBlue),
+      Seq[Colour](cyan,      blue,      lightBlue, blue,      blue,  blue, lightBlue, blue),
+      Seq[Colour](cyan,      blue,      lightBlue, blue,      blue,  blue, lightBlue, blue),
+      Seq[Colour](lightBlue, lightBlue, lightBlue, lightBlue, blue,  blue, blue,      black),
+      Seq[Colour](lightBlue, lightBlue, lightBlue, lightBlue, blue,  blue, blue,      black)
+    ))
+
+    cbmPiece.toMultiColour(customPalette, 0x00) should equal (Tuple3[Seq[Byte], Byte, Byte](
+      Seq[String]("10011101", "01011001", "01100101", "01101001", "10001010", "10101010", "01100110", "10011000").map(Integer.parseInt(_, 2).toByte),
+      0xe6.toByte,
+      0x03.toByte
+    ))
+  }
 }

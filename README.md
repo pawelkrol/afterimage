@@ -6,7 +6,7 @@ attitude-afterimage
 VERSION
 -------
 
-Version 0.03-SNAPSHOT (2014-07-14)
+Version 0.03-SNAPSHOT (2015-11-23)
 
 PREREQUISITES
 -------------
@@ -193,7 +193,7 @@ The list of currently writable PC file format specifications includes:
 COPYRIGHT AND LICENCE
 ---------------------
 
-Copyright (C) 2013, 2014 by Pawel Krol.
+Copyright (C) 2013-2015 by Pawel Krol.
 
 This library is free open source software; you can redistribute it and/or modify it under the same terms as Scala itself, either Scala version 2.11.1 or, at your option, any later version of Scala you may have available.
 
