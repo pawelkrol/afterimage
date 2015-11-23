@@ -1,0 +1,20 @@
+{
+    "palette": [
+        { "red": 0,   "green": 0,   "blue": 0,   "name": "black"       },
+        { "red": 253, "green": 254, "blue": 253, "name": "white"       },
+        { "red": 174, "green": 58,  "blue": 74,  "name": "red"         },
+        { "red": 106, "green": 222, "blue": 199, "name": "cyan"        },
+        { "red": 173, "green": 70,  "blue": 184, "name": "purple"      },
+        { "red": 82,  "green": 198, "blue": 98,  "name": "green"       },
+        { "red": 55,  "green": 54,  "blue": 139, "name": "blue"        },
+        { "red": 226, "green": 235, "blue": 120, "name": "yellow"      },
+        { "red": 175, "green": 92,  "blue": 62,  "name": "orange"      },
+        { "red": 115, "green": 73,  "blue": 46,  "name": "brown"       },
+        { "red": 225, "green": 111, "blue": 127, "name": "light red"   },
+        { "red": 88,  "green": 90,  "blue": 87,  "name": "dark grey"   },
+        { "red": 134, "green": 136, "blue": 133, "name": "grey"        },
+        { "red": 137, "green": 236, "blue": 151, "name": "light green" },
+        { "red": 120, "green": 116, "blue": 202, "name": "light blue"  },
+        { "red": 180, "green": 182, "blue": 179, "name": "light grey"  }
+    ]
+}
