@@ -1,6 +1,8 @@
 package org.c64.attitude.Afterimage
 package Colour
 
+import org.json4s.native.JsonMethods.{compact, render}
+
 import org.scalatest.Suite
 import org.scalatest.matchers.ShouldMatchers
 
@@ -70,5 +72,9 @@ class ColourTest extends Suite with ShouldMatchers {
 
   def testGetImageJBluePixelColour {
     getBlueColour.pixel should equal(0x00352879)
+  }
+
+  def testJsonSerialisation {
+    compact(render(getRedColour.toJson)) should equal("""{"red":104,"green":55,"blue":43,"name":"red"}""")
   }
 }

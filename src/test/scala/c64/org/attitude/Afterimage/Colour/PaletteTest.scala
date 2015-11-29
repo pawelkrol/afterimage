@@ -3,6 +3,9 @@ package Colour
 
 import java.io.File
 
+import org.json4s.JsonDSL._
+import org.json4s.native.JsonMethods.{compact, render}
+
 import org.scalatest.Suite
 import org.scalatest.matchers.ShouldMatchers
 
@@ -104,5 +107,9 @@ class PaletteTest extends Suite with ShouldMatchers {
   def testDirectLoadPaletteFromFileFailure {
     val fileName = "%s/src/test/resources/palettes/invalid.json".format(new File(".").getAbsolutePath())
     intercept[InvalidColourPaletteFilename] { Palette.fromFile(fileName) }
+  }
+
+  def testJsonSerialisation {
+    compact(render(palette.toJson)) should startWith("""{"palette":[""")
   }
 }

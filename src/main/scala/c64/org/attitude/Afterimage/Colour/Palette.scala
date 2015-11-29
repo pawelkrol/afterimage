@@ -1,7 +1,7 @@
 package org.c64.attitude.Afterimage
 package Colour
 
-import org.json4s.JObject
+import org.json4s.{JArray, JObject}
 import org.json4s.native.JsonMethods.parse
 
 /** Colour palette which maps C64 colours from/to RGB colours.
@@ -46,6 +46,10 @@ case class Palette(colours: Array[Colour]) {
     case _ =>
       false
   }
+
+  /** Serialises colour palette to a JSON object.
+    */
+  def toJson = JObject(List(("palette", JArray(colours.map(_.toJson).toList))))
 }
 
 /** Factory for [[org.c64.attitude.Afterimage.Colour.Palette]] instances. */

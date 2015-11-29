@@ -6,12 +6,12 @@ attitude-afterimage
 VERSION
 -------
 
-Version 0.03-SNAPSHOT (2015-11-23)
+Version 0.03-SNAPSHOT (2015-11-29)
 
 PREREQUISITES
 -------------
 
-Besides `scala-library-2.11.1` and `scalatest_2.11.1-2.2.0`, some of the [Afterimage](http://www.cactus.jawnet.pl/afterimage/) functionalities rely upon the following Java image processing toolkit: `imagej-1.46`.
+Besides `scala-library-2.11.7` and `scalatest_2.11.7-2.2.0`, some of the [Afterimage](http://www.cactus.jawnet.pl/afterimage/) functionalities rely upon the following Java image processing toolkit: `imagej-1.46`.
 
 Dependency management is normally handled automatically by your build tool.
 
@@ -19,7 +19,7 @@ Dependency management is normally handled automatically by your build tool.
 
 If you plan on using [Afterimage](http://www.cactus.jawnet.pl/afterimage/) within your program, you have to provide all required dependencies yourself (and the standard Scala library as well, if your project is not developed in Scala, but Java instead). Consult `libraryDependencies` property of a `build.sbt` configuration file for the most recent details.
 
-Default [Afterimage](http://www.cactus.jawnet.pl/afterimage/) configuration requires [Scala](http://www.scala-lang.org/) runtime version 2.11.1. Note that compiling against a different version of the standard Scala library than you are using at runtime would lead to a runtime exception upon execution of your program.
+Default [Afterimage](http://www.cactus.jawnet.pl/afterimage/) configuration requires [Scala](http://www.scala-lang.org/) runtime version 2.11.7. Note that compiling against a different version of the standard Scala library than you are using at runtime would lead to a runtime exception upon execution of your program.
 
 INSTALLATION
 ------------
@@ -32,7 +32,7 @@ In order to compile and build this library directly from the source code type th
 
     $ git clone git://github.com/pawelkrol/attitude-afterimage.git
     $ cd attitude-afterimage/
-    $ sbt clean update compile test package
+    $ sbt clean update compile test package publish
 
 EXAMPLES
 --------
@@ -195,6 +195,6 @@ COPYRIGHT AND LICENCE
 
 Copyright (C) 2013-2015 by Pawel Krol.
 
-This library is free open source software; you can redistribute it and/or modify it under the same terms as Scala itself, either Scala version 2.11.1 or, at your option, any later version of Scala you may have available.
+This library is free open source software; you can redistribute it and/or modify it under the same terms as Scala itself, either Scala version 2.11.7 or, at your option, any later version of Scala you may have available.
 
 PLEASE NOTE THAT IT COMES WITHOUT A WARRANTY OF ANY KIND!

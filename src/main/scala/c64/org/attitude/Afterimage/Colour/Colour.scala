@@ -3,6 +3,8 @@ package Colour
 
 import java.lang.Math.sqrt
 
+import org.json4s.JsonDSL._
+
 import Util.Util.byte2uint
 
 /** Simple RGB colour abstraction with additional colour comparison methods.
@@ -46,6 +48,10 @@ case class Colour(red: Byte, green: Byte, blue: Byte, name: Option[String]) {
     case _ =>
       false
   }
+
+  /** Serialises RGB colour representation to a JSON object.
+    */
+   def toJson = ("red" -> r) ~ ("green" -> g) ~ ("blue" -> b) ~ ("name" -> name.getOrElse(""))
 }
 
 /** Factory for [[org.c64.attitude.Afterimage.Colour.Colour]] instances. */
