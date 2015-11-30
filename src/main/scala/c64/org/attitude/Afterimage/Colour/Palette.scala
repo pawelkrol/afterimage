@@ -26,6 +26,17 @@ case class Palette(colours: Array[Colour]) {
     colours(value)
   }
 
+  /** Returns optional RGB colour for a given C64 colour name as defined in a colour palette data.
+    *
+    * @param name C64 colour name (expected to be a string matching colour name from a colour palette)
+    */
+  def apply(name: String) = {
+    colours.find(_.name match {
+      case Some(colourName) => name == colourName
+      case None => false
+    })
+  }
+
   /** Returns ImageJ colour for a given C64 colour.
     *
     * @param value C64 colour value (expected to be integer between 0 and 15)

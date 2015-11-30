@@ -71,6 +71,10 @@ class PaletteTest extends Suite with ShouldMatchers {
     palette(0x00) should equal(getBlackColour)
   }
 
+  def testGetBlueColourValueByColourName {
+    palette("blue") should equal(Some(getBlueColour))
+  }
+
   def testGetHTMLRedColourIndexFromDefaultPalette {
     val htmlRed = Colour(0xff.toByte, 0x00.toByte, 0x00.toByte, Some("red"))
     palette.get(htmlRed) should equal(0x02)
