@@ -3,16 +3,16 @@ CHANGES
 
 Revision history for `Afterimage`, a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications, entirely written in [Scala](http://www.scala-lang.org/).
 
-0.03-SNAPSHOT (2015-11-30)
---------------------------
+0.03 (2015-12-06)
+-----------------
 
 * Enhancement: importing image files with colour schemes other than RGB is now possible due to an immediate data conversion into an RGB format right after constructing an ImagePlus object from a file prior to an actual image data processing (previously images saved with a colour palette of 8-bit depth resulted in construction of empty pictures, because of inability to get correct colour data)
 * Optimization: algorithm converting PC image files into C64 hires mode now considers most frequent colour as a background colour
 * Extension: VICE internal colour palette provided
-* New feature: applying a customised colour scheme by specifying an externally provided JSON configuration file as a colour pallete parameter instead of a pre-defined template name
-* New feature: JSON serialisation of colour palette data
+* New feature: enable applying a customised colour scheme by specifying an externally provided JSON configuration file as a colour pallete parameter instead of a pre-defined template name
+* New feature: JSON serialisation of a colour palette data
 * New feature: Enable selection of colours from a colour palette by their names
-* Bug fixed: loading image data from a Koala Painter file works now correctly by setting valid background colour even if it was initialized with a value greater than $0f in an original image file
+* Bug fixed: loading image data from a Koala Painter file works now correctly by setting valid background colour even if it was initialized with a value greater than `$0f` in an original image file
 * `Scala` version upgraded to 2.11.7
 * `ScalaTest` version upgraded to 2.2.0
 * `sbt` version upgraded to 0.13.5

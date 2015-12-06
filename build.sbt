@@ -1,6 +1,6 @@
 name := "afterimage"
 
-version := "0.03-SNAPSHOT"
+version := "0.03"
 
 scalaVersion := "2.11.7"
 

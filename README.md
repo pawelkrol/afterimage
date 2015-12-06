@@ -6,7 +6,7 @@ attitude-afterimage
 VERSION
 -------
 
-Version 0.03-SNAPSHOT (2015-11-30)
+Version 0.03 (2015-12-06)
 
 PREREQUISITES
 -------------
@@ -26,7 +26,7 @@ INSTALLATION
 
 You can automatically download and install this library by adding the following dependency information to your `build.sbt` configuration file:
 
-    libraryDependencies += "org.c64.attitude" % "afterimage" % "0.03-SNAPSHOT"
+    libraryDependencies += "org.c64.attitude" % "afterimage" % "0.03"
 
 In order to compile and build this library directly from the source code type the following:
 
@@ -125,7 +125,7 @@ Using [Afterimage](http://www.cactus.jawnet.pl/afterimage/) as a standalone libr
 
 Assuming an above script has been saved into a `convert.scala` file, it can be executed using the following command(s):
 
-    $ export AFTERIMAGE=/home/pkrol/.ivy2/cache/org.c64.attitude/afterimage/jars/afterimage-0.03-SNAPSHOT.jar
+    $ export AFTERIMAGE=/home/pkrol/.ivy2/cache/org.c64.attitude/afterimage/jars/afterimage-0.03.jar
     $ export IMAGEJ=/home/pkrol/.ivy2/cache/gov.nih.imagej/imagej/jars/imagej-1.46.jar
     $ export JSON_4S=/home/pkrol/.ivy2/cache/org.json4s/json4s-ast_2.11/jars/json4s-ast_2.11-3.2.10.jar:/home/pkrol/.ivy2/cache/org.json4s/json4s-core_2.11/jars/json4s-core_2.11-3.2.10.jar:/home/pkrol/.ivy2/cache/org.json4s/json4s-native_2.11/jars/json4s-native_2.11-3.2.10.jar
     $ scala -classpath ${AFTERIMAGE}:${IMAGEJ}:$(JSON_4S) convert.scala
