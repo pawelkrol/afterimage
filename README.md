@@ -32,7 +32,7 @@ In order to compile and build this library directly from the source code type th
 
     $ git clone git://github.com/pawelkrol/attitude-afterimage.git
     $ cd attitude-afterimage/
-    $ sbt clean update compile test package publish
+    $ sbt clean update compile test package publishSigned publish-local
 
 EXAMPLES
 --------
@@ -133,7 +133,7 @@ Assuming an above script has been saved into a `convert.scala` file, it can be e
 CUSTOMISATION
 -------------
 
-Applying a customised colour palette is accomplished by specifying a JSON configuration file name as a `Pallete` parameter instead of a pre-defined template name:
+Applying a customised colour palette is accomplished by specifying a JSON configuration file name as a `Pallete` parameter instead of a predefined template name:
 
     import org.c64.attitude.Afterimage.Colour.Palette
 

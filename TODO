@@ -14,6 +14,9 @@ Refactor all exceptions thrown into RuntimeException: there is no need to have s
   - upload jar to a repo
   - generate scaladoc documentation
   - setup www.attitude.net/afterimage website with some basic info & links (jar, doc, attitude)
+  - upload scaladoc to afterimage website
+    ncftp> rm -rf scaladoc
+    ncftp> put -R scaladoc
 
 * Add support more C64 file formats:
   - http://unusedino.de/ec64/technical/aay/c64/frmmain.htm
