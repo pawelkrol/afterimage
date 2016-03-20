@@ -6,12 +6,12 @@ attitude-afterimage
 VERSION
 -------
 
-Version 0.03 (2015-12-06)
+Version 0.04-SNAPSHOT (2016-03-20)
 
 PREREQUISITES
 -------------
 
-Besides `scala-library-2.11.7` and `scalatest_2.11.7-2.2.0`, some of the [Afterimage](http://www.cactus.jawnet.pl/afterimage/) functionalities rely upon the following Java image processing toolkit: `imagej-1.46`.
+Besides `scala-library-2.11.8` and `scalatest_2.11.8-2.2.6`, some of the [Afterimage](http://www.cactus.jawnet.pl/afterimage/) functionalities rely upon the following Java image processing toolkit: `imagej-1.46`.
 
 Dependency management is normally handled automatically by your build tool.
 
@@ -19,14 +19,14 @@ Dependency management is normally handled automatically by your build tool.
 
 If you plan on using [Afterimage](http://www.cactus.jawnet.pl/afterimage/) within your program, you have to provide all required dependencies yourself (and the standard Scala library as well, if your project is not developed in Scala, but Java instead). Consult `libraryDependencies` property of a `build.sbt` configuration file for the most recent details.
 
-Default [Afterimage](http://www.cactus.jawnet.pl/afterimage/) configuration requires [Scala](http://www.scala-lang.org/) runtime version 2.11.7. Note that compiling against a different version of the standard Scala library than you are using at runtime would lead to a runtime exception upon execution of your program.
+Default [Afterimage](http://www.cactus.jawnet.pl/afterimage/) configuration requires [Scala](http://www.scala-lang.org/) runtime version 2.11.8. Note that compiling against a different version of the standard Scala library than you are using at runtime would lead to a runtime exception upon execution of your program.
 
 INSTALLATION
 ------------
 
 You can automatically download and install this library by adding the following dependency information to your `build.sbt` configuration file:
 
-    libraryDependencies += "org.c64.attitude" % "afterimage" % "0.03"
+    libraryDependencies += "org.c64.attitude" % "afterimage" % "0.04-SNAPSHOT"
 
 In order to compile and build this library directly from the source code type the following:
 
@@ -125,7 +125,7 @@ Using [Afterimage](http://www.cactus.jawnet.pl/afterimage/) as a standalone libr
 
 Assuming an above script has been saved into a `convert.scala` file, it can be executed using the following command(s):
 
-    $ export AFTERIMAGE=/home/pkrol/.ivy2/cache/org.c64.attitude/afterimage/jars/afterimage-0.03.jar
+    $ export AFTERIMAGE=/home/pkrol/.ivy2/cache/org.c64.attitude/afterimage/jars/afterimage-0.04-SNAPSHOT.jar
     $ export IMAGEJ=/home/pkrol/.ivy2/cache/gov.nih.imagej/imagej/jars/imagej-1.46.jar
     $ export JSON_4S=/home/pkrol/.ivy2/cache/org.json4s/json4s-ast_2.11/jars/json4s-ast_2.11-3.2.10.jar:/home/pkrol/.ivy2/cache/org.json4s/json4s-core_2.11/jars/json4s-core_2.11-3.2.10.jar:/home/pkrol/.ivy2/cache/org.json4s/json4s-native_2.11/jars/json4s-native_2.11-3.2.10.jar
     $ scala -classpath ${AFTERIMAGE}:${IMAGEJ}:$(JSON_4S) convert.scala
@@ -193,8 +193,8 @@ The list of currently writable PC file format specifications includes:
 COPYRIGHT AND LICENCE
 ---------------------
 
-Copyright (C) 2013-2015 by Pawel Krol.
+Copyright (C) 2013-2016 by Pawel Krol.
 
-This library is free open source software; you can redistribute it and/or modify it under the same terms as Scala itself, either Scala version 2.11.7 or, at your option, any later version of Scala you may have available.
+This library is free open source software; you can redistribute it and/or modify it under the same terms as Scala itself, either Scala version 2.11.8 or, at your option, any later version of Scala you may have available.
 
 PLEASE NOTE THAT IT COMES WITHOUT A WARRANTY OF ANY KIND!
