@@ -11,7 +11,7 @@ import org.scalatest.matchers.ShouldMatchers
 import Colour.Palette
 import View.Image
 
-class FileImport extends Suite with ShouldMatchers {
+class FileImportTest extends Suite with ShouldMatchers {
 
   private val name = getClass.getResource("/images/bandzior-cuc.png").toString.replace("file:", "")
 
