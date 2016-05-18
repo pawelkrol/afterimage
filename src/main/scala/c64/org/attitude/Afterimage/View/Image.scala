@@ -11,9 +11,13 @@ import Mode.CBM
   */
 class Image(val picture: CBM, val palette: Palette) extends Shower {
 
-  /** Displays image preview. */
-  def show() {
-    create().show()
+  /** Displays image preview.
+   *
+   * @param scaleFactor defines custom image scale factor to be used when rendering a preview (defaults to 1)
+   */
+  def show(scaleFactor: Int = 1) {
+    assert(scaleFactor > 0)
+    create(scaleFactor).show()
   }
 }
 

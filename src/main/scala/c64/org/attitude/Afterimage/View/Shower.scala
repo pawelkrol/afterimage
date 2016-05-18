@@ -23,10 +23,14 @@ trait Shower {
   }
 
   /** Generates the pixel data of the image.
-    *
-    * @return `ImagePlus` object which is capable of generating image preview
-    */
-  def create(): ImagePlus = {
+   *
+   * @param scaleFactor defines custom image scale factor to be used when rendering a picture (defaults to 1)
+   *
+   * @return `ImagePlus` object which is capable of generating image preview
+   */
+  def create(scaleFactor: Int = 1): ImagePlus = {
+    assert(scaleFactor > 0)
+
     val width = picture.width
     val height = picture.height
 
@@ -43,6 +47,10 @@ trait Shower {
     // Scale the image viewport by the given factor:
     val (xScale, yScale) = scale
 
-    new ImagePlus("Afterimage Preview", ip.resize(width * xScale, height * yScale))
+    // Scale the image viewport by the additional (user-defined) factor:
+    val targetWidth = width * xScale * scaleFactor
+    val targetHeight = height * yScale * scaleFactor
+
+    new ImagePlus("Afterimage Preview", ip.resize(targetWidth, targetHeight))
   }
 }

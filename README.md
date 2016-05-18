@@ -6,7 +6,7 @@ attitude-afterimage
 VERSION
 -------
 
-Version 0.04-SNAPSHOT (2016-03-20)
+Version 0.04-SNAPSHOT (2016-05-18)
 
 PREREQUISITES
 -------------
