@@ -26,6 +26,8 @@ INSTALLATION
 
 You can automatically download and install this library by adding the following dependency information to your `build.sbt` configuration file:
 
+    resolvers += "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
+
     libraryDependencies += "org.c64.attitude" % "afterimage" % "0.04-SNAPSHOT"
 
 In order to compile and build this library directly from the source code type the following:
