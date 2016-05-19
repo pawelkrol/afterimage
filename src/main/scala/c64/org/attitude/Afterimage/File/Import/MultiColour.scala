@@ -8,7 +8,7 @@ import Colour.Palette
 /** MultiColour mode file converter.
   *
   * @constructor create a new MultiColour mode file converter
-  * @param backgroundColour Background colour of a target image data (0x00..0x0f)
+  * @param backgroundColour background colour of a target image data (0x00..0x0f)
   * @param palette a default colour palette to be used during conversion process
   */
 case class MultiColour(

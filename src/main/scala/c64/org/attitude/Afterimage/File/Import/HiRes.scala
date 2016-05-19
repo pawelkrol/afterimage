@@ -8,9 +8,11 @@ import Colour.Palette
 /** HiRes mode file converter.
   *
   * @constructor create a new HiRes mode file converter
+  * @param backgroundColour an arbitrary background colour to appear accross an entire target image data (0x00..0x0f)
   * @param palette a default colour palette to be used during conversion process
   */
 case class HiRes(
+  backgroundColour: Option[Byte] = None,
   palette: Palette = Palette("default")
 ) extends Mode {
 
@@ -24,7 +26,7 @@ case class HiRes(
     // Convert each piece into a 8x8 char data separately:
     val chars = from.map(pieces => {
       pieces.map(piece => {
-        piece.toHiRes(palette)
+        piece.toHiRes(palette, backgroundColour)
       })
     })
 

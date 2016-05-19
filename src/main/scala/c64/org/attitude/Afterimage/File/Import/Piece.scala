@@ -17,7 +17,7 @@ class Piece(
 
   private def getEverySecondPixels = pixels.grouped(2).toList.map(_.head)
 
-  private def findTopNColours(palette: Palette, n: Int, backgroundColour: Option[Int] = None): List[Int] = {
+  private def findTopNColours(palette: Palette, n: Int, backgroundColour: Option[Byte] = None): List[Byte] = {
 
     // For multicolour pictures (n == 4) fetch every second pixel from piece data:
     val analysedPixels =
@@ -41,10 +41,10 @@ class Piece(
     })
 
     // Sort calculated occurrences of each colour within this piece:
-    val sortedOccurrences = occurrences.toList.sortWith((a, b) => a._2 > b._2).map(_._1)
+    val sortedOccurrences = occurrences.toList.sortWith((a, b) => a._2 > b._2).map(_._1.toByte)
 
     // If background colour has been provided, put it into the front of a sorted list:
-    val allSortedOccurrences: List[Int] =
+    val allSortedOccurrences =
       backgroundColour match {
         case Some(bckgrd) => {
           bckgrd +: sortedOccurrences.filter(colour => colour != bckgrd)
@@ -55,17 +55,18 @@ class Piece(
 
     // Return "n" most common colours from the ordered list (do it by duplicating the last
     // element "n" times in order to make sure that list contains at least "n" elements):
-    (allSortedOccurrences ++ List.fill[Int](n - 1)(allSortedOccurrences.last)).slice(0, n)
+    (allSortedOccurrences ++ List.fill[Byte](n - 1)(allSortedOccurrences.last)).slice(0, n)
   }
 
-  /** Converts piece data into HiRes image using provided colour palette.
+  /** Converts piece data into HiRes image using provided colour palette and optional background colour.
     *
     * @param palette colour palette to be used during conversion process
+    * @param backgroundColour enforce usage of a constant background colour to a target image data (0x00..0x0f)
     * @return a tuple of 8 bitmap and 1 screen data bytes
     */
-  def toHiRes(palette: Palette): Tuple2[Seq[Byte], Byte] = {
+  def toHiRes(palette: Palette, backgroundColour: Option[Byte] = None): Tuple2[Seq[Byte], Byte] = {
 
-    val top2Colours = findTopNColours(palette, 2)
+    val top2Colours = findTopNColours(palette, 2, backgroundColour)
     val (bckgrdC64, colourC64) = (top2Colours(0), top2Colours(1))
 
     val colour = palette(colourC64)
@@ -108,7 +109,7 @@ class Piece(
     * @param backgroundColour background colour of a target image data (0x00..0x0f)
     * @return a tuple of 8 bitmap, 1 screen and 1 colour data bytes
     */
-  def toMultiColour(palette: Palette, backgroundColour: Int): Tuple3[Seq[Byte], Byte, Byte] = {
+  def toMultiColour(palette: Palette, backgroundColour: Byte): Tuple3[Seq[Byte], Byte, Byte] = {
 
     val top4Colours = findTopNColours(palette, 4, Some(backgroundColour))
     val (bckgrdC64, screenC64lo, screenC64hi, colourC64) = (top4Colours(0).toInt, top4Colours(1).toInt, top4Colours(2).toInt, top4Colours(3).toInt)

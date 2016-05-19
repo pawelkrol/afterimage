@@ -1,31 +1,31 @@
 package org.c64.attitude.Afterimage
 package File.Import
 
-import org.scalatest.Suite
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.FunSpec
 
 import Colour.{Colour, Palette}
 
-class PieceTest extends Suite with ShouldMatchers {
+class PieceSpec extends FunSpec {
 
   private val emptyPiece = Piece()
 
   private val palette = Palette("default")
 
-  def testPieceInitialization {
+  it("initializes new instance object with an empty pixel array") {
 
-    emptyPiece should equal (Piece(Piece.emptyPixelArray))
+    assert(emptyPiece === Piece(Piece.emptyPixelArray))
   }
 
-  def testEmptyPieceToHiResConversion {
+  it("converts an empty piece data into HiRes image using provided colour palette") {
 
-    emptyPiece.toHiRes(palette) should equal (Tuple2[Seq[Byte], Byte](
+    assert(emptyPiece.toHiRes(palette) === Tuple2[Seq[Byte], Byte](
       Seq.fill[Byte](0x08)(0x00.toByte),
       0x00
     ))
   }
 
-  def testCBMPieceToHiResConversion {
+
+  it("converts a C64-coloured piece data into HiRes image using provided colour palette") {
 
     val green = palette(0x05)
     val light_green = palette(0x0d)
@@ -41,13 +41,35 @@ class PieceTest extends Suite with ShouldMatchers {
       Seq[Colour](light_green, light_green, green, green, light_green, light_green, green, green)
     ))
 
-    cbmPiece.toHiRes(palette) should equal (Tuple2[Seq[Byte], Byte](
+    assert(cbmPiece.toHiRes(palette) === Tuple2[Seq[Byte], Byte](
       Seq[Int](0xcc, 0xcc, 0x33, 0x33, 0xcc, 0xcc, 0x33, 0x33).map(_.toByte),
       0x5d.toByte
     ))
   }
 
-  def testPCPieceToHiResConversion {
+  it("converts a C64-coloured piece data into HiRes image using provided colour palette and optional background colour") {
+
+    val green = palette(0x05)
+    val light_green = palette(0x0d)
+
+    val cbmPiece = Piece(pixels = Seq[Seq[Colour]](
+      Seq[Colour](green, green, light_green, light_green, green, green, light_green, light_green),
+      Seq[Colour](green, green, light_green, light_green, green, green, light_green, light_green),
+      Seq[Colour](light_green, light_green, green, green, light_green, light_green, green, green),
+      Seq[Colour](light_green, light_green, green, green, light_green, light_green, green, green),
+      Seq[Colour](green, green, light_green, light_green, green, green, light_green, light_green),
+      Seq[Colour](green, green, light_green, light_green, green, green, light_green, light_green),
+      Seq[Colour](light_green, light_green, green, green, light_green, light_green, green, green),
+      Seq[Colour](light_green, light_green, green, green, light_green, light_green, green, green)
+    ))
+
+    assert(cbmPiece.toHiRes(palette, Some(0x0c)) === Tuple2[Seq[Byte], Byte](
+      Seq[Int](0x33, 0x33, 0xcc, 0xcc, 0x33, 0x33, 0xcc, 0xcc).map(_.toByte),
+      0xdc.toByte
+    ))
+  }
+
+  it("converts a PC-coloured piece data into HiRes image using provided colour palette") {
 
     val brown = Colour(0xa5.toByte, 0x2a.toByte, 0x2a.toByte, Some("brown"))
     val orange = Colour(0xff.toByte, 0xa5.toByte, 0x00.toByte, Some("orange"))
@@ -64,22 +86,22 @@ class PieceTest extends Suite with ShouldMatchers {
       Seq[Colour](orange, orange, orange, orange, orange, orange, orange, red)
     ))
 
-    cbmPiece.toHiRes(palette) should equal (Tuple2[Seq[Byte], Byte](
+    assert(cbmPiece.toHiRes(palette) === Tuple2[Seq[Byte], Byte](
       Seq[Int](0x7f, 0x3f, 0x1f, 0x0f, 0x07, 0x03, 0x01, 0x00).map(_.toByte),
       0x72.toByte
     ))
   }
 
-  def testEmptyPieceToMultiColourConversion {
+  it("converts an empty piece data into MultiColour image using provided colour palette and background colour") {
 
-    emptyPiece.toMultiColour(palette, 0x00) should equal (Tuple3[Seq[Byte], Byte, Byte](
+    assert(emptyPiece.toMultiColour(palette, 0x00) === Tuple3[Seq[Byte], Byte, Byte](
       Seq.fill[Byte](0x08)(0x00.toByte),
       0x00,
       0x00
     ))
   }
 
-  def testCBMPieceToMultiColourConversion {
+  it("converts a C64-coloured piece data into MultiColour image using provided colour palette and background colour") {
 
     val yellow = palette(0x07)
     val blue = palette(0x06)
@@ -97,14 +119,14 @@ class PieceTest extends Suite with ShouldMatchers {
       Seq[Colour](red, red, red, red, green, green, green, green)
     ))
 
-    cbmPiece.toMultiColour(palette, 0x02) should equal (Tuple3[Seq[Byte], Byte, Byte](
+    assert(cbmPiece.toMultiColour(palette, 0x02) === Tuple3[Seq[Byte], Byte, Byte](
       Seq[Int](0xa0, 0xa0, 0xa0, 0xa0, 0x5f, 0x5f, 0x5f, 0x5f).map(_.toByte),
       0x67.toByte,
       0x05.toByte
     ))
   }
 
-  def testPCPieceToMultiColourConversion {
+  it("converts a PC-coloured piece data into MultiColour image using provided colour palette and background colour") {
 
     val beige = Colour(0xf5.toByte, 0xf5.toByte, 0xdc.toByte, Some("beige"))
     val blueViolet = Colour(0x8a.toByte, 0x2b.toByte, 0xe2.toByte, Some("blue_violet"))
@@ -124,14 +146,14 @@ class PieceTest extends Suite with ShouldMatchers {
       Seq[Colour](purple,     indigo,     blueViolet, teal,  teal,  royalBlue,  blueViolet, indigo)
     ))
 
-    cbmPiece.toMultiColour(palette, 0x04) should equal (Tuple3[Seq[Byte], Byte, Byte](
+    assert(cbmPiece.toMultiColour(palette, 0x04) === Tuple3[Seq[Byte], Byte, Byte](
       Seq[Int](0x60, 0xa5, 0x9a, 0x7d, 0x7d, 0xa6, 0x5a, 0x09).map(_.toByte),
       0x6e.toByte,
       0x01.toByte
     ))
   }
 
-  def testMultiColourConversionWithCustomPalette {
+  it("converts a PC-coloured piece data into MultiColour image using custom colour palette and background colour") {
 
     val customPalette = Palette("vice")
 
@@ -151,7 +173,7 @@ class PieceTest extends Suite with ShouldMatchers {
       Seq[Colour](lightBlue, lightBlue, lightBlue, lightBlue, blue,  blue, blue,      black)
     ))
 
-    cbmPiece.toMultiColour(customPalette, 0x00) should equal (Tuple3[Seq[Byte], Byte, Byte](
+    assert(cbmPiece.toMultiColour(customPalette, 0x00) === Tuple3[Seq[Byte], Byte, Byte](
       Seq[String]("10011101", "01011001", "01100101", "01101001", "10001010", "10101010", "01100110", "10011000").map(Integer.parseInt(_, 2).toByte),
       0xe6.toByte,
       0x03.toByte
