@@ -35,15 +35,19 @@ class PNGTest extends Suite {
     PNG(Image(picture, Palette("default")))
   }
 
+  def buildImageConverter(resourceImage: String) = {
+    val name = getClass.getResource(resourceImage).toString.replace("file:", "")
+    val picture = File.load(name)
+    PNG(Image(picture, Palette("default")))
+  }
+
   def testCreatePNG {
     val png = setupTestData()
     assert(png.isInstanceOf[PNG])
   }
 
   def testKoalaPainterToPNG {
-    val name = getClass.getResource("/images/frighthof83-yazoo.kla").toString.replace("file:", "")
-    val picture = File.load(name)
-    val png = PNG(Image(picture, Palette("default")))
+    val png = buildImageConverter("/images/frighthof83-yazoo.kla")
 
     val fileName = setupTempFile()
 
@@ -56,9 +60,7 @@ class PNGTest extends Suite {
   }
 
   def testArtStudioToPNG {
-    val name = getClass.getResource("/images/desolate-deev.aas").toString.replace("file:", "")
-    val picture = File.load(name)
-    val png = PNG(Image(picture, Palette("default")))
+    val png = buildImageConverter("/images/desolate-deev.aas")
 
     val fileName = setupTempFile()
 
@@ -84,6 +86,35 @@ class PNGTest extends Suite {
     intercept[FileAlreadyExistsException] {
       png.save(fileName, false)
     }
+
+    cleanupTempFile(fileName)
+  }
+
+  def testPNGDefaultScaleFactor {
+    val png = buildImageConverter("/images/desolate-deev.aas")
+
+    val fileName = setupTempFile()
+
+    png.save(fileName, true)
+
+    val image = new ImagePlus(fileName)
+    assert(image.getWidth == 320)
+    assert(image.getHeight == 200)
+
+    cleanupTempFile(fileName)
+  }
+
+  def testPNGCustomScaleFactor {
+    val png = buildImageConverter("/images/desolate-deev.aas")
+
+    val fileName = setupTempFile()
+    val scaleFactor = 3
+
+    png.save(fileName, true, scaleFactor)
+
+    val image = new ImagePlus(fileName)
+    assert(image.getWidth == scaleFactor * 320)
+    assert(image.getHeight == scaleFactor * 200)
 
     cleanupTempFile(fileName)
   }

@@ -16,7 +16,7 @@ trait Shower {
   /** Colour palette to be used when displaying a picture. */
   val palette: Palette
 
-  private val scale = picture match {
+  private def scale(pic: CBM) = pic match {
     case multiColour: MultiColour => (4, 2)
     case hiRes: HiRes => (2, 2)
     case _ => throw new RuntimeException("Something went wrong...")
@@ -28,7 +28,7 @@ trait Shower {
    *
    * @return `ImagePlus` object which is capable of generating image preview
    */
-  def create(scaleFactor: Int = 1): ImagePlus = {
+  def create(scaleFactor: Int = 1, scaleOf: (CBM) => Tuple2[Int, Int] = scale): ImagePlus = {
     assert(scaleFactor > 0)
 
     val width = picture.width
@@ -45,7 +45,7 @@ trait Shower {
     }
 
     // Scale the image viewport by the given factor:
-    val (xScale, yScale) = scale
+    val (xScale, yScale) = scaleOf(picture)
 
     // Scale the image viewport by the additional (user-defined) factor:
     val targetWidth = width * xScale * scaleFactor

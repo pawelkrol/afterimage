@@ -6,7 +6,7 @@ attitude-afterimage
 VERSION
 -------
 
-Version 0.04-SNAPSHOT (2016-05-19)
+Version 0.04-SNAPSHOT (2016-11-18)
 
 PREREQUISITES
 -------------
@@ -73,6 +73,10 @@ Save Advanced Art Studio image to PNG file using a default colour palette:
     val image   = Image(picture, palette)
 
     PNG(image).save("images/image.png")
+
+By default saving a PNG image to file triggers an error when overwriting an existing file. To change this behaviour `overwriteIfExists` flag may be used. In order to upscale rendered image before saving it as a PNG file, an additional argument `scaleFactor` (defaulting to _1_) may be defined:
+
+    PNG(image).save(name = "images/image.png", overwriteIfExists = true, scaleFactor = 2)
 
 Serialize first data row of a HiRes Bitmap image to a sequence of byte values:
 
