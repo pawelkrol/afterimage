@@ -1,16 +1,16 @@
 package org.c64.attitude.Afterimage
 package Util
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
-class UtilTest extends Suite {
+class UtilSpec extends FreeSpec {
 
-  def testGetOrderedNumbersSwap {
+  "get ordered numbers swap" in {
     val (one, two) = Util.getOrderedNumbers(2, 1)
     assert(one == 1 && two == 2)
   }
 
-  def testGetOrderedNumbersNoSwap {
+  "get ordered numbers no swap" in {
     val (one, two) = Util.getOrderedNumbers(1, 2)
     assert(one == 1 && two == 2)
   }

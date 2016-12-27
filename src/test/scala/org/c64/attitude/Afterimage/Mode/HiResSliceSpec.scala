@@ -1,15 +1,15 @@
 package org.c64.attitude.Afterimage
 package Mode
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
 import Mode.Data.{Bitmap,Screen}
 
-class HiResSliceTest extends Suite {
+class HiResSliceSpec extends FreeSpec {
 
   val border = Some(0x00.toByte)
 
-  def testCreateHiResWithScreenSliceSuccess {
+  "create hires with screen slice success" in {
 
     // HiResSlice of an exact size of a full-screen HiRes image:
     val bitmap01 = Bitmap(Array.fill(HiRes.size("bitmap")){0x00.toByte}, 40, 25)
@@ -36,7 +36,7 @@ class HiResSliceTest extends Suite {
     assert(HiResSlice(bitmap04, screen04, border, 8, 8).isInstanceOf[HiResSlice])
   }
 
-  def testCreateHiResWithoutScreenSliceSuccess {
+  "create hires without screen slice success" in {
 
     // HiResSlice with more bitmap data provided than indicated by number of image columns:
     val bitmapSize01 = HiRes.size("bitmap") - 0x08 * 0x19
@@ -64,7 +64,7 @@ class HiResSliceTest extends Suite {
     assert(HiResSlice(bitmap05, None, border, 1, 1).isInstanceOf[HiResSlice])
   }
 
-  def testCreateHiResWithScreenSliceFailure {
+  "create hires with screen slice failure" in {
 
     // HiResSlice with image width/height exceeding maximum allowed size:
     val bitmap01 = Bitmap(Array.fill(HiRes.size("bitmap")){0x00.toByte}, 40, 25)
@@ -171,7 +171,7 @@ class HiResSliceTest extends Suite {
     }
   }
 
-  def testCreateHiResWithoutScreenSliceFailure {
+  "create hires without screen slice failure" in {
 
     // HiResSlice with more bitmap data provided than indicated by number of image rows/columns:
     val bitmap01 = Bitmap(Array.fill(HiRes.size("bitmap")){0x00.toByte}, 40, 25)
@@ -273,7 +273,7 @@ class HiResSliceTest extends Suite {
     HiRes(bitmap)
   }
 
-  def testGetPixelFromHiResTopSliceWithScreen {
+  "get pixel from hires top slice with screen" in {
     val hiresSlice = setupHiResImageWithScreen().slice(0, 0, 24, 24)
 
     assert(hiresSlice.pixel(0, 0) == 0x0b)
@@ -297,7 +297,7 @@ class HiResSliceTest extends Suite {
     assert(hiresSlice.pixel(5, 15) == 0x0d)
   }
 
-  def testGetPixelFromHiResShiftedSliceWithScreen {
+  "get pixel from hires shifted slice with screen" in {
     val hiresSlice = setupHiResImageWithScreen().slice(8, 8, 32, 32)
 
     assert(hiresSlice.pixel(7, 0) == 0x0e)
@@ -306,7 +306,7 @@ class HiResSliceTest extends Suite {
     assert(hiresSlice.pixel(1, 7) == 0x06)
   }
 
-  def testGetPixelFromHiResTopSliceWithoutScreen {
+  "get pixel from hires top slice without screen" in {
     val hiresSlice = setupHiResImageWithoutScreen().slice(0, 0, 24, 24)
 
     assert(hiresSlice.pixel(0, 0) == 0x0b)
@@ -332,7 +332,7 @@ class HiResSliceTest extends Suite {
     assert(hiresSlice.pixel(2, 7) == 0x0c)
   }
 
-  def testGetPixelFromHiResShiftedSliceWithoutScreen {
+  "get pixel from hires shifted slice without screen" in {
     val hiresSlice = setupHiResImageWithoutScreen().slice(1, 2, 48, 30)
 
     assert(hiresSlice.pixel(0, 0) == 0x0b)
@@ -361,14 +361,14 @@ class HiResSliceTest extends Suite {
     assert(hiresSlice.pixel(7, 7) == 0x0c)
   }
 
-  def testCreateHiResWithoutScreenShiftedSlice {
+  "create hires without screen shifted slice" in {
 
     val hiresSlice = setupHiResImageWithoutScreen().slice(1, 1, 5, 5)
     val bitmap = List(0xf8, 0xf8, 0xf0, 0xe0, 0xc0, 0x00, 0x00, 0x00).map(_.toByte).toArray
     assert(hiresSlice.bitmap.get.deep == bitmap.deep)
   }
 
-  def testGetPixelFromHiResSliceCreatedFromSlice {
+  "get pixel from hires slice created from slice" in {
     val hiresSlice = setupHiResImageWithScreen().slice(0, 0, 16, 32).slice(0, 8, 8, 16)
 
     assert(hiresSlice.pixel(4, 0) == 0x0d)

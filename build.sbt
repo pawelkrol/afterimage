@@ -1,27 +1,28 @@
-name := "afterimage"
+lazy val root = (project in file(".")).settings(
+  name := "afterimage",
+  organization := "org.c64.attitude",
+  scalaVersion := "2.12.1",
+  version := "0.04-SNAPSHOT"
+)
 
-version := "0.04-SNAPSHOT"
-
-scalaVersion := "2.11.8"
+maxErrors := 1
 
 libraryDependencies ++= Seq(
-  "gov.nih.imagej" % "imagej" % "1.46",
-  "org.json4s" %% "json4s-native" % "3.2.10",
-  "org.scalatest" %% "scalatest" % "2.2.6" % "test"
+  "gov.nih.imagej" % "imagej" % "1.47",
+  "org.json4s" %% "json4s-native" % "3.5.0",
+  "org.scalatest" %% "scalatest" % "3.0.1" % "test"
 )
 
 // Disable using the Scala version in output paths and artifacts:
 crossPaths := false
 
-publishTo <<= version { v: String =>
+publishTo := {
   val nexus = "https://oss.sonatype.org/"
-  if (v.trim.endsWith("SNAPSHOT"))
+  if (isSnapshot.value)
     Some("snapshots" at nexus + "content/repositories/snapshots")
   else
     Some("releases" at nexus + "service/local/staging/deploy/maven2")
 }
-
-organization := "org.c64.attitude"
 
 publishMavenStyle := true
 

@@ -1,16 +1,16 @@
 package org.c64.attitude.Afterimage
 package Mode
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
 import Mode.Data.{Bitmap,Screen}
 
-class MultiColourSliceTest extends Suite {
+class MultiColourSliceSpec extends FreeSpec {
 
   val bckgrd = 0x00.toByte
   val border = Some(0x00.toByte)
 
-  def testCreateMultiColourSliceSuccess {
+  "create multicolour slice success" in {
 
     // MultiColourSlice of an exact size of a full-screen MultiColour image:
     val bitmap01 = Bitmap(Array.fill(MultiColour.size("bitmap")){0x00.toByte}, 40, 25)
@@ -43,7 +43,7 @@ class MultiColourSliceTest extends Suite {
     assert(MultiColourSlice(bitmap04, screen04, colors04, border, bckgrd, 4, 8).isInstanceOf[MultiColourSlice])
   }
 
-  def testCreateMultiColourWithScreenSliceFailure {
+  "create multicolour with screen slice failure" in {
 
     // MultiColourSlice with image width exceeding maximum allowed size (although with valid data)
     // cannot be created, because it is impossible to construct invalid Bitmap/Screen instances:
@@ -212,7 +212,7 @@ class MultiColourSliceTest extends Suite {
     MultiColour(bitmap, screen, colors, bckgrd)
   }
 
-  def testGetSliceFromMultiColourImageSuccess {
+  "get slice from multicolour image success" in {
 
     val multiColourImage = setupMultiColourImage()
 
@@ -221,7 +221,7 @@ class MultiColourSliceTest extends Suite {
     assert(multiColourImage.slice(24, 24).isInstanceOf[MultiColourSlice])
   }
 
-  def testGetSliceFromMultiColourImageFailure {
+  "get slice from multicolour image failure" in {
 
     val multiColourImage = setupMultiColourImage()
 
@@ -233,7 +233,7 @@ class MultiColourSliceTest extends Suite {
     }
   }
 
-  def testGetPixelFromMultiColourTopSliceWithScreen {
+  "get pixel from multicolour top slice with screen" in {
     val multiColourSlice = setupMultiColourImage().slice(0, 2)
 
     assert(multiColourSlice.pixel(0, 0) == 0x07)
@@ -262,7 +262,7 @@ class MultiColourSliceTest extends Suite {
     assert(multiColourSlice.pixel(7, 15) == 0x0d)
   }
 
-  def testGetPixelFromMultiColourShiftedSliceWithScreen {
+  "get pixel from multicolour shifted slice with screen" in {
     val multiColourSlice = setupMultiColourImage().slice(1, 4)
 
     assert(multiColourSlice.pixel(0, 0) == 0x00)

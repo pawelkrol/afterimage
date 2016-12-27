@@ -1,20 +1,20 @@
 package org.c64.attitude.Afterimage
 package Format
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
 import Memory.Address
 import Mode.MultiColour
 
-class KoalaPainterFormatTestSuite extends Suite {
+class KoalaPainterFormatSpec extends FreeSpec {
 
-  def testKoalaPainterFormatCreate {
+  "koala painter format create" in {
     val addr: Address = KoalaPainter.load
     val data: Array[Byte] = Array.fill(KoalaPainter.size){0x00}
     assert(KoalaPainter(addr, data).isInstanceOf[KoalaPainter])
   }
 
-  def testKoalaPainterFormatInvalidAddress {
+  "koala painter format invalid address" in {
     intercept[InvalidImageDataException] {
       val addr: Address = 0x0000
       val data: Array[Byte] = Array.fill(KoalaPainter.size){0x00}
@@ -22,7 +22,7 @@ class KoalaPainterFormatTestSuite extends Suite {
     }
   }
 
-  def testKoalaPainterFormatTooMuchData {
+  "koala painter format too much data" in {
     intercept[InvalidImageDataException] {
       val addr: Address = KoalaPainter.load
       val data: Array[Byte] = Array.fill(KoalaPainter.size + 1){0x00}
@@ -30,7 +30,7 @@ class KoalaPainterFormatTestSuite extends Suite {
     }
   }
 
-  def testKoalaPainterFormatTooLittleData {
+  "koala painter format too little data" in {
     intercept[InvalidImageDataException] {
       val addr: Address = KoalaPainter.load
       val data: Array[Byte] = Array.fill(KoalaPainter.size - 1){0x00}
@@ -38,7 +38,7 @@ class KoalaPainterFormatTestSuite extends Suite {
     }
   }
 
-  def testKoalaPainterFormatEmptyData {
+  "koala painter format empty data" in {
     intercept[InvalidImageDataException] {
       val addr: Address = KoalaPainter.load
       val data: Array[Byte] = Array()
@@ -46,11 +46,11 @@ class KoalaPainterFormatTestSuite extends Suite {
     }
   }
 
-  def testKoalaPainterConfigFileAddr {
+  "koala painter config file addr" in {
    assert(KoalaPainter.load.value == 0x6000)
   }
 
-  def testKoalaPainterConfigFileSize {
+  "koala painter config file size" in {
    assert(KoalaPainter.size == 0x2711)
   }
 
@@ -70,7 +70,7 @@ class KoalaPainterFormatTestSuite extends Suite {
     )
   }
 
-  def testMultiColourDataSerialization {
+  "multicolour data serialization" in {
     val multiColourImage = setupEmptyTestMultiColourData()
     val koalaPainterImage = setupEmptyTestKoalaPainterData()
     assert(KoalaPainter(multiColourImage) equals koalaPainterImage)

@@ -1,26 +1,26 @@
 package org.c64.attitude.Afterimage
 package Format
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
 import Memory.Address
 import Mode.HiRes
 
-class HiResBitmapFormatTestSuite extends Suite {
+class HiResBitmapFormatSpec extends FreeSpec {
 
-  def testHiResBitmapFormatCreate {
+  "hires bitmap format create" in {
     val addr: Address = HiResBitmap.load
     val data: Array[Byte] = Array.fill(HiResBitmap.size){0x00}
     assert(HiResBitmap(addr, data).isInstanceOf[HiResBitmap])
   }
 
-  def testHiResBitmapFormatIrrelevantAddress {
+  "hires bitmap format irrelevant address" in {
     val addr: Address = 0xffff
     val data: Array[Byte] = Array.fill(HiResBitmap.size){0x00}
     assert(HiResBitmap(addr, data).isInstanceOf[HiResBitmap])
   }
 
-  def testHiResBitmapFormatTooMuchData {
+  "hires bitmap format too much data" in {
     intercept[InvalidImageDataException] {
       val addr: Address = HiResBitmap.load
       val data: Array[Byte] = Array.fill(HiResBitmap.size + 1){0x00}
@@ -28,7 +28,7 @@ class HiResBitmapFormatTestSuite extends Suite {
     }
   }
 
-  def testHiResBitmapFormatTooLittleData {
+  "hires bitmap format too little data" in {
     intercept[InvalidImageDataException] {
       val addr: Address = HiResBitmap.load
       val data: Array[Byte] = Array.fill(HiResBitmap.size - 1){0x00}
@@ -36,7 +36,7 @@ class HiResBitmapFormatTestSuite extends Suite {
     }
   }
 
-  def testHiResBitmapFormatEmptyData {
+  "hires bitmap format empty data" in {
     intercept[InvalidImageDataException] {
       val addr: Address = HiResBitmap.load
       val data: Array[Byte] = Array()
@@ -44,11 +44,11 @@ class HiResBitmapFormatTestSuite extends Suite {
     }
   }
 
-  def testHiResBitmapConfigFileAddr {
+  "hires bitmap config file addr" in {
    assert(HiResBitmap.load.value == 0x0000)
   }
 
-  def testHiResBitmapConfigFileSize {
+  "hires bitmap config file size" in {
    assert(HiResBitmap.size == 0x1f40)
   }
 
@@ -63,7 +63,7 @@ class HiResBitmapFormatTestSuite extends Suite {
     )
   }
 
-  def testHiResDataSerialization {
+  "hires data serialization" in {
     val hiResImage = setupEmptyTestHiResData()
     val hiResBitmapImage = setupEmptyTestHiResBitmapData()
     assert(HiResBitmap(hiResImage) equals hiResBitmapImage)

@@ -1,11 +1,11 @@
 package org.c64.attitude.Afterimage
 package Mode.Data.Row
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
 import Mode.HiRes
 
-class HiResRowTest extends Suite {
+class HiResRowSpec extends FreeSpec {
 
   def setupHiResImage() = {
     val bitmap = Array.fill(HiRes.size("bitmap")){0x00}.zipWithIndex.map(zip => {
@@ -31,7 +31,7 @@ class HiResRowTest extends Suite {
 
   def setupHiResSlice() = setupHiResImage().slice(0x00, 0x00, 0x80, 0x10)
 
-  def testHiResAllRows {
+  "hires all rows" in {
     val rows = setupHiResImage().rows
 
     assert(rows.length == 25)
@@ -78,7 +78,7 @@ class HiResRowTest extends Suite {
     assert(secondRow.screen.deep == Array.fill(0x28){0xbc.toByte}.deep)
   }
 
-  def testHiResPixelOffsets {
+  "hires pixel offsets" in {
     val emptyScreen = Array.fill(0x28){0xbc.toByte}
     val emptyBitmap = Array.fill(0x0140){0x00.toByte}
 
@@ -98,7 +98,7 @@ class HiResRowTest extends Suite {
     assert(hiResImageRow.lastPixelOffset(bitmap) == 0x80)
   }
 
-  def testHiResCharMargins {
+  "hires char margins" in {
     val emptyScreen = Array.fill(0x28){0xbc.toByte}
 
     val bitmap = Array.fill(0x0140){0x00.toByte}.zipWithIndex.map(zip => {
@@ -117,7 +117,7 @@ class HiResRowTest extends Suite {
     assert(hiResImageRow.rightMargin == 0x19)
   }
 
-  def testHiResSliceRows {
+  "hires slice rows" in {
     val rows = setupHiResSlice().rows
 
     assert(rows.length == 2)
@@ -178,7 +178,7 @@ class HiResRowTest extends Suite {
     assert(secondRow.screen.deep == Array.fill(0x10){0xbc.toByte}.deep)
   }
 
-  def testHiResImageSliceDataToCode {
+  "hires image slice data to code" in {
     val rows = setupHiResSlice().rows
 
     val row = rows(0).asInstanceOf[HiResRow]
@@ -207,7 +207,7 @@ class HiResRowTest extends Suite {
     assert(got == expected)
   }
 
-  def testHiResFullWidthDataToCode {
+  "hires full width data to code" in {
     val rows = setupHiResImage().rows
 
     val row = rows(0).asInstanceOf[HiResRow]
@@ -246,7 +246,7 @@ class HiResRowTest extends Suite {
     assert(got == expected)
   }
 
-  def testHiResSerializeImageSliceRow {
+  "hires serialize image slice row" in {
     val rows = setupHiResSlice().rows
 
     val row = rows(0).asInstanceOf[HiResRow]
@@ -256,7 +256,7 @@ class HiResRowTest extends Suite {
     assert(got == expected)
   }
 
-  def testHiResSerializeFullWidthRow {
+  "hires serialize full width row" in {
     val rows = setupHiResImage().rows
 
     val row = rows(0).asInstanceOf[HiResRow]
@@ -266,7 +266,7 @@ class HiResRowTest extends Suite {
     assert(got == expected)
   }
 
-  def testHiResDataDeserialization {
+  "hires data deserialization" in {
     val data = "02bcbc0102030405060708090a0b0c0d0e0f10"
 
     val got = HiResRow.inflate(data)
@@ -280,7 +280,7 @@ class HiResRowTest extends Suite {
     assert(got.screen.deep == expected.screen.deep)
   }
 
-  def testHiResRowShift {
+  "hires row shift" in {
     val rows = setupHiResSlice().rows
 
     val row = rows(0).asInstanceOf[HiResRow]

@@ -1,27 +1,27 @@
 package org.c64.attitude.Afterimage
 package Format.Config
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
-class FacePainterConfigTestSuite extends Suite {
+class FacePainterConfigSpec extends FreeSpec {
 
-  def testFacePainterBitmapOffset {
+  "face painter bitmap offset" in {
    assert(FacePainter.bitmap == 0x0000)
   }
 
-  def testFacePainterScreenOffset {
+  "face painter screen offset" in {
    assert(FacePainter.screen == 0x1f40)
   }
 
-  def testFacePainterColorsOffset {
+  "face painter colors offset" in {
    assert(FacePainter.colors == 0x2328)
   }
 
-  def testFacePainterBorderOffset {
+  "face painter border offset" in {
    assert(FacePainter.border == 0x2710)
   }
 
-  def testFacePainterBackgroundOffset {
+  "face painter background offset" in {
    assert(FacePainter.bckgrd == 0x2711)
   }
 }

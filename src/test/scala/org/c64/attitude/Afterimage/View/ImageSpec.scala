@@ -3,13 +3,13 @@ package View
 
 import ij.ImagePlus
 
-import org.scalatest.{Ignore, Suite}
+import org.scalatest.FreeSpec
 
 import Colour.Palette
 import File.File
 import Mode.{HiRes, MultiColour}
 
-class ImageTest extends Suite {
+class ImageSpec extends FreeSpec {
 
   def setupEmptyTestMultiColourData() = {
     MultiColour(
@@ -21,21 +21,20 @@ class ImageTest extends Suite {
     )
   }
 
-  def testImageCreate {
+  "image create" in {
     val picture = setupEmptyTestMultiColourData()
     val palette = Palette("default")
     assert(Image(picture, palette).isInstanceOf[Image])
   }
 
-  def testImageShower {
+  "image shower" in {
     val picture = setupEmptyTestMultiColourData()
     val palette = Palette("default")
     val image = Image(picture, palette).create()
     assert(image.isInstanceOf[ImagePlus])
   }
 
-  @Ignore
-  def testImageHiResShowerView {
+  "image hires shower view" ignore {
 
     val name = getClass.getResource("/images/niemanazwy-bimber.hpi").toString.replace("file:", "")
     val picture = File.load(name)
@@ -43,8 +42,7 @@ class ImageTest extends Suite {
     Image(picture.asInstanceOf[HiRes].invert, palette).show()
   }
 
-  @Ignore
-  def testImageMultiColourShowerView {
+  "image multicolour shower view" ignore {
 
     val name = getClass.getResource("/images/frighthof83-yazoo.fcp").toString.replace("file:", "")
     val picture = File.load(name)
@@ -52,8 +50,7 @@ class ImageTest extends Suite {
     Image(picture, palette).show()
   }
 
-  @Ignore
-  def testImageHiResSliceShowerView {
+  "image hires slice shower view" ignore {
 
     val name = getClass.getResource("/images/desolate-deev.aas").toString.replace("file:", "")
     val picture = File.load(name)
@@ -62,8 +59,7 @@ class ImageTest extends Suite {
     Image(slice, palette).show()
   }
 
-  @Ignore
-  def testImageMultiColourSliceShowerView {
+  "image multicolour slice shower view" ignore {
 
     val name = getClass.getResource("/images/frighthof83-yazoo.ocp").toString.replace("file:", "")
     val picture = File.load(name)

@@ -1,23 +1,23 @@
 package org.c64.attitude.Afterimage
 package Format.Config
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
-class KoalaPainterConfigTestSuite extends Suite {
+class KoalaPainterConfigSpec extends FreeSpec {
 
-  def testKoalaPainterBitmapOffset {
+  "koala painter bitmap offset" in {
    assert(KoalaPainter.bitmap == 0x0000)
   }
 
-  def testKoalaPainterScreenOffset {
+  "koala painter screen offset" in {
    assert(KoalaPainter.screen == 0x1f40)
   }
 
-  def testKoalaPainterColorsOffset {
+  "koala painter colors offset" in {
    assert(KoalaPainter.colors == 0x2328)
   }
 
-  def testKoalaPainterBackgroundOffset {
+  "koala painter background offset" in {
    assert(KoalaPainter.bckgrd == 0x2710)
   }
 }

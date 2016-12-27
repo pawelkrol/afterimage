@@ -1,20 +1,20 @@
 package org.c64.attitude.Afterimage
 package Format
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
 import Memory.Address
 import Mode.MultiColour
 
-class AdvancedArtStudioFormatTestSuite extends Suite {
+class AdvancedArtStudioFormatSpec extends FreeSpec {
 
-  def testAdvancedArtStudioFormatCreate {
+  "advanced art studio format create" in {
     val addr: Address = AdvancedArtStudio.load
     val data: Array[Byte] = Array.fill(AdvancedArtStudio.size){0x00}
     assert(AdvancedArtStudio(addr, data).isInstanceOf[AdvancedArtStudio])
   }
 
-  def testAdvancedArtStudioFormatInvalidAddress {
+  "advanced art studio format invalid address" in {
     intercept[InvalidImageDataException] {
       val addr: Address = 0x0000
       val data: Array[Byte] = Array.fill(AdvancedArtStudio.size){0x00}
@@ -22,7 +22,7 @@ class AdvancedArtStudioFormatTestSuite extends Suite {
     }
   }
 
-  def testAdvancedArtStudioFormatTooMuchData {
+  "advanced art studio format too much data" in {
     intercept[InvalidImageDataException] {
       val addr: Address = AdvancedArtStudio.load
       val data: Array[Byte] = Array.fill(AdvancedArtStudio.size + 1){0x00}
@@ -30,7 +30,7 @@ class AdvancedArtStudioFormatTestSuite extends Suite {
     }
   }
 
-  def testAdvancedArtStudioFormatTooLittleData {
+  "advanced art studio format too little data" in {
     intercept[InvalidImageDataException] {
       val addr: Address = AdvancedArtStudio.load
       val data: Array[Byte] = Array.fill(AdvancedArtStudio.size - 1){0x00}
@@ -38,7 +38,7 @@ class AdvancedArtStudioFormatTestSuite extends Suite {
     }
   }
 
-  def testAdvancedArtStudioFormatEmptyData {
+  "advanced art studio format empty data" in {
     intercept[InvalidImageDataException] {
       val addr: Address = AdvancedArtStudio.load
       val data: Array[Byte] = Array()
@@ -46,11 +46,11 @@ class AdvancedArtStudioFormatTestSuite extends Suite {
     }
   }
 
-  def testAdvancedArtStudioConfigFileAddr {
+  "advanced art studio config file addr" in {
    assert(AdvancedArtStudio.load.value == 0x2000)
   }
 
-  def testAdvancedArtStudioConfigFileSize {
+  "advanced art studio config file size" in {
    assert(AdvancedArtStudio.size == 0x2720)
   }
 
@@ -70,7 +70,7 @@ class AdvancedArtStudioFormatTestSuite extends Suite {
     )
   }
 
-  def testMultiColourDataSerialization {
+  "multicolour data serialization" in {
     val multiColourImage = setupEmptyTestMultiColourData()
     val AdvancedArtStudioImage = setupEmptyTestAdvancedArtStudioData()
     assert(AdvancedArtStudio(multiColourImage) equals AdvancedArtStudioImage)

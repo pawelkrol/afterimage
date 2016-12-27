@@ -1,20 +1,20 @@
 package org.c64.attitude.Afterimage
 package Format
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
 import Memory.Address
 import Mode.MultiColour
 
-class FacePainterFormatTestSuite extends Suite {
+class FacePainterFormatSpec extends FreeSpec {
 
-  def testFacePainterFormatCreate {
+  "face painter format create" in {
     val addr: Address = FacePainter.load
     val data: Array[Byte] = Array.fill(FacePainter.size){0x00}
     assert(FacePainter(addr, data).isInstanceOf[FacePainter])
   }
 
-  def testFacePainterFormatInvalidAddress {
+  "face painter format invalid address" in {
     intercept[InvalidImageDataException] {
       val addr: Address = 0x0000
       val data: Array[Byte] = Array.fill(FacePainter.size){0x00}
@@ -22,7 +22,7 @@ class FacePainterFormatTestSuite extends Suite {
     }
   }
 
-  def testFacePainterFormatTooMuchData {
+  "face painter format too much data" in {
     intercept[InvalidImageDataException] {
       val addr: Address = FacePainter.load
       val data: Array[Byte] = Array.fill(FacePainter.size + 1){0x00}
@@ -30,7 +30,7 @@ class FacePainterFormatTestSuite extends Suite {
     }
   }
 
-  def testFacePainterFormatTooLittleData {
+  "face painter format too little data" in {
     intercept[InvalidImageDataException] {
       val addr: Address = FacePainter.load
       val data: Array[Byte] = Array.fill(FacePainter.size - 1){0x00}
@@ -38,7 +38,7 @@ class FacePainterFormatTestSuite extends Suite {
     }
   }
 
-  def testFacePainterFormatEmptyData {
+  "face painter format empty data" in {
     intercept[InvalidImageDataException] {
       val addr: Address = FacePainter.load
       val data: Array[Byte] = Array()
@@ -46,11 +46,11 @@ class FacePainterFormatTestSuite extends Suite {
     }
   }
 
-  def testFacePainterConfigFileAddr {
+  "face painter config file addr" in {
    assert(FacePainter.load.value == 0x4000)
   }
 
-  def testFacePainterConfigFileSize {
+  "face painter config file size" in {
    assert(FacePainter.size == 0x2712)
   }
 
@@ -71,7 +71,7 @@ class FacePainterFormatTestSuite extends Suite {
     )
   }
 
-  def testMultiColourDataSerialization {
+  "multicolour data serialization" in {
     val multiColourImage = setupEmptyTestMultiColourData()
     val facePainterImage = setupEmptyTestFacePainterData()
     assert(FacePainter(multiColourImage) equals facePainterImage)

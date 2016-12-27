@@ -1,16 +1,16 @@
 package org.c64.attitude.Afterimage
 package Mode.Data
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
-class ScreenTest extends Suite {
+class ScreenSpec extends FreeSpec {
 
-  def testCreateDefaultScreen {
+  "create default screen" in {
 
     assert(Screen().isInstanceOf[Screen])
   }
 
-  def testCreateScreenWithSize {
+  "create screen with size" in {
 
     assert(Screen(40, 25).isInstanceOf[Screen])
     assert(Screen(39, 25).isInstanceOf[Screen])
@@ -39,7 +39,7 @@ class ScreenTest extends Suite {
     }
   }
 
-  def testCreateScreenWithData {
+  "create screen with data" in {
 
     assert(Screen(Array.fill(1000){0x00}, 40, 25).isInstanceOf[Screen])
     assert(Screen(Array.fill(975){0x00}, 39, 25).isInstanceOf[Screen])
@@ -77,7 +77,7 @@ class ScreenTest extends Suite {
     Screen(screen, 40, 25)
   }
 
-  def testGetValue {
+  "get value" in {
 
     val screen = setupTestScreen
 
@@ -107,7 +107,7 @@ class ScreenTest extends Suite {
     }
   }
 
-  def testScreenDataSerialization {
+  "screen data serialization" in {
 
     assert(Screen().get().deep == Array.fill(0x03e8){0x00}.deep)
     assert(Screen(1, 1).get().deep == Array.fill(0x01){0x00}.deep)
@@ -129,7 +129,7 @@ class ScreenTest extends Suite {
     assert(setupTestScreen.get().deep == screen.deep)
   }
 
-  def testScreenDataShift {
+  "screen data shift" in {
 
     val screenToLeft = Array.fill(1000){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
@@ -190,7 +190,7 @@ class ScreenTest extends Suite {
     assert(screen.shift(0, 25).get.deep == Array.fill(1000){0x00}.deep)
   }
 
-  def testScreenDataSlice {
+  "screen data slice" in {
 
     val screenSliceHoriz = Array.fill(2){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip

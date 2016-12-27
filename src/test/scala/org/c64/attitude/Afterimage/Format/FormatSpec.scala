@@ -1,12 +1,12 @@
 package org.c64.attitude.Afterimage
 package Format
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
 import File.File
 import Mode.{HiRes,MultiColour}
 
-class FormatTest extends Suite {
+class FormatSpec extends FreeSpec {
 
   def setupTempFile() = {
 
@@ -22,7 +22,7 @@ class FormatTest extends Suite {
     file.delete()
   }
 
-  def testKoalaPainterToFacePainter {
+  "koala painter to face painter" in {
     val name = getClass.getResource("/images/frighthof83-yazoo.kla").toString.replace("file:", "")
     val image = File.load(name).asInstanceOf[MultiColour]
 
@@ -36,7 +36,7 @@ class FormatTest extends Suite {
     cleanupTempFile(fileName)
   }
 
-  def testFacePainterToKoalaPainter {
+  "face painter to koala painter" in {
     val name = getClass.getResource("/images/frighthof83-yazoo.fcp").toString.replace("file:", "")
     val image = File.load(name).asInstanceOf[MultiColour]
 
@@ -50,7 +50,7 @@ class FormatTest extends Suite {
     cleanupTempFile(fileName)
   }
 
-  def testAdvancedArtStudioToFacePainter {
+  "advanced art studio to face painter" in {
     val name = getClass.getResource("/images/frighthof83-yazoo.ocp").toString.replace("file:", "")
     val image = File.load(name).asInstanceOf[MultiColour]
 
@@ -64,7 +64,7 @@ class FormatTest extends Suite {
     cleanupTempFile(fileName)
   }
 
-  def testFacePainterToAdvancedArtStudio {
+  "face painter to advanced art studio" in {
     val name = getClass.getResource("/images/frighthof83-yazoo.fcp").toString.replace("file:", "")
     val image = File.load(name).asInstanceOf[MultiColour]
 
@@ -78,7 +78,7 @@ class FormatTest extends Suite {
     cleanupTempFile(fileName)
   }
 
-  def testHiresBitmapToArtStudio {
+  "hires bitmap to art studio" in {
     val name = getClass.getResource("/images/niemanazwy-bimber.hpi").toString.replace("file:", "")
     val image = File.load(name).asInstanceOf[HiRes]
 

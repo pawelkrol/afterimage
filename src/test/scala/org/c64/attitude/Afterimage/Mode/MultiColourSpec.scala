@@ -1,19 +1,19 @@
 package org.c64.attitude.Afterimage
 package Mode
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
-class MultiColourTest extends Suite {
+class MultiColourSpec extends FreeSpec {
 
-  def testMultiColourConfigBitmapSize {
+  "multicolour config bitmap size" in {
    assert(MultiColour.size("bitmap") == 0x1f40)
   }
 
-  def testMultiColourConfigScreenSize {
+  "multicolour config screen size" in {
    assert(MultiColour.size("screen") == 0x03e8)
   }
 
-  def testMultiColourConfigColorsSize {
+  "multicolour config colors size" in {
    assert(MultiColour.size("colors") == 0x03e8)
   }
 
@@ -27,75 +27,75 @@ class MultiColourTest extends Suite {
     )
   }
 
-  def testMultiColourCreateWithTestData {
+  "multicolour create with test data" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
     assert(MultiColour(bitmap, screen, colors, bckgrd, border).isInstanceOf[MultiColour])
   }
 
-  def testMultiColourCreateWithEmptyBitmap {
+  "multicolour create with empty bitmap" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
     intercept[InvalidBitmapDataLengthException] {
       MultiColour(Array[Byte](), screen, colors, bckgrd, border)
     }
   }
 
-  def testMultiColourCreateWithTooLargeBitmap {
+  "multicolour create with too large bitmap" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
     intercept[InvalidBitmapDataLengthException] {
       MultiColour(bitmap :+ 0x00.toByte, screen, colors, bckgrd, border)
     }
   }
 
-  def testMultiColourCreateWithTooSmallBitmap {
+  "multicolour create with too small bitmap" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
     intercept[InvalidBitmapDataLengthException] {
       MultiColour(bitmap.init, screen, colors, bckgrd, border)
     }
   }
 
-  def testMultiColourCreateWithEmptyScreen {
+  "multicolour create with empty screen" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
     intercept[InvalidScreenDataLengthException] {
       MultiColour(bitmap, Array[Byte](), colors, bckgrd, border)
     }
   }
 
-  def testMultiColourCreateWithTooLargeScreen {
+  "multicolour create with too large screen" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
     intercept[InvalidScreenDataLengthException] {
       MultiColour(bitmap, screen :+ 0x00.toByte, colors, bckgrd, border)
     }
   }
 
-  def testMultiColourCreateWithTooSmallScreen {
+  "multicolour create with too small screen" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
     intercept[InvalidScreenDataLengthException] {
       MultiColour(bitmap, screen.init, colors, bckgrd, border)
     }
   }
 
-  def testMultiColourCreateWithEmptyColors {
+  "multicolour create with empty colors" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
     intercept[InvalidScreenDataLengthException] {
       MultiColour(bitmap, screen, Array[Byte](), bckgrd, border)
     }
   }
 
-  def testMultiColourCreateWithTooLargeColors {
+  "multicolour create with too large colors" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
     intercept[InvalidScreenDataLengthException] {
       MultiColour(bitmap, screen, colors :+ 0x00.toByte, bckgrd, border)
     }
   }
 
-  def testMultiColourCreateWithTooSmallColors {
+  "multicolour create with too small colors" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
     intercept[InvalidScreenDataLengthException] {
       MultiColour(bitmap, screen, colors.init, bckgrd, border)
     }
   }
 
-  def testGetPixel {
+  "get pixel" in {
     val bitmap = Array.fill(MultiColour.size("bitmap")){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
       val value = index match {
@@ -160,7 +160,7 @@ class MultiColourTest extends Suite {
     assert(multiColourImage.pixel(11, 7) == 0x00)
   }
 
-  def testEmptyMultiColourImage {
+  "empty multicolour image" in {
 
     val multiColourImage = MultiColour()
     assert(multiColourImage.isInstanceOf[MultiColour])

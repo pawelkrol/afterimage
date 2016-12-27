@@ -3,15 +3,15 @@ CHANGES
 
 Revision history for `Afterimage`, a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications, entirely written in [Scala](http://www.scala-lang.org/).
 
-0.04-SNAPSHOT (2016-11-18)
+0.04-SNAPSHOT (2016-12-27)
 --------------------------
 
 * Enhancement: specifying an arbitrary background colour when importing graphic images in HiRes format is now possible (this might turn out especially handy when processing pictures that are designed to be eventually converted into a custom character set and rendered using screen fonts rather than a bitmap image)
 * Enhancement: displaying image preview may now be customised with an arbitrary scale factor to be applied when rendering a picture
 * Enhancement: add customisable picture upscaling by an additional factor when saving PNG image to file (previously saving PNG file would automatically upscale rendered image by a factor of 2, now it renders target image in a 1:1 scale, providing an optional argument to select a custom scaling factor)
-* `Scala` version upgraded to 2.11.8
-* `ScalaTest` version upgraded to 2.2.6
-* `sbt` version upgraded to 0.13.11
+* `Scala` version upgraded to 2.12.1
+* `ScalaTest` version upgraded to 3.0.1
+* `sbt` version upgraded to 0.13.13
 
 0.03 (2015-12-06)
 -----------------

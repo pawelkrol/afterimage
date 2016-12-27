@@ -1,20 +1,20 @@
 package org.c64.attitude.Afterimage
 package Format
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
 import Memory.Address
 import Mode.HiRes
 
-class ArtStudioFormatTestSuite extends Suite {
+class ArtStudioFormatSpec extends FreeSpec {
 
-  def testArtStudioFormatCreate {
+  "art studio format create" in {
     val addr: Address = ArtStudio.load
     val data: Array[Byte] = Array.fill(ArtStudio.size){0x00}
     assert(ArtStudio(addr, data).isInstanceOf[ArtStudio])
   }
 
-  def testArtStudioFormatInvalidAddress {
+  "art studio format invalid address" in {
     intercept[InvalidImageDataException] {
       val addr: Address = 0x0000
       val data: Array[Byte] = Array.fill(ArtStudio.size){0x00}
@@ -22,7 +22,7 @@ class ArtStudioFormatTestSuite extends Suite {
     }
   }
 
-  def testArtStudioFormatTooMuchData {
+  "art studio format too much data" in {
     intercept[InvalidImageDataException] {
       val addr: Address = ArtStudio.load
       val data: Array[Byte] = Array.fill(ArtStudio.size + 1){0x00}
@@ -30,7 +30,7 @@ class ArtStudioFormatTestSuite extends Suite {
     }
   }
 
-  def testArtStudioFormatTooLittleData {
+  "art studio format too little data" in {
     intercept[InvalidImageDataException] {
       val addr: Address = ArtStudio.load
       val data: Array[Byte] = Array.fill(ArtStudio.size - 1){0x00}
@@ -38,7 +38,7 @@ class ArtStudioFormatTestSuite extends Suite {
     }
   }
 
-  def testArtStudioFormatEmptyData {
+  "art studio format empty data" in {
     intercept[InvalidImageDataException] {
       val addr: Address = ArtStudio.load
       val data: Array[Byte] = Array()
@@ -46,11 +46,11 @@ class ArtStudioFormatTestSuite extends Suite {
     }
   }
 
-  def testArtStudioConfigFileAddr {
+  "art studio config file addr" in {
    assert(ArtStudio.load.value == 0x2000)
   }
 
-  def testArtStudioConfigFileSize {
+  "art studio config file size" in {
    assert(ArtStudio.size == 0x2328)
   }
 
@@ -68,7 +68,7 @@ class ArtStudioFormatTestSuite extends Suite {
     )
   }
 
-  def testHiResDataSerialization {
+  "hires data serialization" in {
     val hiResImage = setupEmptyTestHiResData()
     val ArtStudioImage = setupEmptyTestArtStudioData()
     assert(ArtStudio(hiResImage) equals ArtStudioImage)

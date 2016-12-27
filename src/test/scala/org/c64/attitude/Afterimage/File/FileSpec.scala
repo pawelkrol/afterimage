@@ -1,52 +1,52 @@
 package org.c64.attitude.Afterimage
 package File
 
-import org.scalatest.Suite
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.FreeSpec
+import org.scalatest.MustMatchers
 
 import Colour.Palette
 
 import Mode.{HiRes,MultiColour}
 
-class FileTest extends Suite with ShouldMatchers {
+class FileSpec extends FreeSpec with MustMatchers {
 
-  def testLoadFacePainterFile {
+  "load face painter file" in {
     val name = getClass.getResource("/images/frighthof83-yazoo.fcp").toString.replace("file:", "")
     assert(File.load(name).isInstanceOf[MultiColour])
   }
 
-  def testLoadKoalaPainterFileV1 {
+  "load koala painter file v1" in {
     val name = getClass.getResource("/images/frighthof83-yazoo.kla").toString.replace("file:", "")
     assert(File.load(name).isInstanceOf[MultiColour])
   }
 
-  def testLoadKoalaPainterFileV2 {
+  "load koala painter file v2" in {
     val name = getClass.getResource("/images/metal.kla").toString.replace("file:", "")
     val picture = File.load(name).asInstanceOf[MultiColour]
-    picture.pixel(0, 0) should equal (0x00)
+    picture.pixel(0, 0) must equal (0x00)
   }
 
-  def testLoadAdvancedArtStudioFile {
+  "load advanced art studio file" in {
     val name = getClass.getResource("/images/frighthof83-yazoo.ocp").toString.replace("file:", "")
     assert(File.load(name).isInstanceOf[MultiColour])
   }
 
-  def testLoadHiResBitmapFile {
+  "load hires bitmap file" in {
     val name = getClass.getResource("/images/niemanazwy-bimber.hpi").toString.replace("file:", "")
     assert(File.load(name).isInstanceOf[HiRes])
   }
 
-  def testLoadArtStudioFile {
+  "load art studio file" in {
     val name = getClass.getResource("/images/desolate-deev.aas").toString.replace("file:", "")
     assert(File.load(name).isInstanceOf[HiRes])
   }
 
-  def testImportHiResPNGFile {
+  "import hires PNG file" in {
     val name = getClass.getResource("/images/desolate-deev.png").toString.replace("file:", "")
     assert(File.convert(name, Import.HiRes()).isInstanceOf[HiRes])
   }
 
-  def testImportMultiColourPNGFile {
+  "import multicolour PNG file" in {
     val name = getClass.getResource("/images/frighthof83-yazoo.png").toString.replace("file:", "")
     assert(File.convert(name, Import.MultiColour(backgroundColour = 0x00)).isInstanceOf[MultiColour])
   }

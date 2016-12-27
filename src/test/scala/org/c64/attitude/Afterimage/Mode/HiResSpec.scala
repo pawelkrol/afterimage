@@ -1,18 +1,18 @@
 package org.c64.attitude.Afterimage
 package Mode
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
 import Mode.Data.{Bitmap,Screen}
 
-class HiResTest extends Suite {
+class HiResSpec extends FreeSpec {
 
-  def testHiResConfigBitmapSize {
-   assert(HiRes.size("bitmap") == 0x1f40)
+  "hires config bitmap size" in {
+    assert(HiRes.size("bitmap") == 0x1f40)
   }
 
-  def testHiResConfigScreenSize {
-   assert(HiRes.size("screen") == 0x03e8)
+  "hires config screen size" in {
+    assert(HiRes.size("screen") == 0x03e8)
   }
 
   def setupTestData() = {
@@ -23,64 +23,64 @@ class HiResTest extends Suite {
     )
   }
 
-  def testHiResCreateWithTestData {
+  "hires create with test data" in {
     val (bitmap, screen, border) = setupTestData()
     assert(HiRes(bitmap, screen, border).isInstanceOf[HiRes])
   }
 
-  def testHiResCreateWithEmptyBitmap {
+  "hires create with empty bitmap" in {
     val (bitmap, screen, border) = setupTestData()
     intercept[InvalidBitmapDataLengthException] {
       HiRes(Array[Byte](), screen, border)
     }
   }
 
-  def testHiResCreateWithTooLargeBitmap {
+  "hires create with too large bitmap" in {
     val (bitmap, screen, border) = setupTestData()
     intercept[InvalidBitmapDataLengthException] {
       HiRes(bitmap :+ 0x00.toByte, screen, border)
     }
   }
 
-  def testHiResCreateWithTooSmallBitmap {
+  "hires create with too small bitmap" in {
     val (bitmap, screen, border) = setupTestData()
     intercept[InvalidBitmapDataLengthException] {
       HiRes(bitmap.init, screen, border)
     }
   }
 
-  def testHiResCreateWithEmptyScreen {
+  "hires create with empty screen" in {
     val (bitmap, screen, border) = setupTestData()
     intercept[InvalidScreenDataLengthException] {
       HiRes(bitmap, Array[Byte](), border)
     }
   }
 
-  def testHiResCreateWithTooLargeScreen {
+  "hires create with too large screen" in {
     val (bitmap, screen, border) = setupTestData()
     intercept[InvalidScreenDataLengthException] {
       HiRes(bitmap, screen :+ 0x00.toByte, border)
     }
   }
 
-  def testHiResCreateWithTooSmallScreen {
+  "hires create with too small screen" in {
     val (bitmap, screen, border) = setupTestData()
     intercept[InvalidScreenDataLengthException] {
       HiRes(bitmap, screen.init, border)
     }
   }
 
-  def testHiResCreateWithNoScreen {
+  "hires create with no screen" in {
     val (bitmap, screen, border) = setupTestData()
     assert(HiRes(bitmap, border).isInstanceOf[HiRes])
   }
 
-  def testHiResCreateWithNoBorder {
+  "hires create with no border" in {
     val (bitmap, screen, border) = setupTestData()
     assert(HiRes(bitmap, screen).isInstanceOf[HiRes])
   }
 
-  def testGetPixel {
+  "get pixel" in {
     val bitmap = Array.fill(HiRes.size("bitmap")){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
       val value = index match {
@@ -132,14 +132,14 @@ class HiResTest extends Suite {
     assert(hiresImage.pixel(5, 15) == 0x0d)
   }
 
-  def testInvertImagePixels {
+  "invert image pixels" in {
     val (bitmap, screen, border) = setupTestData()
     val hiresImage = HiRes(bitmap).invert
     assert(hiresImage.bitmap.get()(0x00) == 0xff.toByte)
     assert(hiresImage.pixel(0, 0) == 0x0b)
   }
 
-  def testCreateHiResObjectFromScreenSlice {
+  "create hires object from screen slice" in {
     val (bitmap, screen, border) = setupTestData()
     val bitmapSlice = Bitmap(bitmap, Bitmap.maxCols, Bitmap.maxRows)
     val screenSlice = Screen(screen, Screen.maxCols, Screen.maxRows).slice(0, 0, Screen.maxCols - 1, Screen.maxRows)
@@ -148,7 +148,7 @@ class HiResTest extends Suite {
     }
   }
 
-  def testCreateHiResObjectFromBitmapSlice {
+  "create hires object from bitmap slice" in {
     val (bitmap, screen, border) = setupTestData()
     val bitmapSlice = Bitmap(bitmap, Bitmap.maxCols, Bitmap.maxRows).slice(0, 0, Bitmap.maxCols * 0x08 - 8, Bitmap.maxRows * 0x08)
     val screenSlice = Screen(screen, Screen.maxCols, Screen.maxRows)
@@ -157,8 +157,7 @@ class HiResTest extends Suite {
     }
   }
 
-  def testEmptyHiResImage {
-
+  "empty hires image" in {
     val hiResImage = HiRes()
     assert(hiResImage.isInstanceOf[HiRes])
   }

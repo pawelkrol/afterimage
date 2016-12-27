@@ -6,10 +6,10 @@ import ij.process.ColorProcessor
 
 import java.awt.Color.black
 
-import org.scalatest.Suite
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.FreeSpec
+import org.scalatest.MustMatchers
 
-class MultiColourTest extends Suite with ShouldMatchers {
+class MultiColourSpec extends FreeSpec with MustMatchers {
 
   private val fileImportMultiColour = File.Import.MultiColour(backgroundColour = 0x00)
 
@@ -31,14 +31,14 @@ class MultiColourTest extends Suite with ShouldMatchers {
     new ImagePlus("MultiColour Image Converter", ip)
   }
 
-  def testFileImportMultiColourInitialization {
+  "file import multicolour initialization" in {
 
-    fileImportMultiColour should equal (File.Import.MultiColour(backgroundColour = 0x00))
+    fileImportMultiColour must equal (File.Import.MultiColour(backgroundColour = 0x00))
   }
 
-  def testFileImportMultiColourConversion {
+  "file import multicolour conversion" in {
 
     val convertedMultiColourImage = fileImportMultiColour.convert(emptyImagePlus).asInstanceOf[Mode.MultiColour]
-    convertedMultiColourImage should equal (blackMultiColourImage)
+    convertedMultiColourImage must equal (blackMultiColourImage)
   }
 }

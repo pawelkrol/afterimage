@@ -1,65 +1,65 @@
 package org.c64.attitude.Afterimage
 package Memory
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
-class MemoryAddressTestSuite extends Suite {
+class MemoryAddressSpec extends FreeSpec {
 
-  def testAddressCreateFromBytes {
+  "address create from bytes" in {
     val addr = Address(0x00, 0x10)
     assert(addr.lo == 0x00)
     assert(addr.hi == 0x10)
   }
 
-  def testAddressCreateFromInt {
+  "address create from int" in {
     val addr = Address(0x1000)
     assert(addr.lo == 0x00)
     assert(addr.hi == 0x10)
   }
 
-  def testAddressImplicitCreateFromInt {
+  "address implicit create from int" in {
     val addr: Address = 0x1000
     assert(addr.lo == 0x00)
     assert(addr.hi == 0x10)
   }
 
-  def testAddressPrintFromBytes {
+  "address print from bytes" in {
     val addr = Address(0x00, 0x10)
     assert(addr.toString == "$1000")
   }
 
-  def testAddressPrintFromInt {
+  "address print from int" in {
     val addr = Address(0x1000)
     assert(addr.toString == "$1000")
   }
 
-  def testAddressImplicitPrintFromInt {
+  "address implicit print from int" in {
     val addr: Address = 0x1000
     assert(addr.toString == "$1000")
   }
 
-  def testAddressValueFromBytes {
+  "address value from bytes" in {
     val addr = Address(0x00, 0x10)
     assert(addr.value == 4096)
   }
 
-  def testAddressValueFromInt {
+  "address value from int" in {
     val addr = Address(0x1000)
     assert(addr.value == 4096)
   }
 
-  def testAddressImplicitValueFromInt {
+  "address implicit value from int" in {
     val addr: Address = 0x1000
     assert(addr.value == 4096)
   }
 
-  def testAddressCreateNegative {
+  "address create negative" in {
     intercept[InvalidAddressException] {
       Address(-1)
     }
   }
 
-  def testAddressCreateTooLarge {
+  "address create too large" in {
     intercept[InvalidAddressException] {
       Address(0x10000)
     }

@@ -2,14 +2,14 @@ package org.c64.attitude.Afterimage
 package File.Type
 
 import ij.ImagePlus
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
 import Colour.Palette
 import File.File
 import Mode.MultiColour
 import View.Image
 
-class PNGTest extends Suite {
+class PNGSpec extends FreeSpec {
 
   def setupTempFile() = {
 
@@ -41,12 +41,12 @@ class PNGTest extends Suite {
     PNG(Image(picture, Palette("default")))
   }
 
-  def testCreatePNG {
+  "create PNG" in {
     val png = setupTestData()
     assert(png.isInstanceOf[PNG])
   }
 
-  def testKoalaPainterToPNG {
+  "koala painter to PNG" in {
     val png = buildImageConverter("/images/frighthof83-yazoo.kla")
 
     val fileName = setupTempFile()
@@ -59,7 +59,7 @@ class PNGTest extends Suite {
     cleanupTempFile(fileName)
   }
 
-  def testArtStudioToPNG {
+  "art studio to PNG" in {
     val png = buildImageConverter("/images/desolate-deev.aas")
 
     val fileName = setupTempFile()
@@ -72,7 +72,7 @@ class PNGTest extends Suite {
     cleanupTempFile(fileName)
   }
 
-  def testOverwriteIfExistsSaveParameter {
+  "overwrite if exists save parameter" in {
     val png = setupTestData()
 
     val fileName = setupTempFile()
@@ -90,7 +90,7 @@ class PNGTest extends Suite {
     cleanupTempFile(fileName)
   }
 
-  def testPNGDefaultScaleFactor {
+  "PNG default scale factor" in {
     val png = buildImageConverter("/images/desolate-deev.aas")
 
     val fileName = setupTempFile()
@@ -104,7 +104,7 @@ class PNGTest extends Suite {
     cleanupTempFile(fileName)
   }
 
-  def testPNGCustomScaleFactor {
+  "PNG custom scale factor" in {
     val png = buildImageConverter("/images/desolate-deev.aas")
 
     val fileName = setupTempFile()

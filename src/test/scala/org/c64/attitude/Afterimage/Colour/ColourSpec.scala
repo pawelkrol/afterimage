@@ -3,10 +3,10 @@ package Colour
 
 import org.json4s.native.JsonMethods.{compact, render}
 
-import org.scalatest.Suite
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.FreeSpec
+import org.scalatest.MustMatchers
 
-class ColourTest extends Suite with ShouldMatchers {
+class ColourSpec extends FreeSpec with MustMatchers {
 
   private val palette = Palette("default")
 
@@ -19,62 +19,62 @@ class ColourTest extends Suite with ShouldMatchers {
   def getBlueColour =
     Colour(0x35.toByte, 0x28.toByte, 0x79.toByte, Some("blue"))
 
-  def testColourCreate {
+  "colour create" in {
     assert(Colour(0x00.toByte, 0x00.toByte, 0x00.toByte, None).isInstanceOf[Colour])
   }
 
-  def testColourCreateViaMapWithIntegers {
+  "colour create via map with integers" in {
     val params = Map("red" -> 0, "green" -> 0, "blue" -> 0, "name" -> "black")
     assert(Colour(params).isInstanceOf[Colour])
   }
 
-  def testColourCreateViaMapWithDoubles {
+  "colour create via map with doubles" in {
     val params = Map("red" -> 184.0, "green" -> 199.0, "blue" -> 111.0, "name" -> "yellow")
     assert(Colour(params).isInstanceOf[Colour])
   }
 
-  def testColourCreateViaMapWithStrings {
+  "colour create via map with strings" in {
     val params = Map("red" -> "111", "green" -> "61", "blue" -> "134", "name" -> "purple")
     assert(Colour(params).isInstanceOf[Colour])
   }
 
-  def testDistanceBetweenRedAndBlue {
+  "distance between red and blue" in {
     val delta = getRedColour.delta_to(getBlueColour)
-    (delta * 100).round * 0.01 should equal(94.39)
+    (delta * 100).round * 0.01 must equal(94.39)
   }
 
-  def testDistanceBetweenRedAndLightRed {
+  "distance between red and light red" in {
     val delta = getRedColour.delta_to(getLightRedColour)
-    (delta * 100).round * 0.01 should equal(83.19)
+    (delta * 100).round * 0.01 must equal(83.19)
   }
 
-  def testDistanceBetweenBandziorRedAndPaletteRed {
+  "distance between bandzior red and palette red" in {
     val bandziorRed = Colour(0x89.toByte, 0x40.toByte, 0x36.toByte, Some("red"))
     val paletteRed = palette(0x02)
     val delta = bandziorRed.delta_to(paletteRed)
-    (delta * 100).round * 0.01 should equal(35.93)
+    (delta * 100).round * 0.01 must equal(35.93)
   }
 
-  def testDistanceBetweenBandziorRedAndPaletteOrange {
+  "distance between bandzior red and palette orange" in {
     val bandziorRed = Colour(0x89.toByte, 0x40.toByte, 0x36.toByte, Some("red"))
     val paletteOrange = palette(0x08)
     val delta = bandziorRed.delta_to(paletteOrange)
-    (delta * 100).round * 0.01 should equal(34.50)
+    (delta * 100).round * 0.01 must equal(34.50)
   }
 
-  def testDefaultColourCreate {
+  "default colour create" in {
     assert(Colour().isInstanceOf[Colour])
   }
 
-  def testGetImageJRedPixelColour {
-    getRedColour.pixel should equal(0x0068372b)
+  "get ImageJ red pixel colour" in {
+    getRedColour.pixel must equal(0x0068372b)
   }
 
-  def testGetImageJBluePixelColour {
-    getBlueColour.pixel should equal(0x00352879)
+  "get ImageJ blue pixel colour" in {
+    getBlueColour.pixel must equal(0x00352879)
   }
 
-  def testJsonSerialisation {
-    compact(render(getRedColour.toJson)) should equal("""{"red":104,"green":55,"blue":43,"name":"red"}""")
+  "json serialisation" in {
+    compact(render(getRedColour.toJson)) must equal("""{"red":104,"green":55,"blue":43,"name":"red"}""")
   }
 }

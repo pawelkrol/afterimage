@@ -1,11 +1,11 @@
 package org.c64.attitude.Afterimage
 package Mode.Data.Row
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
 import Mode.MultiColour
 
-class MultiColourRowTest extends Suite {
+class MultiColourRowSpec extends FreeSpec {
 
   def setupMultiColourImage() = {
     val bitmap = Array.fill(MultiColour.size("bitmap")){0x00}.zipWithIndex.map(zip => {
@@ -32,7 +32,7 @@ class MultiColourRowTest extends Suite {
 
   def setupMultiColourSlice() = setupMultiColourImage().slice(0, 1)
 
-  def testMultiColourAllRows {
+  "multicolour all rows" in {
     val rows = setupMultiColourImage().rows
 
     assert(rows.length == 25)
@@ -80,7 +80,7 @@ class MultiColourRowTest extends Suite {
     assert(secondRow.colors.deep == Array.fill(0x28){0x03.toByte}.deep)
   }
 
-  def testMultiColourSliceRows {
+  "multicolour slice rows" in {
     val rows = setupMultiColourSlice().rows
 
     assert(rows.length == 0x02)
@@ -101,7 +101,7 @@ class MultiColourRowTest extends Suite {
     assert(row.colors.deep == row.fullColors(0xfb.toByte).deep)
   }
 
-  def testMultiColourDataToCode {
+  "multicolour data to code" in {
     val rows = setupMultiColourSlice().rows
 
     val row = rows(0).asInstanceOf[MultiColourRow]
@@ -143,7 +143,7 @@ class MultiColourRowTest extends Suite {
     assert(got == expected)
   }
 
-  def testMultiColourSerializeRow {
+  "multicolour serialize row" in {
     val rows = setupMultiColourSlice().rows
 
     val row = rows(0).asInstanceOf[MultiColourRow]
@@ -153,7 +153,7 @@ class MultiColourRowTest extends Suite {
     assert(got == expected)
   }
 
-  def testMultiColourDataDeserialization {
+  "multicolour data deserialization" in {
     val data = "280012121212121212121212121212121212121212121212121212121212121212121212121212121212030303030303030303030303030303030303030303030303030303030303030303030303030303032709030000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
 
     val got = MultiColourRow.inflate(data)

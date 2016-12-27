@@ -1,5 +1,9 @@
 --
 
+Instead of explicit validation and error throw, do "require" (this will throw "IllegalArgumentException" instead - wrong argument) or "assert" (this will throw "AssertionError" instead - wrong check in the code) in a class instance
+
+--
+
 Refactor all exceptions thrown into RuntimeException: there is no need to have so many exception classes, especially for the fact I do not handle them in any specific way.
 
 --
@@ -9,6 +13,7 @@ Refactor all exceptions thrown into RuntimeException: there is no need to have s
     > scala library jar
     > imagej library jar
   - remove unused classes with ProGuard
+* Simplify scripting examples (no longer need to include other dependencies on the classpath!)
 
 * Create dedicated Afterimage website:
   - upload jar to a repo

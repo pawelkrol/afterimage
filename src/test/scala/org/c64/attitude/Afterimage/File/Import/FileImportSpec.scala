@@ -4,31 +4,30 @@ package File.Import
 import ij.ImagePlus
 import ij.process.ImageConverter
 
-import org.scalatest.Ignore
-import org.scalatest.Suite
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.FreeSpec
+import org.scalatest.MustMatchers
 
 import Colour.Palette
 import View.Image
 
-class FileImportTest extends Suite with ShouldMatchers {
+class FileImportSpec extends FreeSpec with MustMatchers {
 
   private val name = getClass.getResource("/images/bandzior-cuc.png").toString.replace("file:", "")
 
-  def testConvertToHiResInstance {
+  "convert to hires instance" in {
 
     val mode = HiRes()
     val picture = File.File.convert(name, mode)
 
     assert(picture.isInstanceOf[Mode.HiRes])
 
-    picture.pixel(x = 0, y = 28) should equal (0x0f)
-    picture.pixel(x = 0, y = 29) should equal (0x00)
-    picture.pixel(x = 0, y = 42) should equal (0x00)
-    picture.pixel(x = 0, y = 43) should equal (0x01)
+    picture.pixel(x = 0, y = 28) must equal (0x0f)
+    picture.pixel(x = 0, y = 29) must equal (0x00)
+    picture.pixel(x = 0, y = 42) must equal (0x00)
+    picture.pixel(x = 0, y = 43) must equal (0x01)
   }
 
-  def testCreateCBMImageFromPieces {
+  "create CBM image from pieces" in {
 
     val img = new ImagePlus(name)
     val mode = HiRes()
@@ -39,19 +38,18 @@ class FileImportTest extends Suite with ShouldMatchers {
     val pieces: Seq[Seq[Piece]] = mode.splitInto8x8Pieces(img)
     val picture = mode.createImage(from = pieces)
 
-    picture.pixel(x = 0, y = 28) should equal (0x0f)
-    picture.pixel(x = 0, y = 29) should equal (0x00)
-    picture.pixel(x = 0, y = 42) should equal (0x00)
-    picture.pixel(x = 0, y = 43) should equal (0x01)
+    picture.pixel(x = 0, y = 28) must equal (0x0f)
+    picture.pixel(x = 0, y = 29) must equal (0x00)
+    picture.pixel(x = 0, y = 42) must equal (0x00)
+    picture.pixel(x = 0, y = 43) must equal (0x01)
   }
 
-  @Ignore
-  def testConvertedImageHiResShowerView {
+  "converted image hires shower view" ignore {
 
     val mode = HiRes()
     val picture = File.File.convert(name, mode)
     val palette = Palette("default")
     Image(picture.asInstanceOf[Mode.HiRes], palette).show()
-    0 should equal (1)
+    0 must equal (1)
   }
 }

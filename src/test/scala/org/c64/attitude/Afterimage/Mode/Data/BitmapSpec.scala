@@ -1,16 +1,16 @@
 package org.c64.attitude.Afterimage
 package Mode.Data
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
-class BitmapTest extends Suite {
+class BitmapSpec extends FreeSpec {
 
-  def testCreateDefaultBitmap {
+  "create default bitmap" in {
 
     assert(Bitmap().isInstanceOf[Bitmap])
   }
 
-  def testCreateBitmapWithSize {
+  "create bitmap with size" in {
 
     assert(Bitmap(40, 25).isInstanceOf[Bitmap])
     assert(Bitmap(39, 25).isInstanceOf[Bitmap])
@@ -39,7 +39,7 @@ class BitmapTest extends Suite {
     }
   }
 
-  def testCreateBitmapWithData {
+  "create bitmap with data" in {
 
     assert(Bitmap(Array.fill(8000){0x00}, 40, 25).isInstanceOf[Bitmap])
     assert(Bitmap(Array.fill(7800){0x00}, 39, 25).isInstanceOf[Bitmap])
@@ -82,7 +82,7 @@ class BitmapTest extends Suite {
     Bitmap(bitmap, 40, 25)
   }
 
-  def testIsPixelSet {
+  "is pixel set" in {
 
     val bitmap = setupTestBitmap
 
@@ -127,7 +127,7 @@ class BitmapTest extends Suite {
     }
   }
 
-  def testGetPixels {
+  "get pixels" in {
 
     val bitmap = setupTestBitmap
 
@@ -180,7 +180,7 @@ class BitmapTest extends Suite {
     }
   }
 
-  def testBitmapDataSerialization {
+  "bitmap data serialization" in {
 
     assert(Bitmap().get().deep == Array.fill(0x1f40){0x00}.deep)
     assert(Bitmap(1, 1).get().deep == Array.fill(0x08){0x00}.deep)
@@ -207,7 +207,7 @@ class BitmapTest extends Suite {
     assert(setupTestBitmap.get().deep == bitmap.deep)
   }
 
-  def testBitmapDataShiftAtCharLevel {
+  "bitmap data shift at char level" in {
 
     val bitmapToLeft = Array.fill(8000){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
@@ -282,7 +282,7 @@ class BitmapTest extends Suite {
     assert(bitmap.shift(0, 200).get.deep == Array.fill(8000){0x00}.deep)
   }
 
-  def testBitmapDataShiftAtPixelLevel {
+  "bitmap data shift at pixel level" in {
 
     val bitmapToLeft = Array.fill(8000){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
@@ -359,7 +359,7 @@ class BitmapTest extends Suite {
     assert(bitmap.shift(0, 1).get.deep == bitmapToBottom.deep)
   }
 
-  def testBitmapDataSliceAtCharLevel {
+  "bitmap data slice at char level" in {
 
     val bitmapSliceHoriz = Array.fill(16){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
@@ -424,7 +424,7 @@ class BitmapTest extends Suite {
     }
   }
 
-  def testBitmapDataSliceAtPixelLevel {
+  "bitmap data slice at pixel level" in {
 
     val bitmapSliceHoriz = Array.fill(8){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip

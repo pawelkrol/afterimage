@@ -1,23 +1,23 @@
 package org.c64.attitude.Afterimage
 package Format.Config
 
-import org.scalatest.Suite
+import org.scalatest.FreeSpec
 
-class AdvancedArtStudioTest extends Suite {
+class AdvancedArtStudioSpec extends FreeSpec {
 
-  def testAdvancedArtStudioBitmapOffset {
+  "advanced art studio bitmap offset" in {
    assert(AdvancedArtStudio.bitmap == 0x0000)
   }
 
-  def testAdvancedArtStudioScreenOffset {
+  "advanced art studio screen offset" in {
    assert(AdvancedArtStudio.screen == 0x1f40)
   }
 
-  def testAdvancedArtStudioColorsOffset {
+  "advanced art studio colors offset" in {
    assert(AdvancedArtStudio.colors == 0x2338)
   }
 
-  def testAdvancedArtStudioBackgroundOffset {
+  "advanced art studio background offset" in {
    assert(AdvancedArtStudio.bckgrd == 0x2329)
   }
 }
