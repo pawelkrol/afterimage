@@ -3,8 +3,8 @@ CHANGES
 
 Revision history for `Afterimage`, a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications, entirely written in [Scala](http://www.scala-lang.org/).
 
-0.04-SNAPSHOT (2016-12-27)
---------------------------
+0.04 (2016-12-28)
+-----------------
 
 * Enhancement: specifying an arbitrary background colour when importing graphic images in HiRes format is now possible (this might turn out especially handy when processing pictures that are designed to be eventually converted into a custom character set and rendered using screen fonts rather than a bitmap image)
 * Enhancement: displaying image preview may now be customised with an arbitrary scale factor to be applied when rendering a picture
