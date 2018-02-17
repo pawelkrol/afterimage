@@ -44,7 +44,7 @@ class Data(
    * @param scaleFactor defines custom image scale factor to be used when rendering a picture (defaults to 1, i.e. no upscaling)
    * @param topLeftX defines custom X coordinate considered as a top-left corner of a `targetImage`
    * @param topLeftY defines custom Y coordinate considered as a top-left corner of a `targetImage`
-   * @param backgroundColour default background colour used to fill screen data of an empty target image (defaults to `$e6`)
+   * @param backgroundColour default background colour used to fill screen data of an empty target image (defaults to `0xe6`)
    *
    * @return a function creating an `ImagePlus` object which is capable of generating image preview
    */

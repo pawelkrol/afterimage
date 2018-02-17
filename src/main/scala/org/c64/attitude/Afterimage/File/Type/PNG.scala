@@ -1,6 +1,7 @@
 package org.c64.attitude.Afterimage
 package File.Type
 
+import ij.ImagePlus
 import ij.plugin.PNG_Writer
 import java.io.File
 
@@ -30,19 +31,28 @@ class PNG(
     */
   def save(name: String, overwriteIfExists: Boolean = false, scaleFactor: Int = 1) {
 
-    if (!overwriteIfExists)
-      if ((new File(name)).exists())
-        throw new FileAlreadyExistsException(name)
-
-    PNG.writer.writeImage(image.create(scaleFactor, scaleOf), name, 0)
+    PNG.writeImage(name, image.create(scaleFactor, scaleOf), overwriteIfExists)
   }
 }
 
 /** Factory for [[org.c64.attitude.Afterimage.File.Type.PNG]] instances. */
 object PNG {
 
-  /** Saves images in PNG format using the ImageIO classes. */
-  val writer = new PNG_Writer()
+  private val writer = new PNG_Writer()
+
+  /** Saves images directly in PNG format using the ImageIO classes.
+    *
+    * @param name target file name
+    * @param imagePlus rendered image data
+    * @param overwriteIfExists boolean flag indicating whether overwriting of an existing file should trigger no error
+    */
+  def writeImage(name: String, imagePlus: ImagePlus, overwriteIfExists: Boolean = false) {
+    if (!overwriteIfExists)
+      if ((new File(name)).exists())
+        throw new FileAlreadyExistsException(name)
+
+    writer.writeImage(imagePlus, name, 0)
+  }
 
   /** Creates a new PNG format converter from a [[org.c64.attitude.Afterimage.View.Image]] picture instance.
     *
