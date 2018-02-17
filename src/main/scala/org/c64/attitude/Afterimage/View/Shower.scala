@@ -2,7 +2,7 @@ package org.c64.attitude.Afterimage
 package View
 
 import ij.ImagePlus
-import ij.process.ColorProcessor
+import ij.process.{ ColorProcessor, ImageProcessor }
 
 import Colour.{Colour,Palette}
 import Mode.{CBM,HiRes,MultiColour}
@@ -25,10 +25,17 @@ trait Shower {
   /** Generates the pixel data of the image.
    *
    * @param scaleFactor defines custom image scale factor to be used when rendering a picture (defaults to 1)
+   * @param scaleOf defines an additional custom image scale factor to be used when rendering a picture as a function
+   *                of picture type and possibly different on X and Y axes
+   * @param postProcessHook an optional callback method enabling post-processing of a rendered image before upscaling operation is applied
    *
    * @return `ImagePlus` object which is capable of generating image preview
    */
-  def create(scaleFactor: Int = 1, scaleOf: (CBM) => Tuple2[Int, Int] = scale): ImagePlus = {
+  def create(
+    scaleFactor: Int = 1,
+    scaleOf: (CBM) => Tuple2[Int, Int] = scale,
+    postProcessHook: (ImageProcessor, CBM, Palette, Int, Int) => Unit = (ip, picture, palette, xScale, yScale) => {}
+  ): ImagePlus = {
     assert(scaleFactor > 0)
 
     val width = picture.width
@@ -44,13 +51,20 @@ trait Shower {
       }
     }
 
-    // Scale the image viewport by the given factor:
+    // Scale the image viewport by the given factor determined by the picture mode:
     val (xScale, yScale) = scaleOf(picture)
 
-    // Scale the image viewport by the additional (user-defined) factor:
-    val targetWidth = width * xScale * scaleFactor
-    val targetHeight = height * yScale * scaleFactor
+    val scaledWidth = width * xScale
+    val scaledHeight = height * yScale
 
-    new ImagePlus("Afterimage Preview", ip.resize(targetWidth, targetHeight))
+    val ipResized = ip.resize(scaledWidth, scaledHeight)
+
+    postProcessHook(ipResized, picture, palette, xScale, yScale)
+
+    // Scale the image viewport by the additional (user-defined) factor (both axes):
+    val targetWidth = scaledWidth * scaleFactor
+    val targetHeight = scaledHeight * scaleFactor
+
+    new ImagePlus("Afterimage Preview", ipResized.resize(targetWidth, targetHeight))
   }
 }

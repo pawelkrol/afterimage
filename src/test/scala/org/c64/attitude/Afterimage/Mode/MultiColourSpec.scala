@@ -6,15 +6,15 @@ import org.scalatest.FreeSpec
 class MultiColourSpec extends FreeSpec {
 
   "multicolour config bitmap size" in {
-   assert(MultiColour.size("bitmap") == 0x1f40)
+    assert(MultiColour.size("bitmap") == 0x1f40)
   }
 
   "multicolour config screen size" in {
-   assert(MultiColour.size("screen") == 0x03e8)
+    assert(MultiColour.size("screen") == 0x03e8)
   }
 
   "multicolour config colors size" in {
-   assert(MultiColour.size("colors") == 0x03e8)
+    assert(MultiColour.size("colors") == 0x03e8)
   }
 
   def setupTestData() = {

@@ -3,6 +3,15 @@ CHANGES
 
 Revision history for `Afterimage`, a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications, entirely written in [Scala](http://www.scala-lang.org/).
 
+0.05-SNAPSHOT (2018-02-17)
+--------------------------
+
+* New feature: add basic support for processing and rendering hires and multicolour sprite data
+* `Scala` version upgraded to 2.12.4
+* `ScalaTest` version upgraded to 3.0.5
+* `sbt` version upgraded to 0.13.17
+* `JSON4S` version upgraded to 3.5.3
+
 0.04 (2016-12-28)
 -----------------
 

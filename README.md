@@ -1,17 +1,17 @@
 attitude-afterimage
 ===================
 
-[Afterimage](http://www.cactus.jawnet.pl/afterimage/) is a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications, entirely written in [Scala](http://www.scala-lang.org/). It supports reading, translating, displaying, converting, and writing picture data from/to miscellaneous CBM image files. Since version 0.02 it also provides functionality to import (convert) pictures directly from TIFF, BMP, DICOM, FITS, PGM, GIF, JPEG, and PNG files.
+[Afterimage](http://www.cactus.jawnet.pl/afterimage/) is a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications and sprites, entirely written in [Scala](http://www.scala-lang.org/). It supports reading, translating, displaying, converting, and writing picture data from/to miscellaneous CBM image files. Since version 0.02 it also provides functionality to import (convert) pictures directly from TIFF, BMP, DICOM, FITS, PGM, GIF, JPEG, and PNG files.
 
 VERSION
 -------
 
-Version 0.04 (2016-12-28)
+Version 0.05-SNAPSHOT (2018-02-17)
 
 PREREQUISITES
 -------------
 
-Besides `scala-library-2.12.1` and `scalatest_2.12.1-3.0.1`, some of the [Afterimage](http://www.cactus.jawnet.pl/afterimage/) functionalities rely upon the following Java image processing toolkit: `imagej-1.47`.
+Besides `scala-library-2.12.4` and `scalatest_2.12.4-3.0.5`, some of the [Afterimage](http://www.cactus.jawnet.pl/afterimage/) functionalities rely upon the following Java image processing toolkit: `imagej-1.47`.
 
 Dependency management is normally handled automatically by your build tool.
 
@@ -19,7 +19,7 @@ Dependency management is normally handled automatically by your build tool.
 
 If you plan on using [Afterimage](http://www.cactus.jawnet.pl/afterimage/) within your program, you have to provide all required dependencies yourself (and the standard Scala library as well, if your project is not developed in Scala, but Java instead). Consult `libraryDependencies` property of a `build.sbt` configuration file for the most recent details.
 
-Default [Afterimage](http://www.cactus.jawnet.pl/afterimage/) configuration requires [Scala](http://www.scala-lang.org/) runtime version 2.12.1. Note that compiling against a different version of the standard Scala library than you are using at runtime would lead to a runtime exception upon execution of your program.
+Default [Afterimage](http://www.cactus.jawnet.pl/afterimage/) configuration requires [Scala](http://www.scala-lang.org/) runtime version 2.12.4. Note that compiling against a different version of the standard Scala library than you are using at runtime would lead to a runtime exception upon execution of your program.
 
 INSTALLATION
 ------------
@@ -28,7 +28,7 @@ You can automatically download and install this library by adding the following 
 
     resolvers += "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
 
-    libraryDependencies += "org.c64.attitude" % "afterimage" % "0.04"
+    libraryDependencies += "org.c64.attitude" % "afterimage" % "0.05-SNAPSHOT"
 
 In order to compile and build this library directly from the source code type the following:
 
@@ -110,6 +110,43 @@ Import 320x200 pixels JPEG file and convert image data directly to MultiColour m
 
     val picture = File.convert("images/image.jpg", MultiColour(backgroundColour = 0x00))
 
+Preview hires sprite data using a default colour palette:
+
+    import org.c64.attitude.Afterimage.Sprite.{ Data, HiResProps }
+
+    import scala.io.Codec.ISO8859
+    import scala.io.Source.fromFile
+
+    val data = fromFile("images/sprites.prg")(ISO8859).toSeq.map(_.toByte).take(0x3f)
+    val props = HiResProps(0x00)
+
+    val image = Data(data, props).render(0x00, 0x00)
+    image((_, _, _, _, _) => {}).show()
+
+Combine additional multicolour sprites into a preloaded target image:
+
+    import org.c64.attitude.Afterimage.Colour.Palette
+    import org.c64.attitude.Afterimage.File.File
+    import org.c64.attitude.Afterimage.Sprite.{ Data, MultiProps }
+    import org.c64.attitude.Afterimage.View.Image
+
+    import scala.io.Codec.ISO8859
+    import scala.io.Source.fromFile
+
+    val picture = File.load("images/image.fcp")
+    val palette = Palette("default")
+    val image   = Image(picture, palette)
+
+    val data  = fromFile("images/sprites.prg")(ISO8859).toSeq.map(_.toByte)
+    val props = MultiProps(0x00, 0x01, 0x02)
+
+    val data1      = data.take(0x3f)
+    val firstImage = Data(data1, props).render(0x00, 0x00, _ => image)
+
+    val data2     = data.drop(0x40).take(0x3f)
+    val nextImage = Data(data2, props).renderNext(0x18, 0x00, firstImage)
+    nextImage((_, _, _, _, _) => {}).show()
+
 SCRIPTING
 ---------
 
@@ -131,9 +168,9 @@ Using [Afterimage](http://www.cactus.jawnet.pl/afterimage/) as a standalone libr
 
 Assuming an above script has been saved into a `convert.scala` file, it can be executed using the following command(s):
 
-    $ export AFTERIMAGE=/home/pkrol/.ivy2/cache/org.c64.attitude/afterimage/jars/afterimage-0.04.jar
+    $ export AFTERIMAGE=/home/pkrol/.ivy2/cache/org.c64.attitude/afterimage/jars/afterimage-0.05-SNAPSHOT.jar
     $ export IMAGEJ=/home/pkrol/.ivy2/cache/gov.nih.imagej/imagej/jars/imagej-1.47.jar
-    $ export JSON_4S=/home/pkrol/.ivy2/cache/org.json4s/json4s-ast_2.12/jars/json4s-ast_2.12-3.5.0.jar:/home/pkrol/.ivy2/cache/org.json4s/json4s-core_2.12/jars/json4s-core_2.12-3.5.0.jar:/home/pkrol/.ivy2/cache/org.json4s/json4s-native_2.12/jars/json4s-native_2.12-3.5.0.jar
+    $ export JSON_4S=/home/pkrol/.ivy2/cache/org.json4s/json4s-ast_2.12/jars/json4s-ast_2.12-3.5.3.jar:/home/pkrol/.ivy2/cache/org.json4s/json4s-core_2.12/jars/json4s-core_2.12-3.5.3.jar:/home/pkrol/.ivy2/cache/org.json4s/json4s-native_2.12/jars/json4s-native_2.12-3.5.3.jar
     $ scala -classpath $AFTERIMAGE:$IMAGEJ:$JSON_4S convert.scala
 
 CUSTOMISATION
@@ -181,6 +218,8 @@ The list of currently supported CBM file format specifications includes:
 * Face Painter `.fcp`
 * Koala Painter `.kla`
 
+Additionally binary (raw) sprite data is recognised by suitable classes (i.e. `Sprite.Data`).
+
 The list of PC file format specifications suitable for conversion includes:
 
 * TIFF `.tiff`, `.tif`
@@ -199,8 +238,8 @@ The list of currently writable PC file format specifications includes:
 COPYRIGHT AND LICENCE
 ---------------------
 
-Copyright (C) 2013-2016 by Pawel Krol.
+Copyright (C) 2013-2016, 2018 by Pawel Krol.
 
-This library is free open source software; you can redistribute it and/or modify it under the same terms as Scala itself, either Scala version 2.12.1 or, at your option, any later version of Scala you may have available.
+This library is free open source software; you can redistribute it and/or modify it under the same terms as Scala itself, either Scala version 2.12.4 or, at your option, any later version of Scala you may have available.
 
 PLEASE NOTE THAT IT COMES WITHOUT A WARRANTY OF ANY KIND!

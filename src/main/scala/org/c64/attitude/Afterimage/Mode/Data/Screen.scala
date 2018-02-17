@@ -133,6 +133,10 @@ object Screen {
   def apply(): Screen =
     Screen(Array.fill(maxSize){0x00}, maxCols, maxRows)
 
+  /** Creates a screen of a maximum possible size filled all with a constant value. */
+  def apply(fill: Byte): Screen =
+    Screen(Array.fill(maxSize){fill}, maxCols, maxRows)
+
   /** Creates a default (empty) screen of a given size. */
   def apply(cols: Int, rows: Int): Screen =
     Screen(Array.fill(cols * rows){0x00}, cols, rows)
