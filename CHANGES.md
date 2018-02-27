@@ -3,8 +3,8 @@ CHANGES
 
 Revision history for `Afterimage`, a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications, entirely written in [Scala](http://www.scala-lang.org/).
 
-0.06-SNAPSHOT (2018-02-17)
---------------------------
+0.06 (2018-02-27)
+-----------------
 
 * Enhancement: Enable saving rendered images directly in PNG format
 
