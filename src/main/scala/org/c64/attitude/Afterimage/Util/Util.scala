@@ -50,7 +50,7 @@ object Util {
     */
   def byte2uint(byte: Byte): Int = byte.toInt & 0xff
 
-  private def dumpBitmapData(bitmap: Bitmap) {
+  private def dumpBitmapData(bitmap: Bitmap): Unit = {
 
     println("======")
     println("BITMAP")
@@ -74,7 +74,7 @@ object Util {
     })
   }
 
-  private def dumpScreenData(screen: Option[Screen], label: String = "SCREEN") {
+  private def dumpScreenData(screen: Option[Screen], label: String = "SCREEN"): Unit = {
 
     println("======")
     println(label)
@@ -98,7 +98,7 @@ object Util {
     }
   }
 
-  private def dumpByteData(byte: Option[Byte], label: String = "BORDER") {
+  private def dumpByteData(byte: Option[Byte], label: String = "BORDER"): Unit = {
 
     println("======")
     println(label)
@@ -116,7 +116,7 @@ object Util {
     *
     * @param image `HiRes` image data to be printed out
     */
-  def dumpHiResImageData(image: HiRes) {
+  def dumpHiResImageData(image: HiRes): Unit = {
 
     val bitmap = image.bitmap
     val screen = image.screen
@@ -133,7 +133,7 @@ object Util {
     *
     * @param image `MultiColour` image data to be printed out
     */
-  def dumpMultiColourImageData(image: MultiColour) {
+  def dumpMultiColourImageData(image: MultiColour): Unit = {
 
     val bitmap = image.bitmap
     val screen = image.screen

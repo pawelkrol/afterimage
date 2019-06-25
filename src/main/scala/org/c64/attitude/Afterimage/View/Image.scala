@@ -15,7 +15,7 @@ class Image(val picture: CBM, val palette: Palette) extends Shower {
    *
    * @param scaleFactor defines custom image scale factor to be used when rendering a preview (defaults to 1)
    */
-  def show(scaleFactor: Int = 1) {
+  def show(scaleFactor: Int = 1): Unit = {
     assert(scaleFactor > 0)
     create(scaleFactor).show()
   }

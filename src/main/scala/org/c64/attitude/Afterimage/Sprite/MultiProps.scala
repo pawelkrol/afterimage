@@ -21,7 +21,7 @@ class MultiProps(
 ) extends SpriteProperties {
 
   /** Returns an array of pixel colours defined as tuples of an actual colour and its display priority. */
-  def pixels(bits: Seq[String]): Seq[Option[Tuple2[Int, Boolean]]] =
+  def pixels(bits: Array[String]): Seq[Option[Tuple2[Int, Boolean]]] =
     bits.grouped(2).toSeq.map(_.reduce(_ + _)).map(bit => bit match {
       case "11" =>
         Some(multiColour1, hasPriority)

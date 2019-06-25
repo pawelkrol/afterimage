@@ -1,6 +1,8 @@
 package org.c64.attitude.Afterimage
 package File.Import
 
+import scala.math.Ordering.Double.TotalOrdering
+
 import Colour.{Colour, Palette}
 
 /** Small image piece (8x8 pixels) abstraction.
@@ -136,7 +138,7 @@ class Piece(
       column.map(pixel => {
         // Find which of the most popular colours (colour, bckgrd, screenLo,
         // screenHi) is the closest one to this currently analysed pixel:
-        imageColours.minBy(_._2.delta_to(pixel))
+        imageColours.minBy(_._2.delta_to(pixel))(TotalOrdering)
       })
     })
 

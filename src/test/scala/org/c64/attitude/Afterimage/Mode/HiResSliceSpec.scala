@@ -4,6 +4,7 @@ package Mode
 import org.scalatest.FreeSpec
 
 import Mode.Data.{Bitmap,Screen}
+import Util.ArrayHelper.deep
 
 class HiResSliceSpec extends FreeSpec {
 
@@ -365,7 +366,7 @@ class HiResSliceSpec extends FreeSpec {
 
     val hiresSlice = setupHiResImageWithoutScreen().slice(1, 1, 5, 5)
     val bitmap = List(0xf8, 0xf8, 0xf0, 0xe0, 0xc0, 0x00, 0x00, 0x00).map(_.toByte).toArray
-    assert(hiresSlice.bitmap.get.deep == bitmap.deep)
+    assert(deep(hiresSlice.bitmap.get) == deep(bitmap))
   }
 
   "get pixel from hires slice created from slice" in {

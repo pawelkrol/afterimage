@@ -1,6 +1,8 @@
 package org.c64.attitude.Afterimage
 package Memory
 
+import scala.language.implicitConversions
+
 /** 16-bit memory address.
   *
   * @constructor create a new memory `Address`

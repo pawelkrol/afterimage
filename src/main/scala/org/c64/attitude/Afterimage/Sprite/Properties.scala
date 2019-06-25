@@ -11,5 +11,5 @@ trait SpriteProperties {
 
   require(hasPriority == true, "Higher background to sprite display priority is currently not supported")
 
-  def pixels(bits: Seq[String]): Seq[Option[Tuple2[Int, Boolean]]]
+  def pixels(bits: Array[String]): Seq[Option[Tuple2[Int, Boolean]]]
 }

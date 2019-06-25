@@ -20,7 +20,7 @@ class PNGSpec extends FreeSpec {
     tmpFile.getAbsolutePath()
   }
 
-  def cleanupTempFile(fileName: String) {
+  def cleanupTempFile(fileName: String): Unit = {
     val file = new java.io.File(fileName)
     file.delete()
   }

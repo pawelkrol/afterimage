@@ -22,7 +22,7 @@ class HiResSlice(
 ) extends HiRes(bitmap, screen, border) {
 
   /** Validates consistency of an object instance data. */
-  override def validate() {
+  override def validate(): Unit = {
 
     screen match {
       case Some(scr) => {

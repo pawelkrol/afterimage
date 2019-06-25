@@ -4,6 +4,7 @@ package Mode.Data.Row
 import org.scalatest.FreeSpec
 
 import Mode.MultiColour
+import Util.ArrayHelper.deep
 
 class RowSpec extends FreeSpec {
 
@@ -45,56 +46,56 @@ class RowSpec extends FreeSpec {
 
   "get first bitmap row from bitmap data" in {
     val testBitmap = Array.fill(Row.bitmapRowSize){0xff.toByte} ++ Array.fill(MultiColour.size("bitmap") - Row.bitmapRowSize){0x00.toByte}
-    assert(Row.getBitmapRow(0, testBitmap).deep == Array.fill(Row.bitmapRowSize){0xff.toByte}.deep)
+    assert(deep(Row.getBitmapRow(0, testBitmap)) == deep(Array.fill(Row.bitmapRowSize){0xff.toByte}))
   }
 
   "get second bitmap row from bitmap data" in {
     val testBitmap = Array.fill(Row.bitmapRowSize){0xff.toByte} ++ Array.fill(MultiColour.size("bitmap") - Row.bitmapRowSize){0x00.toByte}
-    assert(Row.getBitmapRow(1, testBitmap).deep == Array.fill(Row.bitmapRowSize){0x00.toByte}.deep)
+    assert(deep(Row.getBitmapRow(1, testBitmap)) == deep(Array.fill(Row.bitmapRowSize){0x00.toByte}))
   }
 
   "get first screen row from screen data" in {
     val testScreen = Array.fill(Row.screenRowSize){0xff.toByte} ++ Array.fill(MultiColour.size("screen") - Row.screenRowSize){0x00.toByte}
-    assert(Row.getScreenRow(0, testScreen).deep == Array.fill(Row.screenRowSize){0xff.toByte}.deep)
+    assert(deep(Row.getScreenRow(0, testScreen)) == deep(Array.fill(Row.screenRowSize){0xff.toByte}))
   }
 
   "get second screen row from bitmap data" in {
     val testScreen = Array.fill(Row.screenRowSize){0xff.toByte} ++ Array.fill(MultiColour.size("screen") - Row.screenRowSize){0x00.toByte}
-    assert(Row.getScreenRow(1, testScreen).deep == Array.fill(Row.screenRowSize){0x00.toByte}.deep)
+    assert(deep(Row.getScreenRow(1, testScreen)) == deep(Array.fill(Row.screenRowSize){0x00.toByte}))
   }
 
   "get first colors row from colors data" in {
     val testColors = Array.fill(Row.colorsRowSize){0xff.toByte} ++ Array.fill(MultiColour.size("colors") - Row.colorsRowSize){0x00.toByte}
-    assert(Row.getColorsRow(0, testColors).deep == Array.fill(Row.colorsRowSize){0xff.toByte}.deep)
+    assert(deep(Row.getColorsRow(0, testColors)) == deep(Array.fill(Row.colorsRowSize){0xff.toByte}))
   }
 
   "get second colors row from bitmap data" in {
     val testColors = Array.fill(Row.colorsRowSize){0xff.toByte} ++ Array.fill(MultiColour.size("colors") - Row.colorsRowSize){0x00.toByte}
-    assert(Row.getColorsRow(1, testColors).deep == Array.fill(Row.colorsRowSize){0x00.toByte}.deep)
+    assert(deep(Row.getColorsRow(1, testColors)) == deep(Array.fill(Row.colorsRowSize){0x00.toByte}))
   }
 
   "get two bitmap rows from bitmap data" in {
     val testBitmap = Array.fill(Row.bitmapRowSize){0xff.toByte} ++ Array.fill(MultiColour.size("bitmap") - Row.bitmapRowSize){0x00.toByte}
     val expectedRows = Array.fill(Row.bitmapRowSize){0xff.toByte} ++ Array.fill(Row.bitmapRowSize){0x00.toByte}
-    assert(Row.getBitmapRows(0, 1, testBitmap).deep == expectedRows.deep)
+    assert(deep(Row.getBitmapRows(0, 1, testBitmap)) == deep(expectedRows))
   }
 
   "get two bitmap rows inverted from bitmap data" in {
     val testBitmap = Array.fill(Row.bitmapRowSize){0xff.toByte} ++ Array.fill(MultiColour.size("bitmap") - Row.bitmapRowSize){0x00.toByte}
     val expectedRows = Array.fill(Row.bitmapRowSize){0xff.toByte} ++ Array.fill(Row.bitmapRowSize){0x00.toByte}
-    assert(Row.getBitmapRows(1, 0, testBitmap).deep == expectedRows.deep)
+    assert(deep(Row.getBitmapRows(1, 0, testBitmap)) == deep(expectedRows))
   }
 
   "get two screen rows from screen data" in {
     val testScreen = Array.fill(Row.screenRowSize){0xff.toByte} ++ Array.fill(MultiColour.size("screen") - Row.screenRowSize){0x00.toByte}
     val expectedRows = Array.fill(Row.screenRowSize){0xff.toByte} ++ Array.fill(Row.screenRowSize){0x00.toByte}
-    assert(Row.getScreenRows(0, 1, testScreen).deep == expectedRows.deep)
+    assert(deep(Row.getScreenRows(0, 1, testScreen)) == deep(expectedRows))
   }
 
   "get two colors rows from colors data" in {
     val testColors = Array.fill(Row.colorsRowSize){0xff.toByte} ++ Array.fill(MultiColour.size("colors") - Row.colorsRowSize){0x00.toByte}
     val expectedRows = Array.fill(Row.colorsRowSize){0xff.toByte} ++ Array.fill(Row.colorsRowSize){0x00.toByte}
-    assert(Row.getColorsRows(0, 1, testColors).deep == expectedRows.deep)
+    assert(deep(Row.getColorsRows(0, 1, testColors)) == deep(expectedRows))
   }
 
   "convert data to code single byte" in {

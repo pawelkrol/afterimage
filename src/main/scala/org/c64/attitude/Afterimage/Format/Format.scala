@@ -7,6 +7,7 @@ import Config.Offset
 import Memory.Address
 import Mode.{CBM,HiRes,MultiColour}
 import Mode.Data.{Bitmap,Screen}
+import Util.ArrayHelper.deep
 
 /** CBM graphic format abstraction functioning as a base class for miscellaneous image formats providing data validation options as well as convenient access to the file loading address and data bytes. */
 trait Format {
@@ -27,7 +28,7 @@ trait Format {
   val config: Offset
 
   /** Validates consistency of an object instance data. */
-  def validate() {
+  def validate(): Unit = {
     if (load != addr || data.length != size)
       throw new InvalidImageDataException(this.getClass.getName.split("\\.").last)
   }
@@ -39,7 +40,7 @@ trait Format {
     * @param name target file name
     * @param overwriteIfExists boolean flag indicating whether overwriting of an existing file should trigger no error
     */
-  def save(name: String, overwriteIfExists: Boolean = false) {
+  def save(name: String, overwriteIfExists: Boolean = false): Unit = {
 
     val file = new File(name)
 
@@ -114,7 +115,7 @@ trait Format {
     */
   override def equals(other: Any) = other match {
     case that: Format =>
-      (that canEqual this) && (this.addr == that.addr) && (this.data.deep == that.data.deep)
+      (that canEqual this) && (this.addr == that.addr) && (deep(this.data) == deep(that.data))
     case _ =>
       false
   }

@@ -24,7 +24,7 @@ case class HiResBitmap(
   /** Default length of file data bytes. */
   val size = HiResBitmap.size
 
-  override def validate() {
+  override def validate(): Unit = {
     if (data.length != size)
       throw new InvalidImageDataException(this.getClass.getName.split("\\.").last)
   }

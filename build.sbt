@@ -1,16 +1,17 @@
 lazy val root = (project in file(".")).settings(
   name := "afterimage",
   organization := "org.c64.attitude",
-  scalaVersion := "2.12.4",
-  version := "0.06"
+  scalacOptions ++= Seq("-deprecation", "-feature"),
+  scalaVersion := "2.13.0",
+  version := "0.07-SNAPSHOT"
 )
 
 maxErrors := 1
 
 libraryDependencies ++= Seq(
   "gov.nih.imagej" % "imagej" % "1.47",
-  "org.json4s" %% "json4s-native" % "3.5.3",
-  "org.scalatest" %% "scalatest" % "3.0.5" % "test"
+  "org.json4s" %% "json4s-native" % "3.6.6",
+  "org.scalatest" %% "scalatest" % "3.0.8" % "test"
 )
 
 // Disable using the Scala version in output paths and artifacts:
@@ -34,20 +35,20 @@ pomExtra := (
   <url>http://attitude.c64.org/afterimage</url>
   <licenses>
     <license>
-      <name>Scala License</name>
-      <url>http://www.scala-lang.org/node/146</url>
+      <name>Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
   <scm>
-    <url>git://github.com/pawelkrol/attitude-afterimage.git</url>
+    <url>git://github.com/pawelkrol/attitude-afterimage</url>
     <connection>scm:git:git://github.com/pawelkrol/attitude-afterimage.git</connection>
   </scm>
   <developers>
     <developer>
       <id>pawelkrol</id>
       <name>Pawel Krol</name>
-      <url>http://attitude.c64.org</url>
+      <url>http://www.attitude.c64.org</url>
     </developer>
   </developers>
 )

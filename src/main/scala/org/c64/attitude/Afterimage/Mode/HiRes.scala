@@ -39,7 +39,7 @@ case class HiRes(
   validate()
 
   /** Validates consistency of an object instance data. */
-  def validate() {
+  def validate(): Unit = {
     if (bitmap.get().length != HiRes.size("bitmap"))
       throw new InvalidImageModeDataException(imageMode)
 

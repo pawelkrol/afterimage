@@ -4,6 +4,7 @@ package Mode.Data.Row
 import org.scalatest.FreeSpec
 
 import Mode.HiRes
+import Util.ArrayHelper.deep
 
 class HiResRowSpec extends FreeSpec {
 
@@ -71,11 +72,11 @@ class HiResRowSpec extends FreeSpec {
       value.toByte
     })
 
-    assert(firstRow.bitmap.deep == bitmapLine1.deep)
-    assert(firstRow.screen.deep == Array.fill(0x28){0xbc.toByte}.deep)
+    assert(deep(firstRow.bitmap) == deep(bitmapLine1))
+    assert(deep(firstRow.screen) == deep(Array.fill(0x28){0xbc.toByte}))
 
-    assert(secondRow.bitmap.deep == bitmapLine2.deep)
-    assert(secondRow.screen.deep == Array.fill(0x28){0xbc.toByte}.deep)
+    assert(deep(secondRow.bitmap) == deep(bitmapLine2))
+    assert(deep(secondRow.screen) == deep(Array.fill(0x28){0xbc.toByte}))
   }
 
   "hires pixel offsets" in {
@@ -171,11 +172,11 @@ class HiResRowSpec extends FreeSpec {
       value.toByte
     })
 
-    assert(firstRow.bitmap.deep == bitmapLine1.deep)
-    assert(firstRow.screen.deep == Array.fill(0x10){0xbc.toByte}.deep)
+    assert(deep(firstRow.bitmap) == deep(bitmapLine1))
+    assert(deep(firstRow.screen) == deep(Array.fill(0x10){0xbc.toByte}))
 
-    assert(secondRow.bitmap.deep == bitmapLine2.deep)
-    assert(secondRow.screen.deep == Array.fill(0x10){0xbc.toByte}.deep)
+    assert(deep(secondRow.bitmap) == deep(bitmapLine2))
+    assert(deep(secondRow.screen) == deep(Array.fill(0x10){0xbc.toByte}))
   }
 
   "hires image slice data to code" in {
@@ -276,8 +277,8 @@ class HiResRowSpec extends FreeSpec {
       List(0xbc, 0xbc).map(_.toByte).toArray
     )
 
-    assert(got.bitmap.deep == expected.bitmap.deep)
-    assert(got.screen.deep == expected.screen.deep)
+    assert(deep(got.bitmap) == deep(expected.bitmap))
+    assert(deep(got.screen) == deep(expected.screen))
   }
 
   "hires row shift" in {
@@ -433,36 +434,36 @@ class HiResRowSpec extends FreeSpec {
 
     val screenLineLeft9 = Array.fill(0x0010){0x00}
 
-    assert(row.shift(-1).bitmap.deep == bitmapLineLeft1.deep)
-    assert(row.shift(-1).screen.deep == screenLineLeft1.deep)
+    assert(deep(row.shift(-1).bitmap) == deep(bitmapLineLeft1))
+    assert(deep(row.shift(-1).screen) == deep(screenLineLeft1))
 
-    assert(row.shift(-1, 0xbc.toByte).bitmap.deep == bitmapLineLeft2.deep)
-    assert(row.shift(-1, 0xbc.toByte).screen.deep == screenLineLeft2.deep)
+    assert(deep(row.shift(-1, 0xbc.toByte).bitmap) == deep(bitmapLineLeft2))
+    assert(deep(row.shift(-1, 0xbc.toByte).screen) == deep(screenLineLeft2))
 
-    assert(row.shift(-1, 0x01.toByte, 0xff.toByte).bitmap.deep == bitmapLineLeft3.deep)
-    assert(row.shift(-1, 0x01.toByte, 0xff.toByte).screen.deep == screenLineLeft3.deep)
+    assert(deep(row.shift(-1, 0x01.toByte, 0xff.toByte).bitmap) == deep(bitmapLineLeft3))
+    assert(deep(row.shift(-1, 0x01.toByte, 0xff.toByte).screen) == deep(screenLineLeft3))
 
 //throw new RuntimeException(">>>\nBEFORE:\n%s\nGOT:\n%s\nEXPECTED:\n%s\n<<<".format(row.screen.mkString("-"), row.shift(1, 0xbc.toByte).screen.mkString("-"), screenLineLeft4.mkString("-")))
 
-    assert(row.shift(1).bitmap.deep == bitmapLineLeft4.deep)
-    assert(row.shift(1).screen.deep == screenLineLeft4.deep)
+    assert(deep(row.shift(1).bitmap) == deep(bitmapLineLeft4))
+    assert(deep(row.shift(1).screen) == deep(screenLineLeft4))
 
-    assert(row.shift(1, 0xbc.toByte).bitmap.deep == bitmapLineLeft5.deep)
-    assert(row.shift(1, 0xbc.toByte).screen.deep == screenLineLeft5.deep)
+    assert(deep(row.shift(1, 0xbc.toByte).bitmap) == deep(bitmapLineLeft5))
+    assert(deep(row.shift(1, 0xbc.toByte).screen) == deep(screenLineLeft5))
 
-    assert(row.shift(1, 0x01.toByte, 0xff.toByte).bitmap.deep == bitmapLineLeft6.deep)
-    assert(row.shift(1, 0x01.toByte, 0xff.toByte).screen.deep == screenLineLeft6.deep)
+    assert(deep(row.shift(1, 0x01.toByte, 0xff.toByte).bitmap) == deep(bitmapLineLeft6))
+    assert(deep(row.shift(1, 0x01.toByte, 0xff.toByte).screen) == deep(screenLineLeft6))
 
-    assert(row.shift(-15).bitmap.deep == bitmapLineLeft7.deep)
-    assert(row.shift(-15).screen.deep == screenLineLeft7.deep)
+    assert(deep(row.shift(-15).bitmap) == deep(bitmapLineLeft7))
+    assert(deep(row.shift(-15).screen) == deep(screenLineLeft7))
 
-    assert(row.shift(15).bitmap.deep == bitmapLineLeft8.deep)
-    assert(row.shift(15).screen.deep == screenLineLeft8.deep)
+    assert(deep(row.shift(15).bitmap) == deep(bitmapLineLeft8))
+    assert(deep(row.shift(15).screen) == deep(screenLineLeft8))
 
-    assert(row.shift(-16).bitmap.deep == bitmapLineLeft9.deep)
-    assert(row.shift(-16).screen.deep == screenLineLeft9.deep)
+    assert(deep(row.shift(-16).bitmap) == deep(bitmapLineLeft9))
+    assert(deep(row.shift(-16).screen) == deep(screenLineLeft9))
 
-    assert(row.shift(16).bitmap.deep == bitmapLineLeft9.deep)
-    assert(row.shift(16).screen.deep == screenLineLeft9.deep)
+    assert(deep(row.shift(16).bitmap) == deep(bitmapLineLeft9))
+    assert(deep(row.shift(16).screen) == deep(screenLineLeft9))
   }
 }

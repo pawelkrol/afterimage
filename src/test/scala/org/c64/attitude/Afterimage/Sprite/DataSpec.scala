@@ -37,7 +37,7 @@ class DataSpec extends FreeSpec {
       props = MultiProps(0x00, 0x01, 0x02, stretched, stretched, true)
     )
 
-  private def assertPixels(image: ImagePlus, pixels: Seq[Tuple3[Int, Int, Int]]) {
+  private def assertPixels(image: ImagePlus, pixels: Seq[Tuple3[Int, Int, Int]]): Unit = {
     pixels.foreach({ case (x, y, expectedColour) => {
       val pixel = image.getPixel(x, y).map(_.toByte)
       val (red, green, blue, alpha) = (pixel(0), pixel(1), pixel(2), pixel(3))

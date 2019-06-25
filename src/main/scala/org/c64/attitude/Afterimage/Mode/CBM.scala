@@ -36,14 +36,14 @@ trait CBM {
   val imageMode = this.getClass.getName.split("\\.").last
 
   /** Validates consistency of an object instance data. */
-  def validate()
+  def validate(): Unit
 
   /** Validates whether given pixel coordinates are located within the image.
     *
     * @param x X coordinate of the pixel
     * @param y Y coordinate of the pixel
     */
-  def validatePixelCoordinates(x: Int, y: Int) {
+  def validatePixelCoordinates(x: Int, y: Int): Unit = {
     if (x < 0 || x >= width || y < 0 || y >= height)
       throw new InvalidPixelCoordinates(
         "[%s,%s]".format(x, y),

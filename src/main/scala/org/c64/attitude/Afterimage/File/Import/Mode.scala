@@ -57,7 +57,7 @@ trait Mode {
     createImage(from = pieces)
   }
 
-  private def validate(img: ImagePlus) {
+  private def validate(img: ImagePlus): Unit = {
 
     if (img.getWidth != Mode.CBM.width || img.getHeight != Mode.CBM.height)
       throw new RuntimeException("Invalid image size encountered: %dx%d (expected image size was: %dx%d)".format(

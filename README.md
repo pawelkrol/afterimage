@@ -6,12 +6,12 @@ attitude-afterimage
 VERSION
 -------
 
-Version 0.06 (2018-02-27)
+Version 0.07-SNAPSHOT (2019-06-27)
 
 PREREQUISITES
 -------------
 
-Besides `scala-library-2.12.4` and `scalatest_2.12.4-3.0.5`, some of the [Afterimage](http://www.cactus.jawnet.pl/afterimage/) functionalities rely upon the following Java image processing toolkit: `imagej-1.47`.
+Besides `scala-library-2.13.0` and `scalatest_2.13.0-3.0.8`, some of the [Afterimage](http://www.cactus.jawnet.pl/afterimage/) functionalities rely upon the following Java image processing toolkit: `imagej-1.47`.
 
 Dependency management is normally handled automatically by your build tool.
 
@@ -19,7 +19,7 @@ Dependency management is normally handled automatically by your build tool.
 
 If you plan on using [Afterimage](http://www.cactus.jawnet.pl/afterimage/) within your program, you have to provide all required dependencies yourself (and the standard Scala library as well, if your project is not developed in Scala, but Java instead). Consult `libraryDependencies` property of a `build.sbt` configuration file for the most recent details.
 
-Default [Afterimage](http://www.cactus.jawnet.pl/afterimage/) configuration requires [Scala](http://www.scala-lang.org/) runtime version 2.12.4. Note that compiling against a different version of the standard Scala library than you are using at runtime would lead to a runtime exception upon execution of your program.
+Default [Afterimage](http://www.cactus.jawnet.pl/afterimage/) configuration requires [Scala](http://www.scala-lang.org/) runtime version 2.13.0. Note that compiling against a different version of the standard Scala library than you are using at runtime would lead to a runtime exception upon execution of your program.
 
 INSTALLATION
 ------------
@@ -28,7 +28,7 @@ You can automatically download and install this library by adding the following 
 
     resolvers += "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
 
-    libraryDependencies += "org.c64.attitude" % "afterimage" % "0.06"
+    libraryDependencies += "org.c64.attitude" % "afterimage" % "0.07-SNAPSHOT"
 
 In order to compile and build this library directly from the source code type the following:
 
@@ -168,9 +168,9 @@ Using [Afterimage](http://www.cactus.jawnet.pl/afterimage/) as a standalone libr
 
 Assuming an above script has been saved into a `convert.scala` file, it can be executed using the following command(s):
 
-    $ export AFTERIMAGE=/home/pkrol/.ivy2/cache/org.c64.attitude/afterimage/jars/afterimage-0.06.jar
+    $ export AFTERIMAGE=/home/pkrol/.ivy2/cache/org.c64.attitude/afterimage/jars/afterimage-0.07-SNAPSHOT.jar
     $ export IMAGEJ=/home/pkrol/.ivy2/cache/gov.nih.imagej/imagej/jars/imagej-1.47.jar
-    $ export JSON_4S=/home/pkrol/.ivy2/cache/org.json4s/json4s-ast_2.12/jars/json4s-ast_2.12-3.5.3.jar:/home/pkrol/.ivy2/cache/org.json4s/json4s-core_2.12/jars/json4s-core_2.12-3.5.3.jar:/home/pkrol/.ivy2/cache/org.json4s/json4s-native_2.12/jars/json4s-native_2.12-3.5.3.jar
+    $ export JSON_4S=/home/pkrol/.ivy2/cache/org.json4s/json4s-ast_2.13/jars/json4s-ast_2.13-3.6.6.jar:/home/pkrol/.ivy2/cache/org.json4s/json4s-core_2.32/jars/json4s-core_2.13-3.6.6.jar:/home/pkrol/.ivy2/cache/org.json4s/json4s-native_2.13/jars/json4s-native_2.13-3.6.6.jar
     $ scala -classpath $AFTERIMAGE:$IMAGEJ:$JSON_4S convert.scala
 
 CUSTOMISATION
@@ -238,8 +238,8 @@ The list of currently writable PC file format specifications includes:
 COPYRIGHT AND LICENCE
 ---------------------
 
-Copyright (C) 2013-2016, 2018 by Pawel Krol.
+Copyright (C) 2013-2019 by Pawel Krol.
 
-This library is free open source software; you can redistribute it and/or modify it under the same terms as Scala itself, either Scala version 2.12.4 or, at your option, any later version of Scala you may have available.
+This library is free open source software; you can redistribute it and/or modify it under [the same terms](https://github.com/pawelkrol/attitude-afterimage/blob/master/LICENSE.md) as Scala itself, either Scala version 2.13.0 or, at your option, any later version of Scala you may have available.
 
 PLEASE NOTE THAT IT COMES WITHOUT A WARRANTY OF ANY KIND!

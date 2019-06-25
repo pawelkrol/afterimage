@@ -3,6 +3,8 @@ package Mode.Data
 
 import org.scalatest.FreeSpec
 
+import Util.ArrayHelper.deep
+
 class ScreenSpec extends FreeSpec {
 
   "create default screen" in {
@@ -109,9 +111,9 @@ class ScreenSpec extends FreeSpec {
 
   "screen data serialization" in {
 
-    assert(Screen().get().deep == Array.fill(0x03e8){0x00}.deep)
-    assert(Screen(1, 1).get().deep == Array.fill(0x01){0x00}.deep)
-    assert(Screen(40, 25).get().deep == Array.fill(0x03e8){0x00}.deep)
+    assert(deep(Screen().get()) == deep(Array.fill(0x03e8){0x00}))
+    assert(deep(Screen(1, 1).get()) == deep(Array.fill(0x01){0x00}))
+    assert(deep(Screen(40, 25).get()) == deep(Array.fill(0x03e8){0x00}))
 
     val screen = Array.fill(1000){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
@@ -126,7 +128,7 @@ class ScreenSpec extends FreeSpec {
       value.toByte
     })
 
-    assert(setupTestScreen.get().deep == screen.deep)
+    assert(deep(setupTestScreen.get()) == deep(screen))
   }
 
   "screen data shift" in {
@@ -179,15 +181,15 @@ class ScreenSpec extends FreeSpec {
 
     val screen = setupTestScreen
 
-    assert(screen.shift(-1, 0).get.deep == screenToLeft.deep)
-    assert(screen.shift(1, 0).get.deep == screenToRight.deep)
-    assert(screen.shift(0, -1).get.deep == screenToTop.deep)
-    assert(screen.shift(0, 1).get.deep == screenToBottom.deep)
+    assert(deep(screen.shift(-1, 0).get) == deep(screenToLeft))
+    assert(deep(screen.shift(1, 0).get) == deep(screenToRight))
+    assert(deep(screen.shift(0, -1).get) == deep(screenToTop))
+    assert(deep(screen.shift(0, 1).get) == deep(screenToBottom))
 
-    assert(screen.shift(-40, 0).get.deep == Array.fill(1000){0x00}.deep)
-    assert(screen.shift(40, 0).get.deep == Array.fill(1000){0x00}.deep)
-    assert(screen.shift(0, -25).get.deep == Array.fill(1000){0x00}.deep)
-    assert(screen.shift(0, 25).get.deep == Array.fill(1000){0x00}.deep)
+    assert(deep(screen.shift(-40, 0).get) == deep(Array.fill(1000){0x00}))
+    assert(deep(screen.shift(40, 0).get) == deep(Array.fill(1000){0x00}))
+    assert(deep(screen.shift(0, -25).get) == deep(Array.fill(1000){0x00}))
+    assert(deep(screen.shift(0, 25).get) == deep(Array.fill(1000){0x00}))
   }
 
   "screen data slice" in {
@@ -244,11 +246,11 @@ class ScreenSpec extends FreeSpec {
 
     val screen = setupTestScreen
 
-    assert(screen.slice(0, 0, 2, 1).get().deep == screenSliceHoriz.deep)
-    assert(screen.slice(0, 0, 1, 2).get().deep == screenSliceVert.deep)
-    assert(screen.slice(1, 0, 1, 1).get().deep == screenSliceRight.deep)
-    assert(screen.slice(0, 1, 1, 1).get().deep == screenSliceLower.deep)
-    assert(screen.slice(0, 0, 4, 3).get().deep == screenSliceWider.deep)
+    assert(deep(screen.slice(0, 0, 2, 1).get()) == deep(screenSliceHoriz))
+    assert(deep(screen.slice(0, 0, 1, 2).get()) == deep(screenSliceVert))
+    assert(deep(screen.slice(1, 0, 1, 1).get()) == deep(screenSliceRight))
+    assert(deep(screen.slice(0, 1, 1, 1).get()) == deep(screenSliceLower))
+    assert(deep(screen.slice(0, 0, 4, 3).get()) == deep(screenSliceWider))
 
     intercept[InvalidScreenDataSizeException] {
       screen.slice(0, 0, 41, 25)

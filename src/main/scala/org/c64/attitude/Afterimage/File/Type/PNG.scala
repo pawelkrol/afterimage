@@ -29,7 +29,7 @@ class PNG(
     * @param overwriteIfExists boolean flag indicating whether overwriting of an existing file should trigger no error
     * @param scaleFactor defines custom image scale factor to be used when rendering a PNG file (defaults to 1)
     */
-  def save(name: String, overwriteIfExists: Boolean = false, scaleFactor: Int = 1) {
+  def save(name: String, overwriteIfExists: Boolean = false, scaleFactor: Int = 1): Unit = {
 
     PNG.writeImage(name, image.create(scaleFactor, scaleOf), overwriteIfExists)
   }
@@ -46,7 +46,7 @@ object PNG {
     * @param imagePlus rendered image data
     * @param overwriteIfExists boolean flag indicating whether overwriting of an existing file should trigger no error
     */
-  def writeImage(name: String, imagePlus: ImagePlus, overwriteIfExists: Boolean = false) {
+  def writeImage(name: String, imagePlus: ImagePlus, overwriteIfExists: Boolean = false): Unit = {
     if (!overwriteIfExists)
       if ((new File(name)).exists())
         throw new FileAlreadyExistsException(name)

@@ -110,7 +110,7 @@ object Row {
   /** Default length of a single image row colours data. */
   val colorsRowSize = 0x28
 
-  private def validateRowIndex(index: Int) {
+  private def validateRowIndex(index: Int): Unit = {
     if (index < 0 || index > 24)
       throw new InvalidDataRowIndexException(index)
   }

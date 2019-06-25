@@ -4,6 +4,8 @@ package Colour
 import org.json4s.{JArray, JObject}
 import org.json4s.native.JsonMethods.parse
 
+import scala.math.Ordering.Double.TotalOrdering
+
 /** Colour palette which maps C64 colours from/to RGB colours.
   *
   * @constructor create a new colour palette with a set of 16 colours
@@ -47,7 +49,7 @@ case class Palette(colours: Array[Colour]) {
     *
     * @param colour RGB colour to be resolved into the closest matching C64 hue
     */
-  def get(colour: Colour) = colours.zipWithIndex.minBy(_._1.delta_to(colour))._2
+  def get(colour: Colour) = colours.zipWithIndex.minBy(_._1.delta_to(colour))(TotalOrdering)._2
 
   def canEqual(that: Any) = that.isInstanceOf[Palette]
 

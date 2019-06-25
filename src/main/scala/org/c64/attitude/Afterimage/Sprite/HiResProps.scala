@@ -17,8 +17,8 @@ class HiResProps(
 ) extends SpriteProperties {
 
   /** Returns an array of pixel colours defined as tuples of an actual colour and its display priority. */
-  def pixels(bits: Seq[String]): Seq[Option[Tuple2[Int, Boolean]]] =
-    bits.map(bit => bit match {
+  def pixels(bits: Array[String]): Seq[Option[Tuple2[Int, Boolean]]] =
+    bits.toSeq.map(bit => bit match {
       case "1" =>
         Some((colour, hasPriority))
       case "0" =>

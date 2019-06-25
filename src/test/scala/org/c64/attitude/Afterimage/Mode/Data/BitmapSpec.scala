@@ -3,6 +3,8 @@ package Mode.Data
 
 import org.scalatest.FreeSpec
 
+import Util.ArrayHelper.deep
+
 class BitmapSpec extends FreeSpec {
 
   "create default bitmap" in {
@@ -182,9 +184,9 @@ class BitmapSpec extends FreeSpec {
 
   "bitmap data serialization" in {
 
-    assert(Bitmap().get().deep == Array.fill(0x1f40){0x00}.deep)
-    assert(Bitmap(1, 1).get().deep == Array.fill(0x08){0x00}.deep)
-    assert(Bitmap(40, 25).get().deep == Array.fill(0x1f40){0x00}.deep)
+    assert(deep(Bitmap().get()) == deep(Array.fill(0x1f40){0x00}))
+    assert(deep(Bitmap(1, 1).get()) == deep(Array.fill(0x08){0x00}))
+    assert(deep(Bitmap(40, 25).get()) == deep(Array.fill(0x1f40){0x00}))
 
     val bitmap = Array.fill(8000){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
@@ -204,7 +206,7 @@ class BitmapSpec extends FreeSpec {
       value.toByte
     })
 
-    assert(setupTestBitmap.get().deep == bitmap.deep)
+    assert(deep(setupTestBitmap.get()) == deep(bitmap))
   }
 
   "bitmap data shift at char level" in {
@@ -271,15 +273,15 @@ class BitmapSpec extends FreeSpec {
 
     val bitmap = setupTestBitmap
 
-    assert(bitmap.shift(-8, 0).get.deep == bitmapToLeft.deep)
-    assert(bitmap.shift(8, 0).get.deep == bitmapToRight.deep)
-    assert(bitmap.shift(0, -8).get.deep == bitmapToTop.deep)
-    assert(bitmap.shift(0, 8).get.deep == bitmapToBottom.deep)
+    assert(deep(bitmap.shift(-8, 0).get) == deep(bitmapToLeft))
+    assert(deep(bitmap.shift(8, 0).get) == deep(bitmapToRight))
+    assert(deep(bitmap.shift(0, -8).get) == deep(bitmapToTop))
+    assert(deep(bitmap.shift(0, 8).get) == deep(bitmapToBottom))
 
-    assert(bitmap.shift(-320, 0).get.deep == Array.fill(8000){0x00}.deep)
-    assert(bitmap.shift(320, 0).get.deep == Array.fill(8000){0x00}.deep)
-    assert(bitmap.shift(0, -200).get.deep == Array.fill(8000){0x00}.deep)
-    assert(bitmap.shift(0, 200).get.deep == Array.fill(8000){0x00}.deep)
+    assert(deep(bitmap.shift(-320, 0).get) == deep(Array.fill(8000){0x00}))
+    assert(deep(bitmap.shift(320, 0).get) == deep(Array.fill(8000){0x00}))
+    assert(deep(bitmap.shift(0, -200).get) == deep(Array.fill(8000){0x00}))
+    assert(deep(bitmap.shift(0, 200).get) == deep(Array.fill(8000){0x00}))
   }
 
   "bitmap data shift at pixel level" in {
@@ -353,10 +355,10 @@ class BitmapSpec extends FreeSpec {
 
     val bitmap = setupTestBitmap
 
-    assert(bitmap.shift(-1, 0).get.deep == bitmapToLeft.deep)
-    assert(bitmap.shift(1, 0).get.deep == bitmapToRight.deep)
-    assert(bitmap.shift(0, -1).get.deep == bitmapToTop.deep)
-    assert(bitmap.shift(0, 1).get.deep == bitmapToBottom.deep)
+    assert(deep(bitmap.shift(-1, 0).get) == deep(bitmapToLeft))
+    assert(deep(bitmap.shift(1, 0).get) == deep(bitmapToRight))
+    assert(deep(bitmap.shift(0, -1).get) == deep(bitmapToTop))
+    assert(deep(bitmap.shift(0, 1).get) == deep(bitmapToBottom))
   }
 
   "bitmap data slice at char level" in {
@@ -411,10 +413,10 @@ class BitmapSpec extends FreeSpec {
 
     val bitmap = setupTestBitmap
 
-    assert(bitmap.slice(0, 0, 16, 8).get().deep == bitmapSliceHoriz.deep)
-    assert(bitmap.slice(0, 0, 8, 16).get().deep == bitmapSliceVert.deep)
-    assert(bitmap.slice(8, 0, 8, 8).get().deep == bitmapSliceRight.deep)
-    assert(bitmap.slice(0, 8, 8, 8).get().deep == bitmapSliceLower.deep)
+    assert(deep(bitmap.slice(0, 0, 16, 8).get()) == deep(bitmapSliceHoriz))
+    assert(deep(bitmap.slice(0, 0, 8, 16).get()) == deep(bitmapSliceVert))
+    assert(deep(bitmap.slice(8, 0, 8, 8).get()) == deep(bitmapSliceRight))
+    assert(deep(bitmap.slice(0, 8, 8, 8).get()) == deep(bitmapSliceLower))
 
     intercept[IndexOutOfBoundsException] {
       bitmap.slice(0, 0, 328, 200)
@@ -465,10 +467,10 @@ class BitmapSpec extends FreeSpec {
 
     val bitmap = setupTestBitmap
 
-    assert(bitmap.slice(0, 0, 2, 1).get().deep == bitmapSliceHoriz.deep)
-    assert(bitmap.slice(0, 0, 1, 2).get().deep == bitmapSliceVert.deep)
-    assert(bitmap.slice(7, 0, 4, 4).get().deep == bitmapSliceRight.deep)
-    assert(bitmap.slice(0, 4, 7, 7).get().deep == bitmapSliceLower.deep)
+    assert(deep(bitmap.slice(0, 0, 2, 1).get()) == deep(bitmapSliceHoriz))
+    assert(deep(bitmap.slice(0, 0, 1, 2).get()) == deep(bitmapSliceVert))
+    assert(deep(bitmap.slice(7, 0, 4, 4).get()) == deep(bitmapSliceRight))
+    assert(deep(bitmap.slice(0, 4, 7, 7).get()) == deep(bitmapSliceLower))
 
     intercept[IndexOutOfBoundsException] {
       bitmap.slice(0, 0, 321, 200)

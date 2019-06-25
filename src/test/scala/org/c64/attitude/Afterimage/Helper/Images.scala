@@ -50,7 +50,7 @@ object Images {
     imagePlus
   }
 
-  private def preview(imagePlus: ImagePlus, width: Int, height: Int, scaleFactor: Int = 1) {
+  private def preview(imagePlus: ImagePlus, width: Int, height: Int, scaleFactor: Int = 1): Unit = {
 
     val ip = resize(imagePlus, width, height).getProcessor
 

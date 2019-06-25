@@ -48,7 +48,7 @@ case class MultiColour(
   validate()
 
   /** Validates consistency of an object instance data. */
-  def validate() {
+  def validate(): Unit = {
     if (bitmap.get().length != MultiColour.size("bitmap") || screen.get().length != MultiColour.size("screen") || colors.get().length != MultiColour.size("colors"))
       throw new InvalidImageModeDataException(imageMode)
   }

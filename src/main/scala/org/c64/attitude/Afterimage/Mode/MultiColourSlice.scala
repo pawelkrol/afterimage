@@ -25,7 +25,7 @@ class MultiColourSlice(
 ) extends MultiColour(bitmap, screen, colors, border, bckgrd) {
 
   /** Validates consistency of an object instance data. */
-  override def validate() {
+  override def validate(): Unit = {
 
     val numBytes = width * 2 * height >> 3
     val numChars = (width * 2 >> 3) * (height >> 3)

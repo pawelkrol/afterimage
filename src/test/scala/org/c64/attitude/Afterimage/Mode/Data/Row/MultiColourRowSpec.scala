@@ -4,6 +4,7 @@ package Mode.Data.Row
 import org.scalatest.FreeSpec
 
 import Mode.MultiColour
+import Util.ArrayHelper.deep
 
 class MultiColourRowSpec extends FreeSpec {
 
@@ -71,13 +72,13 @@ class MultiColourRowSpec extends FreeSpec {
       value.toByte
     })
 
-    assert(firstRow.bitmap.deep == bitmapLine1.deep)
-    assert(firstRow.screen.deep == Array.fill(0x28){0x12.toByte}.deep)
-    assert(firstRow.colors.deep == Array.fill(0x28){0x03.toByte}.deep)
+    assert(deep(firstRow.bitmap) == deep(bitmapLine1))
+    assert(deep(firstRow.screen) == deep(Array.fill(0x28){0x12.toByte}))
+    assert(deep(firstRow.colors) == deep(Array.fill(0x28){0x03.toByte}))
 
-    assert(secondRow.bitmap.deep == bitmapLine2.deep)
-    assert(secondRow.screen.deep == Array.fill(0x28){0x12.toByte}.deep)
-    assert(secondRow.colors.deep == Array.fill(0x28){0x03.toByte}.deep)
+    assert(deep(secondRow.bitmap) == deep(bitmapLine2))
+    assert(deep(secondRow.screen) == deep(Array.fill(0x28){0x12.toByte}))
+    assert(deep(secondRow.colors) == deep(Array.fill(0x28){0x03.toByte}))
   }
 
   "multicolour slice rows" in {
@@ -92,13 +93,13 @@ class MultiColourRowSpec extends FreeSpec {
     assert(row.leftPixelMargin == 0x0000)
     assert(row.rightPixelMargin == 0x013f)
 
-    assert(row.bitmap.deep == row.fullBitmap().deep)
-    assert(row.screen.deep == row.fullScreen().deep)
-    assert(row.colors.deep == row.fullColors().deep)
+    assert(deep(row.bitmap) == deep(row.fullBitmap()))
+    assert(deep(row.screen) == deep(row.fullScreen()))
+    assert(deep(row.colors) == deep(row.fullColors()))
 
-    assert(row.bitmap.deep == row.fullBitmap(0xd5.toByte).deep)
-    assert(row.screen.deep == row.fullScreen(0xe6.toByte).deep)
-    assert(row.colors.deep == row.fullColors(0xfb.toByte).deep)
+    assert(deep(row.bitmap) == deep(row.fullBitmap(0xd5.toByte)))
+    assert(deep(row.screen) == deep(row.fullScreen(0xe6.toByte)))
+    assert(deep(row.colors) == deep(row.fullColors(0xfb.toByte)))
   }
 
   "multicolour data to code" in {
@@ -161,8 +162,8 @@ class MultiColourRowSpec extends FreeSpec {
     val expected = setupMultiColourImage().rows(0).asInstanceOf[MultiColourRow]
 
     assert(got.bckgrd == expected.bckgrd)
-    assert(got.bitmap.deep == expected.bitmap.deep)
-    assert(got.screen.deep == expected.screen.deep)
-    assert(got.colors.deep == expected.colors.deep)
+    assert(deep(got.bitmap) == deep(expected.bitmap))
+    assert(deep(got.screen) == deep(expected.screen))
+    assert(deep(got.colors) == deep(expected.colors))
   }
 }
