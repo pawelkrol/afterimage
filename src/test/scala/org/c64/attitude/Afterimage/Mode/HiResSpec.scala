@@ -30,42 +30,42 @@ class HiResSpec extends FreeSpec {
 
   "hires create with empty bitmap" in {
     val (bitmap, screen, border) = setupTestData()
-    intercept[InvalidBitmapDataLengthException] {
+    intercept[IllegalArgumentException] {
       HiRes(Array[Byte](), screen, border)
     }
   }
 
   "hires create with too large bitmap" in {
     val (bitmap, screen, border) = setupTestData()
-    intercept[InvalidBitmapDataLengthException] {
+    intercept[IllegalArgumentException] {
       HiRes(bitmap :+ 0x00.toByte, screen, border)
     }
   }
 
   "hires create with too small bitmap" in {
     val (bitmap, screen, border) = setupTestData()
-    intercept[InvalidBitmapDataLengthException] {
+    intercept[IllegalArgumentException] {
       HiRes(bitmap.init, screen, border)
     }
   }
 
   "hires create with empty screen" in {
     val (bitmap, screen, border) = setupTestData()
-    intercept[InvalidScreenDataLengthException] {
+    intercept[IllegalArgumentException] {
       HiRes(bitmap, Array[Byte](), border)
     }
   }
 
   "hires create with too large screen" in {
     val (bitmap, screen, border) = setupTestData()
-    intercept[InvalidScreenDataLengthException] {
+    intercept[IllegalArgumentException] {
       HiRes(bitmap, screen :+ 0x00.toByte, border)
     }
   }
 
   "hires create with too small screen" in {
     val (bitmap, screen, border) = setupTestData()
-    intercept[InvalidScreenDataLengthException] {
+    intercept[IllegalArgumentException] {
       HiRes(bitmap, screen.init, border)
     }
   }
@@ -143,7 +143,7 @@ class HiResSpec extends FreeSpec {
     val (bitmap, screen, border) = setupTestData()
     val bitmapSlice = Bitmap(bitmap, Bitmap.maxCols, Bitmap.maxRows)
     val screenSlice = Screen(screen, Screen.maxCols, Screen.maxRows).slice(0, 0, Screen.maxCols - 1, Screen.maxRows)
-    intercept[InvalidImageModeDataException] {
+    intercept[IllegalArgumentException] {
       new HiRes(bitmapSlice, Some(screenSlice), Some(border))
     }
   }
@@ -152,7 +152,7 @@ class HiResSpec extends FreeSpec {
     val (bitmap, screen, border) = setupTestData()
     val bitmapSlice = Bitmap(bitmap, Bitmap.maxCols, Bitmap.maxRows).slice(0, 0, Bitmap.maxCols * 0x08 - 8, Bitmap.maxRows * 0x08)
     val screenSlice = Screen(screen, Screen.maxCols, Screen.maxRows)
-    intercept[InvalidImageModeDataException] {
+    intercept[IllegalArgumentException] {
       new HiRes(bitmapSlice, Some(screenSlice), Some(border))
     }
   }

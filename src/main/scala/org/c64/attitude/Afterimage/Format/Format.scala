@@ -2,6 +2,7 @@ package org.c64.attitude.Afterimage
 package Format
 
 import java.io.{File,PrintStream}
+import java.nio.file.FileAlreadyExistsException
 
 import Config.Offset
 import Memory.Address
@@ -29,8 +30,10 @@ trait Format {
 
   /** Validates consistency of an object instance data. */
   def validate(): Unit = {
-    if (load != addr || data.length != size)
-      throw new InvalidImageDataException(this.getClass.getName.split("\\.").last)
+    require(
+      load == addr && data.length == size,
+      "Invalid image data: Not a %s format".format(this.getClass.getName.split("\\.").last)
+    )
   }
 
   private def serialize() = addr.toWrite ++ data

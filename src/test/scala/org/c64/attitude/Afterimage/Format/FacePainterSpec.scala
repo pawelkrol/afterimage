@@ -15,7 +15,7 @@ class FacePainterFormatSpec extends FreeSpec {
   }
 
   "face painter format invalid address" in {
-    intercept[InvalidImageDataException] {
+    intercept[IllegalArgumentException] {
       val addr: Address = 0x0000
       val data: Array[Byte] = Array.fill(FacePainter.size){0x00}
       FacePainter(addr, data)
@@ -23,7 +23,7 @@ class FacePainterFormatSpec extends FreeSpec {
   }
 
   "face painter format too much data" in {
-    intercept[InvalidImageDataException] {
+    intercept[IllegalArgumentException] {
       val addr: Address = FacePainter.load
       val data: Array[Byte] = Array.fill(FacePainter.size + 1){0x00}
       FacePainter(addr, data)
@@ -31,7 +31,7 @@ class FacePainterFormatSpec extends FreeSpec {
   }
 
   "face painter format too little data" in {
-    intercept[InvalidImageDataException] {
+    intercept[IllegalArgumentException] {
       val addr: Address = FacePainter.load
       val data: Array[Byte] = Array.fill(FacePainter.size - 1){0x00}
       FacePainter(addr, data)
@@ -39,7 +39,7 @@ class FacePainterFormatSpec extends FreeSpec {
   }
 
   "face painter format empty data" in {
-    intercept[InvalidImageDataException] {
+    intercept[IllegalArgumentException] {
       val addr: Address = FacePainter.load
       val data: Array[Byte] = Array()
       FacePainter(addr, data)

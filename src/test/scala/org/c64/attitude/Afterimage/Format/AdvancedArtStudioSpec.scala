@@ -15,7 +15,7 @@ class AdvancedArtStudioFormatSpec extends FreeSpec {
   }
 
   "advanced art studio format invalid address" in {
-    intercept[InvalidImageDataException] {
+    intercept[IllegalArgumentException] {
       val addr: Address = 0x0000
       val data: Array[Byte] = Array.fill(AdvancedArtStudio.size){0x00}
       AdvancedArtStudio(addr, data)
@@ -23,7 +23,7 @@ class AdvancedArtStudioFormatSpec extends FreeSpec {
   }
 
   "advanced art studio format too much data" in {
-    intercept[InvalidImageDataException] {
+    intercept[IllegalArgumentException] {
       val addr: Address = AdvancedArtStudio.load
       val data: Array[Byte] = Array.fill(AdvancedArtStudio.size + 1){0x00}
       AdvancedArtStudio(addr, data)
@@ -31,7 +31,7 @@ class AdvancedArtStudioFormatSpec extends FreeSpec {
   }
 
   "advanced art studio format too little data" in {
-    intercept[InvalidImageDataException] {
+    intercept[IllegalArgumentException] {
       val addr: Address = AdvancedArtStudio.load
       val data: Array[Byte] = Array.fill(AdvancedArtStudio.size - 1){0x00}
       AdvancedArtStudio(addr, data)
@@ -39,7 +39,7 @@ class AdvancedArtStudioFormatSpec extends FreeSpec {
   }
 
   "advanced art studio format empty data" in {
-    intercept[InvalidImageDataException] {
+    intercept[IllegalArgumentException] {
       val addr: Address = AdvancedArtStudio.load
       val data: Array[Byte] = Array()
       AdvancedArtStudio(addr, data)

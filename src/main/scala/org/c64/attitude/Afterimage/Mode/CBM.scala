@@ -44,11 +44,13 @@ trait CBM {
     * @param y Y coordinate of the pixel
     */
   def validatePixelCoordinates(x: Int, y: Int): Unit = {
-    if (x < 0 || x >= width || y < 0 || y >= height)
-      throw new InvalidPixelCoordinates(
+    require(
+      x >= 0 && x < width && y >= 0 && y < height,
+      "Invalid pixel coordinates: got %d, but expected values within the range of %s".format(
         "[%s,%s]".format(x, y),
         "[%s,%s]".format(width, height)
       )
+    )
   }
 
   /** Returns the C64 colour of the pixel at [x,y].

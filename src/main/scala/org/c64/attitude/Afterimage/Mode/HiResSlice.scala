@@ -31,54 +31,102 @@ class HiResSlice(
         val numChars = (width >> 3) * (height >> 3)
 
         // Check if provided data arrays are not empty:
-        if (bitmap.get().length == 0)
-          throw new InvalidImageDataSliceException("HiRes", bitmap.get().length.toString, "between 8 and 8000", "bitmap data bytes")
-        if (scr.get().length == 0)
-          throw new InvalidImageDataSliceException("HiRes", scr.get().length.toString, "between 1 and 1000", "screen data bytes")
+        require(
+          bitmap.get().length > 0,
+          "Invalid HiRes image data slice: got %s, but expected between 8 and 8000 bitmap data bytes".format(
+            bitmap.get().length.toString
+          )
+        )
+        require(
+          scr.get().length > 0,
+          "Invalid HiRes image data slice: got %s, but expected between 1 and 1000 screen data bytes".format(
+            scr.get().length.toString
+          )
+        )
 
         // Check if data slice dimensions are defined:
-        if (width < 8 || height < 8 || width > 320 || height > 200)
-          throw new InvalidImageDataSliceException("HiRes", "%sx%s".format(width, height), "image dimensions", "between 8x8 and 320x200")
+        require(
+          width >= 8 && height >= 8 && width <= 320 && height <= 200,
+          "Invalid HiRes image data slice: got %s, but expected image dimensions between 8x8 and 320x200".format(
+            "%sx%s".format(width, height)
+          )
+        )
 
         // Check if both width and height parameters can by divided by 8 without any reminder:
-        if (width % 8 > 0 || height % 8 > 0)
-          throw new InvalidImageDataSliceException("HiRes", "%sx%s".format(width, height), "image dimensions", "to be numbers divisible by 8")
+        require(
+          width % 8 == 0 && height % 8 == 0,
+          "Invalid HiRes image data slice: got %s, but expected image dimensions to be numbers divisible by 8".format(
+            "%sx%s".format(width, height)
+          )
+        )
 
         // Expected number of bytes in a "bitmap" array equals numBytes:
-        if (bitmap.get().length != numBytes)
-          throw new InvalidImageDataSliceException("HiRes", bitmap.get().length.toString, numBytes.toString, "bitmap data bytes")
+        require(
+          bitmap.get().length == numBytes,
+          "Invalid HiRes image data slice: got %s, but expected %s bitmap data bytes".format(
+            bitmap.get().length.toString, numBytes.toString
+          )
+        )
 
         // Expected number of bytes in a "screen" array equals numChars:
-        if (scr.get().length != numChars)
-          throw new InvalidImageDataSliceException("HiRes", scr.get().length.toString, numChars.toString, "screen data bytes")
+        require(
+          scr.get().length == numChars,
+          "Invalid HiRes image data slice: got %s, but expected %s screen data bytes".format(
+            scr.get().length.toString, numChars.toString
+          )
+        )
 
         // Check if amount of bitmap data exceeds maximum allowed value:
-        if (bitmap.get().length > HiRes.size("bitmap"))
-          throw new InvalidImageDataSliceException("HiRes", bitmap.get().length.toString, HiRes.size("bitmap").toString, "bitmap data bytes")
+        require(
+          bitmap.get().length <= HiRes.size("bitmap"),
+          "Invalid HiRes image data slice: got %s, but expected %s bitmap data bytes".format(
+            bitmap.get().length.toString, HiRes.size("bitmap").toString
+          )
+        )
 
         // Check if amount of screen data exceeds maximum allowed value:
-        if (scr.get().length > HiRes.size("screen"))
-          throw new InvalidImageDataSliceException("HiRes", scr.get().length.toString, HiRes.size("screen").toString, "screen data bytes")
+        require(
+          scr.get().length <= HiRes.size("screen"),
+          "Invalid HiRes image data slice: got %s, but expected %s screen data bytes".format(
+            scr.get().length.toString, HiRes.size("screen").toString
+          )
+        )
       }
       case None => {
 
         val numBytes = (widthRounded * heightRounded >> 3)
 
         // Check if provided data array is not empty:
-        if (bitmap.get().length == 0)
-          throw new InvalidImageDataSliceException("HiRes", bitmap.get().length.toString, "between 1 and 8000", "bitmap data bytes")
+        require(
+          bitmap.get().length > 0,
+          "Invalid HiRes image data slice: got %s, but expected between 1 and 8000 bitmap data bytes".format(
+            bitmap.get().length.toString
+          )
+        )
 
         // Check if data slice dimensions are defined:
-        if (width < 1 || height < 1 || width > 320 || height > 200)
-          throw new InvalidImageDataSliceException("HiRes", "%sx%s".format(width, height), "image dimensions", "between 1x1 and 320x200")
+        require(
+          width >= 1 && height >= 1 && width <= 320 && height <= 200,
+          "Invalid HiRes image data slice: got %s, but expected image dimensions between 1x1 and 320x200".format(
+            "%sx%s".format(width, height)
+          )
+        )
 
         // Expected number of bytes in a "bitmap" array equals numBytes:
-        if (bitmap.get().length != numBytes)
-          throw new InvalidImageDataSliceException("HiRes", bitmap.get().length.toString, numBytes.toString, "bitmap data bytes")
+        require(
+          bitmap.get().length == numBytes,
+          "Invalid HiRes image data slice: got %s, but expected %s bitmap data bytes".format(
+            bitmap.get().length.toString, numBytes.toString
+          )
+        )
 
         // Check if amount of bitmap data exceeds maximum allowed value:
-        if (bitmap.get().length > HiRes.size("bitmap"))
-          throw new InvalidImageDataSliceException("HiRes", bitmap.get().length.toString, HiRes.size("bitmap").toString, "bitmap data bytes")
+        require(
+          bitmap.get().length <= HiRes.size("bitmap"),
+          "Invalid HiRes image data slice: got %s, but expected %s bitmap data bytes".format(
+            bitmap.get().length.toString, HiRes.size("bitmap").toString
+          )
+        )
       }
     }
   }

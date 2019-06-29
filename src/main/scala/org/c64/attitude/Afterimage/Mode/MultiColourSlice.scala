@@ -31,44 +31,88 @@ class MultiColourSlice(
     val numChars = (width * 2 >> 3) * (height >> 3)
 
     // Check if provided data arrays are not empty:
-    if (bitmap.get().length == 0)
-      throw new InvalidImageDataSliceException("MultiColour", bitmap.get().length.toString, "between 8 and 8000", "bitmap data bytes")
-    if (screen.get().length == 0)
-      throw new InvalidImageDataSliceException("MultiColour", screen.get().length.toString, "between 1 and 1000", "screen data bytes")
-    if (colors.get().length == 0)
-      throw new InvalidImageDataSliceException("MultiColour", colors.get().length.toString, "between 1 and 1000", "colour data bytes")
+    require(
+      bitmap.get().length > 0,
+      "Invalid MultiColour image data slice: got %s, but expected between 8 and 8000 bitmap data bytes".format(
+        bitmap.get().length.toString
+      )
+    )
+    require(
+      screen.get().length > 0,
+      "Invalid MultiColour image data slice: got %s, but expected between 1 and 1000 screen data bytes".format(
+        screen.get().length.toString
+      )
+    )
+    require(
+      colors.get().length > 0,
+      "Invalid MultiColour image data slice: got %s, but expected between 1 and 1000 colour data bytes".format(
+        colors.get().length.toString
+      )
+    )
 
     // Check if data slice dimensions are defined:
-    if (width < 4 || height < 8 || width > 160 || height > 200)
-      throw new InvalidImageDataSliceException("MultiColour", "%sx%s".format(width, height), "image dimensions", "between 8x8 and 160x200")
+    require(
+      width >= 4 && height >= 8 && width <= 160 && height <= 200,
+      "Invalid MultiColour image data slice: got %s, but expected image dimensions between 8x8 and 160x200".format(
+        "%sx%s".format(width, height)
+      )
+    )
 
     // Check if both width and height parameters can by divided by 8 without any reminder:
-    if (width % 4 > 0 || height % 8 > 0)
-      throw new InvalidImageDataSliceException("MultiColour", "%sx%s".format(width, height), "image dimensions", "to be numbers divisible by 8")
+    require(
+      width % 4 <= 0 && height % 8 <= 0,
+      "Invalid MultiColour image data slice: got %s, but expected image dimensions to be numbers divisible by 8".format(
+        "%sx%s".format(width, height)
+      )
+    )
 
     // Expected number of bytes in a "bitmap" array equals numBytes:
-    if (bitmap.get().length != numBytes)
-      throw new InvalidImageDataSliceException("MultiColour", bitmap.get().length.toString, numBytes.toString, "bitmap data bytes")
+    require(
+      bitmap.get().length == numBytes,
+      "Invalid MultiColour image data slice: got %s, but expected %s bitmap data bytes".format(
+        bitmap.get().length.toString, numBytes.toString
+      )
+    )
 
     // Expected number of bytes in a "screen" array equals numChars:
-    if (screen.get().length != numChars)
-      throw new InvalidImageDataSliceException("MultiColour", screen.get().length.toString, numChars.toString, "screen data bytes")
+    require(
+      screen.get().length == numChars,
+      "Invalid MultiColour image data slice: got %s, but expected %s screen data bytes".format(
+        screen.get().length.toString, numChars.toString
+      )
+    )
 
     // Expected number of bytes in a "colors" array equals numChars:
-    if (colors.get().length != numChars)
-      throw new InvalidImageDataSliceException("MultiColour", colors.get().length.toString, numChars.toString, "colour data bytes")
+    require(
+      colors.get().length == numChars,
+      "Invalid MultiColour image data slice: got %s, but expected %s colour data bytes".format(
+        colors.get().length.toString, numChars.toString
+      )
+    )
 
     // Check if amount of bitmap data exceeds maximum allowed value:
-    if (bitmap.get().length > MultiColour.size("bitmap"))
-      throw new InvalidImageDataSliceException("MultiColour", bitmap.get().length.toString, MultiColour.size("bitmap").toString, "bitmap data bytes")
+    require(
+      bitmap.get().length <= MultiColour.size("bitmap"),
+      "Invalid MultiColour image data slice: got %s, but expected %s bitmap data bytes".format(
+        bitmap.get().length.toString, MultiColour.size("bitmap").toString
+      )
+    )
 
     // Check if amount of screen data exceeds maximum allowed value:
-    if (screen.get().length > MultiColour.size("screen"))
-      throw new InvalidImageDataSliceException("MultiColour", screen.get().length.toString, MultiColour.size("screen").toString, "screen data bytes")
+    require(
+      screen.get().length <= MultiColour.size("screen"),
+      "Invalid MultiColour image data slice: got %s, but expected %s screen data bytes".format(
+        screen.get().length.toString, MultiColour.size("screen").toString
+      )
+    )
 
     // Check if amount of colors data exceeds maximum allowed value:
-    if (colors.get().length > MultiColour.size("colors"))
-      throw new InvalidImageDataSliceException("MultiColour", colors.get().length.toString, MultiColour.size("colors").toString, "colour data bytes")
+    require(
+      colors.get().length <= MultiColour.size("colors"),
+      "Invalid MultiColour image data slice: got %s, but expected %s colour data bytes".format(
+        colors.get().length.toString, MultiColour.size("colors").toString
+      )
+    )
   }
 }
 

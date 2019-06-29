@@ -48,31 +48,31 @@ class MultiColourSliceSpec extends FreeSpec {
     // MultiColourSlice with image width exceeding maximum allowed size (although with valid data)
     // cannot be created, because it is impossible to construct invalid Bitmap/Screen instances:
     val bitmapSize01 = MultiColour.size("bitmap") + 0x08 * 0x19
-    intercept[InvalidBitmapDataSizeException] {
+    intercept[IllegalArgumentException] {
       Bitmap(Array.fill(bitmapSize01){0x00.toByte}, 41, 25)
     }
     val screenSize01 = MultiColour.size("screen") + 0x01 * 0x19
-    intercept[InvalidScreenDataSizeException] {
+    intercept[IllegalArgumentException] {
       Screen(Array.fill(screenSize01){0x00.toByte}, 41, 25)
     }
 
     // MultiColourSlice of an empty bitmap or screen data cannot be created,
     // because it is impossible to construct invalid Bitmap/Screen instances:
-    intercept[InvalidBitmapDataSizeException] {
+    intercept[IllegalArgumentException] {
       Bitmap(Array[Byte](), 0, 0)
     }
-    intercept[InvalidScreenDataSizeException] {
+    intercept[IllegalArgumentException] {
       Screen(Array[Byte](), 0, 0)
     }
 
     // MultiColourSlice with image height exceeding maximum allowed size (although with valid data)
     // cannot be created, because it is impossible to construct invalid Bitmap/Screen instances:
     val bitmapSize06 = MultiColour.size("bitmap") + 0x08 * 0x28
-    intercept[InvalidBitmapDataSizeException] {
+    intercept[IllegalArgumentException] {
       Bitmap(Array.fill(bitmapSize06){0x00.toByte}, 40, 26)
     }
     val screenSize06 = MultiColour.size("screen") + 0x01 * 0x28
-    intercept[InvalidScreenDataSizeException] {
+    intercept[IllegalArgumentException] {
       Screen(Array.fill(screenSize06){0x00.toByte}, 40, 26)
     }
 
@@ -80,10 +80,10 @@ class MultiColourSliceSpec extends FreeSpec {
     val bitmap09 = Bitmap(Array.fill(MultiColour.size("bitmap")){0x00.toByte}, 40, 25)
     val screen09 = Screen(Array.fill(MultiColour.size("screen")){0x00.toByte}, 40, 25)
     val colors09 = Screen(Array.fill(MultiColour.size("colors")){0x00.toByte}, 40, 25)
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       MultiColourSlice(bitmap09, screen09, colors09, border, bckgrd, 159, 200)
     }
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       MultiColourSlice(bitmap09, screen09, colors09, border, bckgrd, 160, 199)
     }
 
@@ -94,7 +94,7 @@ class MultiColourSliceSpec extends FreeSpec {
     val bitmap10 = Bitmap(Array.fill(bitmapSize10){0x00.toByte}, 40, 24)
     val screen10 = Screen(Array.fill(screenSize10){0x00.toByte}, 40, 24)
     val colors10 = Screen(Array.fill(colorsSize10){0x00.toByte}, 40, 24)
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       MultiColourSlice(bitmap10, screen10, colors10, border, bckgrd, 160, 184)
     }
 
@@ -105,7 +105,7 @@ class MultiColourSliceSpec extends FreeSpec {
     val bitmap11 = Bitmap(Array.fill(bitmapSize11){0x00.toByte}, 40, 24)
     val screen11 = Screen(Array.fill(screenSize11){0x00.toByte}, 40, 24)
     val colors11 = Screen(Array.fill(colorsSize11){0x00.toByte}, 40, 24)
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       MultiColourSlice(bitmap11, screen11, colors11, border, bckgrd, 160, 200)
     }
 
@@ -116,7 +116,7 @@ class MultiColourSliceSpec extends FreeSpec {
     val bitmap12 = Bitmap(Array.fill(bitmapSize12){0x00.toByte}, 39, 25)
     val screen12 = Screen(Array.fill(screenSize12){0x00.toByte}, 39, 25)
     val colors12 = Screen(Array.fill(colorsSize12){0x00.toByte}, 39, 25)
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       MultiColourSlice(bitmap12, screen12, colors12, border, bckgrd, 152, 200)
     }
 
@@ -127,7 +127,7 @@ class MultiColourSliceSpec extends FreeSpec {
     val bitmap13 = Bitmap(Array.fill(bitmapSize13){0x00.toByte}, 39, 25)
     val screen13 = Screen(Array.fill(screenSize13){0x00.toByte}, 39, 25)
     val colors13 = Screen(Array.fill(colorsSize13){0x00.toByte}, 39, 25)
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       MultiColourSlice(bitmap13, screen13, colors13, border, bckgrd, 160, 200)
     }
 
@@ -137,10 +137,10 @@ class MultiColourSliceSpec extends FreeSpec {
     val bitmap14 = Bitmap(Array.fill(bitmapSize14){0x00.toByte}, 39, 25)
     val screen14 = Screen(Array.fill(MultiColour.size("screen")){0x00.toByte}, 40, 25)
     val colors14 = Screen(Array.fill(colorsSize14){0x00.toByte}, 39, 25)
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       MultiColourSlice(bitmap14, screen14, colors14, border, bckgrd, 156, 200)
     }
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       MultiColourSlice(bitmap14, screen14, colors14, border, bckgrd, 160, 200)
     }
 
@@ -150,10 +150,10 @@ class MultiColourSliceSpec extends FreeSpec {
     val bitmap15 = Bitmap(Array.fill(MultiColour.size("bitmap")){0x00.toByte}, 40, 25)
     val screen15 = Screen(Array.fill(screenSize15){0x00.toByte}, 39, 25)
     val colors15 = Screen(Array.fill(colorsSize15){0x00.toByte}, 39, 25)
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       MultiColourSlice(bitmap15, screen15, colors15, border, bckgrd, 156, 200)
     }
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       MultiColourSlice(bitmap15, screen15, colors15, border, bckgrd, 160, 200)
     }
 
@@ -163,10 +163,10 @@ class MultiColourSliceSpec extends FreeSpec {
     val bitmap19 = Bitmap(Array.fill(bitmapSize19){0x00.toByte}, 39, 25)
     val screen19 = Screen(Array.fill(screenSize19){0x00.toByte}, 39, 25)
     val colors19 = Screen(Array.fill(MultiColour.size("colors")){0x00.toByte}, 40, 25)
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       MultiColourSlice(bitmap19, screen19, colors19, border, bckgrd, 156, 200)
     }
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       MultiColourSlice(bitmap19, screen19, colors19, border, bckgrd, 160, 200)
     }
   }
@@ -225,10 +225,10 @@ class MultiColourSliceSpec extends FreeSpec {
 
     val multiColourImage = setupMultiColourImage()
 
-    intercept[InvalidSliceSelectionAreaException] {
+    intercept[IllegalArgumentException] {
       multiColourImage.slice(-1, 5)
     }
-    intercept[InvalidSliceSelectionAreaException] {
+    intercept[IllegalArgumentException] {
       multiColourImage.slice(-1, 5)
     }
   }

@@ -61,7 +61,7 @@ object File {
       case _: Throwable =>
     }
 
-    throw new InvalidImageDataException("recognized graphics")
+    throw new IllegalArgumentException("Invalid image data: unrecognised graphics format")
   }
 
   /** Imports image data from file.

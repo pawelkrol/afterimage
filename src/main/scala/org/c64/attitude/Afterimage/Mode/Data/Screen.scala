@@ -10,21 +10,29 @@ package Mode.Data
   */
 case class Screen(data: Array[Byte], cols: Int, rows: Int) {
 
-  if (cols < 1 || cols > Screen.maxCols || rows < 1 || rows > Screen.maxRows)
-    throw new InvalidScreenDataSizeException("%dx%d".format(cols, rows))
+  require(
+    cols >= 1 && cols <= Screen.maxCols && rows >= 1 && rows <= Screen.maxRows,
+    "Invalid screen colours data size: got %s, but expected anything between 1x1 and 40x25 with row and column values counted as occurences of 8x8 character areas".format(
+      "%dx%d".format(cols, rows)
+    )
+  )
 
-  if (data.length != cols * rows)
-    throw new InvalidScreenDataLengthException(data.length, cols * rows)
+  require(
+    data.length == cols * rows,
+    "Invalid screen colours data length: got %d, but expected %d bytes".format(data.length, cols * rows)
+  )
 
   /** Returns the entire screen colours data as an array of bytes. */
   def get(): Array[Byte] = data
 
   def validateScreenCoordinates(x: Int, y: Int) =
-    if (x < 0 || x >= cols || y < 0 || y >= rows)
-      throw new InvalidScreenCoordinates(
+    require(
+      x >= 0 && x < cols && y >= 0 && y < rows,
+      "Invalid pixel coordinates: got %d, but expected values within the range of %s".format(
         "[%s,%s]".format(x, y),
         "[%s,%s]".format(cols, rows)
       )
+    )
 
   /** Returns screen colour at a given position.
     *

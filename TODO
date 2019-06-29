@@ -1,12 +1,5 @@
---
-
-Instead of explicit validation and error throw, do "require" (this will throw "IllegalArgumentException" instead - wrong argument) or "assert" (this will throw "AssertionError" instead - wrong check in the code) in a class instance
-
---
-
-Refactor all exceptions thrown into RuntimeException: there is no need to have so many exception classes, especially for the fact I do not handle them in any specific way.
-
---
+TODO
+====
 
 * Build stand-alone JAR:
   - include dependencies to:
@@ -31,5 +24,3 @@ Refactor all exceptions thrown into RuntimeException: there is no need to have s
 
 * Useful info about creating stand-alone executable JARs:
   - http://blog.yuvimasory.com/2010/09/creating-standalone-executable-jar-with.html
-
---

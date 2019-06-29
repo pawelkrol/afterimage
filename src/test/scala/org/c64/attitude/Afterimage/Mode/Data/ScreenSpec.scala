@@ -21,22 +21,22 @@ class ScreenSpec extends FreeSpec {
     assert(Screen(1, 25).isInstanceOf[Screen])
     assert(Screen(1, 1).isInstanceOf[Screen])
 
-    intercept[InvalidScreenDataSizeException] {
+    intercept[IllegalArgumentException] {
       Screen(40, 26)
     }
-    intercept[InvalidScreenDataSizeException] {
+    intercept[IllegalArgumentException] {
       Screen(41, 25)
     }
-    intercept[InvalidScreenDataSizeException] {
+    intercept[IllegalArgumentException] {
       Screen(40, 0)
     }
-    intercept[InvalidScreenDataSizeException] {
+    intercept[IllegalArgumentException] {
       Screen(0, 25)
     }
-    intercept[InvalidScreenDataSizeException] {
+    intercept[IllegalArgumentException] {
       Screen(0, 0)
     }
-    intercept[InvalidScreenDataSizeException] {
+    intercept[IllegalArgumentException] {
       Screen(-1, -1)
     }
   }
@@ -50,13 +50,13 @@ class ScreenSpec extends FreeSpec {
     assert(Screen(Array.fill(25){0x00}, 1, 25).isInstanceOf[Screen])
     assert(Screen(Array.fill(1){0x00}, 1, 1).isInstanceOf[Screen])
 
-    intercept[InvalidScreenDataLengthException] {
+    intercept[IllegalArgumentException] {
       Screen(Array.fill(1001){0x00}, 40, 25)
     }
-    intercept[InvalidScreenDataLengthException] {
+    intercept[IllegalArgumentException] {
       Screen(Array.fill(999){0x00}, 40, 25)
     }
-    intercept[InvalidScreenDataLengthException] {
+    intercept[IllegalArgumentException] {
       Screen(Array(), 40, 25)
     }
   }
@@ -89,22 +89,22 @@ class ScreenSpec extends FreeSpec {
     assert(screen.get(0, 1) == 0x04.toByte)
     assert(screen.get(1, 1) == 0x05.toByte)
 
-    intercept[InvalidScreenCoordinates] {
+    intercept[IllegalArgumentException] {
       screen.get(-1, -1)
     }
-    intercept[InvalidScreenCoordinates] {
+    intercept[IllegalArgumentException] {
       screen.get(-1, 0)
     }
-    intercept[InvalidScreenCoordinates] {
+    intercept[IllegalArgumentException] {
       screen.get(0, -1)
     }
-    intercept[InvalidScreenCoordinates] {
+    intercept[IllegalArgumentException] {
       screen.get(40, 0)
     }
-    intercept[InvalidScreenCoordinates] {
+    intercept[IllegalArgumentException] {
       screen.get(0, 25)
     }
-    intercept[InvalidScreenCoordinates] {
+    intercept[IllegalArgumentException] {
       screen.get(40, 25)
     }
   }
@@ -252,10 +252,10 @@ class ScreenSpec extends FreeSpec {
     assert(deep(screen.slice(0, 1, 1, 1).get()) == deep(screenSliceLower))
     assert(deep(screen.slice(0, 0, 4, 3).get()) == deep(screenSliceWider))
 
-    intercept[InvalidScreenDataSizeException] {
+    intercept[IllegalArgumentException] {
       screen.slice(0, 0, 41, 25)
     }
-    intercept[InvalidScreenDataSizeException] {
+    intercept[IllegalArgumentException] {
       screen.slice(0, 0, 40, 26)
     }
   }

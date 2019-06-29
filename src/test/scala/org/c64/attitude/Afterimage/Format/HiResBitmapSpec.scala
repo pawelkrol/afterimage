@@ -21,7 +21,7 @@ class HiResBitmapFormatSpec extends FreeSpec {
   }
 
   "hires bitmap format too much data" in {
-    intercept[InvalidImageDataException] {
+    intercept[IllegalArgumentException] {
       val addr: Address = HiResBitmap.load
       val data: Array[Byte] = Array.fill(HiResBitmap.size + 1){0x00}
       HiResBitmap(addr, data)
@@ -29,7 +29,7 @@ class HiResBitmapFormatSpec extends FreeSpec {
   }
 
   "hires bitmap format too little data" in {
-    intercept[InvalidImageDataException] {
+    intercept[IllegalArgumentException] {
       val addr: Address = HiResBitmap.load
       val data: Array[Byte] = Array.fill(HiResBitmap.size - 1){0x00}
       HiResBitmap(addr, data)
@@ -37,7 +37,7 @@ class HiResBitmapFormatSpec extends FreeSpec {
   }
 
   "hires bitmap format empty data" in {
-    intercept[InvalidImageDataException] {
+    intercept[IllegalArgumentException] {
       val addr: Address = HiResBitmap.load
       val data: Array[Byte] = Array()
       HiResBitmap(addr, data)

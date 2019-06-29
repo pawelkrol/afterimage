@@ -10,11 +10,20 @@ package Mode.Data
   */
 case class Bitmap(data: Array[Byte], cols: Int, rows: Int) {
 
-  if (cols < 1 || cols > Bitmap.maxCols || rows < 1 || rows > Bitmap.maxRows)
-    throw new InvalidBitmapDataSizeException("%dx%d".format(cols, rows))
+  require(
+    cols >= 1 && cols <= Bitmap.maxCols && rows >= 1 && rows <= Bitmap.maxRows,
+    "Invalid bitmap data size: got %s, but expected anything between 1x1 and 40x25 with row and column values counted as occurences of 8x8 character areas".format(
+      "%dx%d".format(cols, rows)
+    )
+  )
 
-  if (data.length != cols * rows * Bitmap.bytesPerChar)
-    throw new InvalidBitmapDataLengthException(data.length, cols * rows * Bitmap.bytesPerChar)
+  require(
+    data.length == cols * rows * Bitmap.bytesPerChar,
+    "Invalid bitmap data length: got %d, but expected %d bytes".format(
+      data.length,
+      cols * rows * Bitmap.bytesPerChar
+    )
+  )
 
   private lazy val pixels = {
 
@@ -50,8 +59,10 @@ case class Bitmap(data: Array[Byte], cols: Int, rows: Int) {
     */
   def getPixels(x: Int, y: Int, numBits: Int) = {
 
-    if (numBits < 1 || numBits > 8)
-      throw new InvalidPixelsNumberException(numBits)
+    require(
+      numBits >= 1 && numBits <= 8,
+      "Invalid number of pixels requested: got %d, but expected an integer between 1 and 8".format(numBits)
+    )
 
     (0 to numBits - 1).foldLeft(0x00)((pixels, bit) => {
       val pixel = if (isPixelSet(x + bit, y)) 0x01 else 0x00

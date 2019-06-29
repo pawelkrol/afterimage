@@ -34,63 +34,63 @@ class MultiColourSpec extends FreeSpec {
 
   "multicolour create with empty bitmap" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
-    intercept[InvalidBitmapDataLengthException] {
+    intercept[IllegalArgumentException] {
       MultiColour(Array[Byte](), screen, colors, bckgrd, border)
     }
   }
 
   "multicolour create with too large bitmap" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
-    intercept[InvalidBitmapDataLengthException] {
+    intercept[IllegalArgumentException] {
       MultiColour(bitmap :+ 0x00.toByte, screen, colors, bckgrd, border)
     }
   }
 
   "multicolour create with too small bitmap" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
-    intercept[InvalidBitmapDataLengthException] {
+    intercept[IllegalArgumentException] {
       MultiColour(bitmap.init, screen, colors, bckgrd, border)
     }
   }
 
   "multicolour create with empty screen" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
-    intercept[InvalidScreenDataLengthException] {
+    intercept[IllegalArgumentException] {
       MultiColour(bitmap, Array[Byte](), colors, bckgrd, border)
     }
   }
 
   "multicolour create with too large screen" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
-    intercept[InvalidScreenDataLengthException] {
+    intercept[IllegalArgumentException] {
       MultiColour(bitmap, screen :+ 0x00.toByte, colors, bckgrd, border)
     }
   }
 
   "multicolour create with too small screen" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
-    intercept[InvalidScreenDataLengthException] {
+    intercept[IllegalArgumentException] {
       MultiColour(bitmap, screen.init, colors, bckgrd, border)
     }
   }
 
   "multicolour create with empty colors" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
-    intercept[InvalidScreenDataLengthException] {
+    intercept[IllegalArgumentException] {
       MultiColour(bitmap, screen, Array[Byte](), bckgrd, border)
     }
   }
 
   "multicolour create with too large colors" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
-    intercept[InvalidScreenDataLengthException] {
+    intercept[IllegalArgumentException] {
       MultiColour(bitmap, screen, colors :+ 0x00.toByte, bckgrd, border)
     }
   }
 
   "multicolour create with too small colors" in {
     val (bitmap, screen, colors, border, bckgrd) = setupTestData()
-    intercept[InvalidScreenDataLengthException] {
+    intercept[IllegalArgumentException] {
       MultiColour(bitmap, screen, colors.init, bckgrd, border)
     }
   }

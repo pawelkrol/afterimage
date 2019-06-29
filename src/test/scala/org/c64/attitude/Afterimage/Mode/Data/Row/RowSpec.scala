@@ -9,37 +9,37 @@ import Util.ArrayHelper.deep
 class RowSpec extends FreeSpec {
 
   "get bitmap from negative index row" in {
-    intercept[InvalidDataRowIndexException] {
+    intercept[IllegalArgumentException] {
       Row.getBitmapRow(-1, Array[Byte]())
     }
   }
 
   "get bitmap from exceeding index row" in {
-    intercept[InvalidDataRowIndexException] {
+    intercept[IllegalArgumentException] {
       Row.getBitmapRow(25, Array[Byte]())
     }
   }
 
   "get screen from negative index row" in {
-    intercept[InvalidDataRowIndexException] {
+    intercept[IllegalArgumentException] {
       Row.getScreenRow(-1, Array[Byte]())
     }
   }
 
   "get screen from exceeding index row" in {
-    intercept[InvalidDataRowIndexException] {
+    intercept[IllegalArgumentException] {
       Row.getScreenRow(25, Array[Byte]())
     }
   }
 
   "get colors from negative index row" in {
-    intercept[InvalidDataRowIndexException] {
+    intercept[IllegalArgumentException] {
       Row.getColorsRow(-1, Array[Byte]())
     }
   }
 
   "get colors from exceeding index row" in {
-    intercept[InvalidDataRowIndexException] {
+    intercept[IllegalArgumentException] {
       Row.getColorsRow(25, Array[Byte]())
     }
   }

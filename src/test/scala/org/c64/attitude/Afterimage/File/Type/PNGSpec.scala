@@ -2,6 +2,7 @@ package org.c64.attitude.Afterimage
 package File.Type
 
 import ij.ImagePlus
+import java.nio.file.FileAlreadyExistsException
 import org.scalatest.FreeSpec
 
 import Colour.Palette

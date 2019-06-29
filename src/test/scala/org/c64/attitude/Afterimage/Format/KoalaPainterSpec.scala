@@ -15,7 +15,7 @@ class KoalaPainterFormatSpec extends FreeSpec {
   }
 
   "koala painter format invalid address" in {
-    intercept[InvalidImageDataException] {
+    intercept[IllegalArgumentException] {
       val addr: Address = 0x0000
       val data: Array[Byte] = Array.fill(KoalaPainter.size){0x00}
       KoalaPainter(addr, data)
@@ -23,7 +23,7 @@ class KoalaPainterFormatSpec extends FreeSpec {
   }
 
   "koala painter format too much data" in {
-    intercept[InvalidImageDataException] {
+    intercept[IllegalArgumentException] {
       val addr: Address = KoalaPainter.load
       val data: Array[Byte] = Array.fill(KoalaPainter.size + 1){0x00}
       KoalaPainter(addr, data)
@@ -31,7 +31,7 @@ class KoalaPainterFormatSpec extends FreeSpec {
   }
 
   "koala painter format too little data" in {
-    intercept[InvalidImageDataException] {
+    intercept[IllegalArgumentException] {
       val addr: Address = KoalaPainter.load
       val data: Array[Byte] = Array.fill(KoalaPainter.size - 1){0x00}
       KoalaPainter(addr, data)
@@ -39,7 +39,7 @@ class KoalaPainterFormatSpec extends FreeSpec {
   }
 
   "koala painter format empty data" in {
-    intercept[InvalidImageDataException] {
+    intercept[IllegalArgumentException] {
       val addr: Address = KoalaPainter.load
       val data: Array[Byte] = Array()
       KoalaPainter(addr, data)

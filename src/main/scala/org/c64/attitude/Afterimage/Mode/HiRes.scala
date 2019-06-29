@@ -40,13 +40,11 @@ case class HiRes(
 
   /** Validates consistency of an object instance data. */
   def validate(): Unit = {
-    if (bitmap.get().length != HiRes.size("bitmap"))
-      throw new InvalidImageModeDataException(imageMode)
+    require(bitmap.get().length == HiRes.size("bitmap"), "Invalid %s image data".format(imageMode))
 
     screen match {
       case Some(scr) =>
-        if (scr.get().length != HiRes.size("screen"))
-          throw new InvalidImageModeDataException(imageMode)
+        require(scr.get().length == HiRes.size("screen"), "Invalid %s image data".format(imageMode))
       case None =>
     }
   }
@@ -110,12 +108,22 @@ case class HiRes(
     screen match {
       case Some(scr) => {
         // Validate start and end position alignment to char boundaries:
-        if (x % 8 > 0 || y % 8 > 0)
-          throw new InvalidSliceCoordinatesException("[%d,%d]".format(x, y), "values aligned with a 8x8 char boundaries")
+        require(
+          x % 8 == 0 && y % 8 == 0,
+          "Invalid slice coordinates requested: got %s, but expected %s".format(
+            "[%d,%d]".format(x, y),
+            "values aligned with an 8x8 char boundaries"
+          )
+        )
 
         // Validate newWidth and newHeight values:
-        if (x + newWidth > width || y + newHeight > height)
-          throw new InvalidSliceDimensionsException("[%d,%d]".format(newWidth, newHeight), "[%d,%d]".format(width, height))
+        require(
+          x + newWidth <= width && y + newHeight <= height,
+          "Invalid slice dimensions requested: got %s, but at this position maximum allowed size is %s".format(
+            "[%d,%d]".format(newWidth, newHeight),
+            "[%d,%d]".format(width, height)
+          )
+        )
 
         val newBitmap = bitmap.slice(x, y, newWidth, newHeight)
         val newScreen = screen match {

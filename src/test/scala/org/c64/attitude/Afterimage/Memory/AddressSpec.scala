@@ -54,13 +54,13 @@ class MemoryAddressSpec extends FreeSpec {
   }
 
   "address create negative" in {
-    intercept[InvalidAddressException] {
+    intercept[IllegalArgumentException] {
       Address(-1)
     }
   }
 
   "address create too large" in {
-    intercept[InvalidAddressException] {
+    intercept[IllegalArgumentException] {
       Address(0x10000)
     }
   }

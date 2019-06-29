@@ -21,22 +21,22 @@ class BitmapSpec extends FreeSpec {
     assert(Bitmap(1, 25).isInstanceOf[Bitmap])
     assert(Bitmap(1, 1).isInstanceOf[Bitmap])
 
-    intercept[InvalidBitmapDataSizeException] {
+    intercept[IllegalArgumentException] {
       Bitmap(40, 26)
     }
-    intercept[InvalidBitmapDataSizeException] {
+    intercept[IllegalArgumentException] {
       Bitmap(41, 25)
     }
-    intercept[InvalidBitmapDataSizeException] {
+    intercept[IllegalArgumentException] {
       Bitmap(40, 0)
     }
-    intercept[InvalidBitmapDataSizeException] {
+    intercept[IllegalArgumentException] {
       Bitmap(0, 25)
     }
-    intercept[InvalidBitmapDataSizeException] {
+    intercept[IllegalArgumentException] {
       Bitmap(0, 0)
     }
-    intercept[InvalidBitmapDataSizeException] {
+    intercept[IllegalArgumentException] {
       Bitmap(-1, -1)
     }
   }
@@ -50,13 +50,13 @@ class BitmapSpec extends FreeSpec {
     assert(Bitmap(Array.fill(200){0x00}, 1, 25).isInstanceOf[Bitmap])
     assert(Bitmap(Array.fill(8){0x00}, 1, 1).isInstanceOf[Bitmap])
 
-    intercept[InvalidBitmapDataLengthException] {
+    intercept[IllegalArgumentException] {
       Bitmap(Array.fill(8001){0x00}, 40, 25)
     }
-    intercept[InvalidBitmapDataLengthException] {
+    intercept[IllegalArgumentException] {
       Bitmap(Array.fill(7999){0x00}, 40, 25)
     }
-    intercept[InvalidBitmapDataLengthException] {
+    intercept[IllegalArgumentException] {
       Bitmap(Array(), 40, 25)
     }
   }
@@ -142,13 +142,13 @@ class BitmapSpec extends FreeSpec {
     assert(bitmap.getPixels(0, 0, 7) == 0x40.toByte)
     assert(bitmap.getPixels(0, 0, 8) == 0x80.toByte)
 
-    intercept[InvalidPixelsNumberException] {
+    intercept[IllegalArgumentException] {
       bitmap.getPixels(0, 0, 0)
     }
-    intercept[InvalidPixelsNumberException] {
+    intercept[IllegalArgumentException] {
       bitmap.getPixels(0, 0, -1)
     }
-    intercept[InvalidPixelsNumberException] {
+    intercept[IllegalArgumentException] {
       bitmap.getPixels(0, 0, 9)
     }
 

@@ -49,8 +49,9 @@ case class MultiColour(
 
   /** Validates consistency of an object instance data. */
   def validate(): Unit = {
-    if (bitmap.get().length != MultiColour.size("bitmap") || screen.get().length != MultiColour.size("screen") || colors.get().length != MultiColour.size("colors"))
-      throw new InvalidImageModeDataException(imageMode)
+    require(bitmap.get().length == MultiColour.size("bitmap"), "Invalid %s image data".format(imageMode))
+    require(screen.get().length == MultiColour.size("screen"), "Invalid %s image data".format(imageMode))
+    require(colors.get().length == MultiColour.size("colors"), "Invalid %s image data".format(imageMode))
   }
 
   private def pixelBits(x: Int, y: Int) = bitmap.getPixels(2 * x, y, 2)
@@ -90,8 +91,13 @@ case class MultiColour(
     val minY = 0
     val maxY = numCharRows - 1
 
-    if (fromY < minY || toY > maxY)
-      throw new InvalidSliceSelectionAreaException("[%d,%d]".format(fromY, toY), maxY)
+    require(
+      fromY >= minY && toY <= maxY,
+      "Invalid slice selection area in MultiColour mode requested: got %s, but expected rows between 0 and %s".format(
+        "[%d,%d]".format(fromY, toY),
+        maxY
+      )
+    )
 
     val screenHeight = toY - fromY + 1
 

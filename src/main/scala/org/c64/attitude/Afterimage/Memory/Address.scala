@@ -33,8 +33,7 @@ object Address {
     * @return a new `Address` instance with the memory address determined by the integer value
     */
   def apply(addr: Int): Address = {
-    if (addr < 0x0000 || addr > 0xffff)
-      throw new InvalidAddressException(addr)
+    require(addr >= 0x0000 && addr <= 0xffff, "Illegal memory address: $%04x".format(addr))
     val lo = (addr & 0x00ff).toByte
     val hi = ((addr & 0xff00) >> 8).toByte
     this(lo, hi)

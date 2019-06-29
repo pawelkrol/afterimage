@@ -111,8 +111,10 @@ object Row {
   val colorsRowSize = 0x28
 
   private def validateRowIndex(index: Int): Unit = {
-    if (index < 0 || index > 24)
-      throw new InvalidDataRowIndexException(index)
+    require(
+      index >= 0 && index <= 24,
+      "Invalid data row index requested: got %d, but expected an integer between 0 and 24".format(index)
+    )
   }
 
   /** Returns the new bitmap row data composed from cutting out selected row of a given size from the original image.
@@ -201,8 +203,7 @@ object Row {
     numValues: Int = 16,
     indent: Int = 16
   ) = {
-    if (data.length == 0)
-      throw new NoDataException()
+    require(data.length > 0, "No data has been provided: cannot process empty data")
 
     val dataLengthRounded = round((data.length - 1) / numValues) * numValues + numValues
     val numLines = dataLengthRounded / numValues

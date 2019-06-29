@@ -36,13 +36,13 @@ class PaletteSpec extends FreeSpec with MustMatchers {
   }
 
   "load invalid palette" in {
-    intercept[InvalidColourPalette] {
+    intercept[RuntimeException] {
       Palette("invalid")
     }
   }
 
   "direct load invalid palette" in {
-    intercept[InvalidColourPaletteTemplate] {
+    intercept[RuntimeException] {
       Palette.fromTemplate("invalid")
     }
   }
@@ -105,12 +105,12 @@ class PaletteSpec extends FreeSpec with MustMatchers {
 
   "load palette from file failure" in {
     val fileName = "%s/src/test/resources/palettes/invalid.json".format(new File(".").getAbsolutePath())
-    intercept[InvalidColourPalette] { Palette(fileName) }
+    intercept[RuntimeException] { Palette(fileName) }
   }
 
   "direct load palette from file failure" in {
     val fileName = "%s/src/test/resources/palettes/invalid.json".format(new File(".").getAbsolutePath())
-    intercept[InvalidColourPaletteFilename] { Palette.fromFile(fileName) }
+    intercept[IllegalArgumentException] { Palette.fromFile(fileName) }
   }
 
   "json serialisation" in {

@@ -70,46 +70,46 @@ class HiResSliceSpec extends FreeSpec {
     // HiResSlice with image width/height exceeding maximum allowed size:
     val bitmap01 = Bitmap(Array.fill(HiRes.size("bitmap")){0x00.toByte}, 40, 25)
     val screen01 = Some(Screen(Array.fill(HiRes.size("screen")){0x00.toByte}, 40, 25))
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap01, screen01, border, 328, 200)
     }
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap01, screen01, border, 328, 200)
     }
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap01, screen01, border, 320, 208)
     }
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap01, screen01, border, 320, 208)
     }
 
     // HiResSlice of an undefined slice width/height:
     val bitmap04 = Bitmap(Array.fill(HiRes.size("bitmap")){0x00.toByte}, 40, 25)
     val screen04 = Some(Screen(Array.fill(HiRes.size("screen")){0x00.toByte}, 40, 25))
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap04, screen04, border, 0, 200)
     }
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap04, screen04, border, 320, 0)
     }
 
     // HiResSlice of an undefined slice width/height:
     val bitmap05 = Bitmap(Array.fill(HiRes.size("bitmap")){0x00.toByte}, 40, 25)
     val screen05 = Some(Screen(Array.fill(HiRes.size("screen")){0x00.toByte}, 40, 25))
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap05, screen05, border, 0, 200)
     }
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap05, screen05, border, 320, 0)
     }
 
     // HiResSlice with image width/height not divisible by 8 (although with valid data):
     val bitmap09 = Bitmap(Array.fill(HiRes.size("bitmap")){0x00.toByte}, 40, 25)
     val screen09 = Some(Screen(Array.fill(HiRes.size("screen")){0x00.toByte}, 40, 25))
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap09, screen09, border, 319, 200)
     }
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap09, screen09, border, 320, 199)
     }
 
@@ -118,7 +118,7 @@ class HiResSliceSpec extends FreeSpec {
     val screenSize10 = HiRes.size("screen") - 0x01 * 0x28
     val bitmap10 = Bitmap(Array.fill(bitmapSize10){0x00.toByte}, 40, 24)
     val screen10 = Some(Screen(Array.fill(screenSize10){0x00.toByte}, 40, 24))
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap10, screen10, border, 320, 184)
     }
 
@@ -127,7 +127,7 @@ class HiResSliceSpec extends FreeSpec {
     val screenSize11 = HiRes.size("screen") - 0x01 * 0x28
     val bitmap11 = Bitmap(Array.fill(bitmapSize11){0x00.toByte}, 40, 24)
     val screen11 = Some(Screen(Array.fill(screenSize11){0x00.toByte}, 40, 24))
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap11, screen11, border, 320, 200)
     }
 
@@ -136,7 +136,7 @@ class HiResSliceSpec extends FreeSpec {
     val screenSize12 = HiRes.size("screen") - 0x01 * 0x19
     val bitmap12 = Bitmap(Array.fill(bitmapSize12){0x00.toByte}, 39, 25)
     val screen12 = Some(Screen(Array.fill(screenSize12){0x00.toByte}, 39, 25))
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap12, screen12, border, 304, 200)
     }
 
@@ -145,7 +145,7 @@ class HiResSliceSpec extends FreeSpec {
     val screenSize13 = HiRes.size("screen") - 0x01 * 0x19
     val bitmap13 = Bitmap(Array.fill(bitmapSize13){0x00.toByte}, 39, 25)
     val screen13 = Some(Screen(Array.fill(screenSize13){0x00.toByte}, 39, 25))
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap13, screen13, border, 320, 200)
     }
 
@@ -153,10 +153,10 @@ class HiResSliceSpec extends FreeSpec {
     val bitmapSize14 = HiRes.size("bitmap") - 0x08 * 0x19
     val bitmap14 = Bitmap(Array.fill(bitmapSize14){0x00.toByte}, 39, 25)
     val screen14 = Some(Screen(Array.fill(HiRes.size("screen")){0x00.toByte}, 40, 25))
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap14, screen14, border, 312, 200)
     }
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap14, screen14, border, 320, 200)
     }
 
@@ -164,10 +164,10 @@ class HiResSliceSpec extends FreeSpec {
     val screenSize15 = HiRes.size("screen") - 0x01 * 0x19
     val bitmap15 = Bitmap(Array.fill(HiRes.size("bitmap")){0x00.toByte}, 40, 25)
     val screen15 = Some(Screen(Array.fill(screenSize15){0x00.toByte}, 39, 25))
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap15, screen15, border, 312, 200)
     }
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap15, screen15, border, 320, 200)
     }
   }
@@ -176,47 +176,47 @@ class HiResSliceSpec extends FreeSpec {
 
     // HiResSlice with more bitmap data provided than indicated by number of image rows/columns:
     val bitmap01 = Bitmap(Array.fill(HiRes.size("bitmap")){0x00.toByte}, 40, 25)
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap01, None, border, 321, 200)
     }
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap01, None, border, 320, 201)
     }
 
     // HiResSlice of an undefined slice width/height:
     val bitmap02 = Bitmap(Array.fill(HiRes.size("bitmap")){0x00.toByte}, 40, 25)
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap02, None, border, 0, 200)
     }
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap02, None, border, 320, 0)
     }
 
     // HiResSlice with more bitmap data provided than indicated by number of image rows:
     val bitmapSize04 = HiRes.size("bitmap") - 0x08 * 0x28
     val bitmap04 = Bitmap(Array.fill(bitmapSize04){0x00.toByte}, 40, 24)
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap04, None, border, 320, 184)
     }
 
     // HiResSlice with less bitmap data provided than indicated by number of image rows:
     val bitmapSize05 = HiRes.size("bitmap") - 0x08 * 0x28
     val bitmap05 = Bitmap(Array.fill(bitmapSize05){0x00.toByte}, 40, 24)
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap05, None, border, 320, 200)
     }
 
     // HiResSlice with more bitmap data provided than indicated by number of image columns:
     val bitmapSize06 = HiRes.size("bitmap") - 0x08 * 0x19
     val bitmap06 = Bitmap(Array.fill(bitmapSize06){0x00.toByte}, 39, 25)
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap06, None, border, 304, 200)
     }
 
     // HiResSlice with less bitmap data provided than indicated by number of image columns:
     val bitmapSize07 = HiRes.size("bitmap") - 0x08 * 0x19
     val bitmap07 = Bitmap(Array.fill(bitmapSize07){0x00.toByte}, 39, 25)
-    intercept[InvalidImageDataSliceException] {
+    intercept[IllegalArgumentException] {
       HiResSlice(bitmap07, None, border, 320, 200)
     }
   }

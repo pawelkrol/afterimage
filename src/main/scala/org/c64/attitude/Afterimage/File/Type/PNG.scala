@@ -4,6 +4,7 @@ package File.Type
 import ij.ImagePlus
 import ij.plugin.PNG_Writer
 import java.io.File
+import java.nio.file.FileAlreadyExistsException
 
 import Mode.{CBM,HiRes,MultiColour}
 import View.Image

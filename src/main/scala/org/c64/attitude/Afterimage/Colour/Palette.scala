@@ -13,8 +13,10 @@ import scala.math.Ordering.Double.TotalOrdering
   */
 case class Palette(colours: Array[Colour]) {
 
-  if (colours.length != 16)
-    throw new InvalidNumberOfPaletteColours(colours.length)
+  require(
+    colours.length == 16,
+    "Invalid number of palette colours: got %d, but expected an array of 16 colours".format(colours.length)
+  )
 
   /** Returns RGB colour for a given C64 colour.
     *
@@ -22,8 +24,10 @@ case class Palette(colours: Array[Colour]) {
     */
   def apply(value: Int) = {
 
-    if (value < 0 || value > 15)
-      throw new InvalidPaletteColourIndexValue(value)
+    require(
+      value >= 0 && value <= 15,
+      "Invalid palette colour index: got %d, but expected an integer between 0 and 15".format(value)
+    )
 
     colours(value)
   }
@@ -116,7 +120,8 @@ object Palette {
           fromTemplate(name)
         }
         catch {
-          case _: Throwable => throw new InvalidColourPalette(name)
+          case _: Throwable =>
+            throw new RuntimeException("Invalid colour palette: '%s' (no such file or template found)".format(name))
         }
     }
   }
@@ -130,7 +135,8 @@ object Palette {
       build(name)
     }
     catch {
-      case _: Throwable => throw new InvalidColourPaletteTemplate(name)
+      case _: Throwable =>
+        throw new RuntimeException("Invalid colour palette template: check '%s' configuration".format(name))
     }
   }
 
@@ -143,7 +149,8 @@ object Palette {
       load(name)
     }
     catch {
-      case _: Throwable => throw new InvalidColourPaletteFilename(name)
+      case _: Throwable =>
+        throw new IllegalArgumentException("Invalid colour palette setup: malformed JSON data in '%s' file".format(name))
     }
   }
 }
