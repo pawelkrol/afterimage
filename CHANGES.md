@@ -3,8 +3,8 @@ CHANGES
 
 Revision history for `Afterimage`, a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications, entirely written in [Scala](http://www.scala-lang.org/).
 
-0.07-SNAPSHOT (2019-06-30)
---------------------------
+0.07 (2019-06-30)
+-----------------
 
 * Enhancement: add support for more CBM image file formats: Amica Paint
 * Refactoring: simplify error handling API by replacing all homebrewed exception classes targetting argument validation with a single "IllegalArgumentException" class thrown upon an invalid argument passed to any method, and a generic "RuntimeException" for all other errors
@@ -17,7 +17,7 @@ Revision history for `Afterimage`, a Commodore 64 graphics library with a built-
 0.06 (2018-02-27)
 -----------------
 
-* Enhancement: Enable saving rendered images directly in PNG format
+* Enhancement: enable saving rendered images directly in PNG format
 
 0.05 (2018-02-17)
 -----------------
