@@ -4,7 +4,7 @@ package File
 import ij.ImagePlus
 import ij.process.ImageConverter
 
-import Format.{AdvancedArtStudio,ArtStudio,Config,FacePainter,HiResBitmap,KoalaPainter}
+import Format.{AdvancedArtStudio,AmicaPaint,ArtStudio,Config,FacePainter,HiResBitmap,KoalaPainter}
 import Memory.Address
 import Mode.CBM
 
@@ -42,6 +42,13 @@ object File {
 
     try {
       return AdvancedArtStudio(addr, data).extractData()
+    }
+    catch {
+      case _: Throwable =>
+    }
+
+    try {
+      return AmicaPaint.unpack(addr, data).extractData()
     }
     catch {
       case _: Throwable =>

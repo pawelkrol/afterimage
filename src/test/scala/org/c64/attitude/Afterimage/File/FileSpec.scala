@@ -31,6 +31,11 @@ class FileSpec extends FreeSpec with MustMatchers {
     assert(File.load(name).isInstanceOf[MultiColour])
   }
 
+  "load amica paint file" in {
+    val name = getClass.getResource("/images/phantasy-rrr.ami").toString.replace("file:", "")
+    assert(File.load(name).isInstanceOf[MultiColour])
+  }
+
   "load hires bitmap file" in {
     val name = getClass.getResource("/images/niemanazwy-bimber.hpi").toString.replace("file:", "")
     assert(File.load(name).isInstanceOf[HiRes])

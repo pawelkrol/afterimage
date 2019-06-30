@@ -100,6 +100,7 @@ trait Format {
 
         val border = multiColour match {
           case advancedArtStudio: Config.AdvancedArtStudio => None
+          case amicaPaint: Config.AmicaPaint => None
           case facePainter: Config.FacePainter => Some(data(facePainter.border))
           case koalaPainter: Config.KoalaPainter => None
           case _ => throw new RuntimeException("Something went wrong...")

@@ -6,7 +6,7 @@ attitude-afterimage
 VERSION
 -------
 
-Version 0.07-SNAPSHOT (2019-06-29)
+Version 0.07-SNAPSHOT (2019-06-30)
 
 PREREQUISITES
 -------------
@@ -213,6 +213,7 @@ FEATURES
 The list of currently supported CBM file format specifications includes:
 
 * Advanced Art Studio `.ocp`
+* Amica Paint `.ami`
 * Art Studio `.aas`
 * Hires Bitmap `.hpi`
 * Face Painter `.fcp`
