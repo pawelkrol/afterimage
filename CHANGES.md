@@ -3,11 +3,16 @@ CHANGES
 
 Revision history for `Afterimage`, a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications, entirely written in [Scala](http://www.scala-lang.org/).
 
+0.08-SNAPSHOT (2019-07-10)
+--------------------------
+
+* Improvement: Align exceptions thrown upon failed attempts to load an invalid colour palette to be always `IllegalArgumentException` (previously sometimes a generic `RuntimeException` would have been reported)
+
 0.07 (2019-06-30)
 -----------------
 
 * Enhancement: add support for more CBM image file formats: Amica Paint
-* Refactoring: simplify error handling API by replacing all homebrewed exception classes targetting argument validation with a single "IllegalArgumentException" class thrown upon an invalid argument passed to any method, and a generic "RuntimeException" for all other errors
+* Refactoring: simplify error handling API by replacing all homebrewed exception classes targetting argument validation with a single `IllegalArgumentException` class thrown upon an invalid argument passed to any method, and a generic `RuntimeException` for all other errors
 * `Scala` version upgraded to 2.13.0
 * `ScalaTest` version upgraded to 3.0.8
 * `sbt` version upgraded to 1.2.8

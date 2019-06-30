@@ -121,7 +121,7 @@ object Palette {
         }
         catch {
           case _: Throwable =>
-            throw new RuntimeException("Invalid colour palette: '%s' (no such file or template found)".format(name))
+            throw new IllegalArgumentException("Invalid colour palette: '%s' (no such file or template found)".format(name))
         }
     }
   }
@@ -136,7 +136,7 @@ object Palette {
     }
     catch {
       case _: Throwable =>
-        throw new RuntimeException("Invalid colour palette template: check '%s' configuration".format(name))
+        throw new IllegalArgumentException("Invalid colour palette template: check '%s' configuration".format(name))
     }
   }
 
