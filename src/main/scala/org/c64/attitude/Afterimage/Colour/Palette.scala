@@ -153,4 +153,18 @@ object Palette {
         throw new IllegalArgumentException("Invalid colour palette setup: malformed JSON data in '%s' file".format(name))
     }
   }
+
+  /** Creates a colour palette from a given plain JSON string.
+    *
+    * @param json Plain JSON string with a customised colour palette
+    */
+  def fromJson(json: String) = {
+    try {
+      parseJSON(json)
+    }
+    catch {
+      case _: Throwable =>
+        throw new IllegalArgumentException("Invalid colour palette setup: malformed JSON data in input string")
+    }
+  }
 }

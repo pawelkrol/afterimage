@@ -9,6 +9,9 @@ import org.json4s.native.JsonMethods.{compact, render}
 import org.scalatest.FreeSpec
 import org.scalatest.MustMatchers
 
+import scala.io.Codec.UTF8
+import scala.io.Source.fromFile
+
 class PaletteSpec extends FreeSpec with MustMatchers {
 
   private val palette = Palette("default")
@@ -115,5 +118,17 @@ class PaletteSpec extends FreeSpec with MustMatchers {
 
   "json serialisation" in {
     compact(render(palette.toJson)) must startWith("""{"palette":[""")
+  }
+
+  "direct create palette from json string success" in {
+    val fileName = "%s/src/test/resources/palettes/custom.json".format(new File(".").getAbsolutePath())
+    val json = fromFile(fileName)(UTF8).mkString
+    assert(Palette.fromJson(json).isInstanceOf[Palette])
+  }
+
+  "direct create palette from json string failure" in {
+    val fileName = "%s/src/test/resources/palettes/custom.json".format(new File(".").getAbsolutePath())
+    val json = fromFile(fileName)(UTF8).mkString + "malformed"
+    intercept[IllegalArgumentException] { Palette.fromJson(json) }
   }
 }
