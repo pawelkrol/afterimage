@@ -50,7 +50,7 @@ object AmicaPaint {
     * @return a new `AmicaPaint` instance with the file data determined by the image data
     */
   def apply(image: MultiColour): AmicaPaint = {
-    val data = image.bitmap.get ++ image.screen.get ++ image.colors.get ++ Array(image.bckgrd) ++ Array.fill(Config.AmicaPaint.size("colorRotationTable")){0x00.toByte}
+    val data = image.bitmap.get() ++ image.screen.get() ++ image.colors.get() ++ Array(image.bckgrd) ++ Array.fill(Config.AmicaPaint.size("colorRotationTable")){0x00.toByte}
     this(load, data)
   }
 

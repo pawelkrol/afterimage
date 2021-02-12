@@ -1,9 +1,9 @@
 package org.c64.attitude.Afterimage
 package Format.Config
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
-class FacePainterConfigSpec extends FreeSpec {
+class FacePainterConfigSpec extends AnyFreeSpec {
 
   "face painter bitmap offset" in {
    assert(FacePainter.bitmap == 0x0000)

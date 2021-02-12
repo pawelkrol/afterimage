@@ -56,7 +56,7 @@ object HiResBitmap {
     * @return a new `HiResBitmap` instance with the file data determined by the image data
     */
   def apply(image: HiRes): HiResBitmap = {
-    val data = image.bitmap.get
+    val data = image.bitmap.get()
     this(load, data)
   }
 }

@@ -50,10 +50,10 @@ object ArtStudio {
     */
   def apply(image: HiRes): ArtStudio = {
     val screen = image.screen match {
-      case Some(scr) => scr.get
+      case Some(scr) => scr.get()
       case None => image.emptyScreen
     }
-    val data = image.bitmap.get ++ screen
+    val data = image.bitmap.get() ++ screen
     this(load, data)
   }
 }

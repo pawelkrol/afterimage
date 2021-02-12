@@ -1,11 +1,11 @@
 package org.c64.attitude.Afterimage
 package File.Import
 
-import org.scalatest.FunSpec
+import org.scalatest.funspec.AnyFunSpec
 
 import Colour.{Colour, Palette}
 
-class PieceSpec extends FunSpec {
+class PieceSpec extends AnyFunSpec {
 
   private val emptyPiece = Piece()
 

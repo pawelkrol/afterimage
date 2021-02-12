@@ -1,11 +1,11 @@
 package org.c64.attitude.Afterimage
 package Mode
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
 import Mode.Data.{Bitmap,Screen}
 
-class MultiColourSliceSpec extends FreeSpec {
+class MultiColourSliceSpec extends AnyFreeSpec {
 
   val bckgrd = 0x00.toByte
   val border = Some(0x00.toByte)

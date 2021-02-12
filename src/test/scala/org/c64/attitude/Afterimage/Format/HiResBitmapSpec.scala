@@ -1,12 +1,12 @@
 package org.c64.attitude.Afterimage
 package Format
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
 import Memory.Address
 import Mode.HiRes
 
-class HiResBitmapFormatSpec extends FreeSpec {
+class HiResBitmapFormatSpec extends AnyFreeSpec {
 
   "hires bitmap format create" in {
     val addr: Address = HiResBitmap.load

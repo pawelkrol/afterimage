@@ -1,9 +1,9 @@
 package org.c64.attitude.Afterimage
 package Util
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
-class UtilSpec extends FreeSpec {
+class UtilSpec extends AnyFreeSpec {
 
   "get ordered numbers swap" in {
     val (one, two) = Util.getOrderedNumbers(2, 1)

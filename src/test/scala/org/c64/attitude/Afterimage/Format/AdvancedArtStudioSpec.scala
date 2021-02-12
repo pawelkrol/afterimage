@@ -1,12 +1,12 @@
 package org.c64.attitude.Afterimage
 package Format
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
 import Memory.Address
 import Mode.MultiColour
 
-class AdvancedArtStudioFormatSpec extends FreeSpec {
+class AdvancedArtStudioFormatSpec extends AnyFreeSpec {
 
   "advanced art studio format create" in {
     val addr: Address = AdvancedArtStudio.load

@@ -1,12 +1,12 @@
 package org.c64.attitude.Afterimage
 package Mode.Data.Row
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
 import Mode.HiRes
 import Util.ArrayHelper.deep
 
-class HiResRowSpec extends FreeSpec {
+class HiResRowSpec extends AnyFreeSpec {
 
   def setupHiResImage() = {
     val bitmap = Array.fill(HiRes.size("bitmap")){0x00}.zipWithIndex.map(zip => {

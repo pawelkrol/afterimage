@@ -49,7 +49,7 @@ object KoalaPainter {
     * @return a new `KoalaPainter` instance with the file data determined by the image data
     */
   def apply(image: MultiColour): KoalaPainter = {
-    val data = image.bitmap.get ++ image.screen.get ++ image.colors.get :+ image.bckgrd
+    val data = image.bitmap.get() ++ image.screen.get() ++ image.colors.get() :+ image.bckgrd
     this(load, data)
   }
 }

@@ -1,11 +1,11 @@
 package org.c64.attitude.Afterimage
 package Mode.Data
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
 import Util.ArrayHelper.deep
 
-class ScreenSpec extends FreeSpec {
+class ScreenSpec extends AnyFreeSpec {
 
   "create default screen" in {
 
@@ -181,15 +181,15 @@ class ScreenSpec extends FreeSpec {
 
     val screen = setupTestScreen
 
-    assert(deep(screen.shift(-1, 0).get) == deep(screenToLeft))
-    assert(deep(screen.shift(1, 0).get) == deep(screenToRight))
-    assert(deep(screen.shift(0, -1).get) == deep(screenToTop))
-    assert(deep(screen.shift(0, 1).get) == deep(screenToBottom))
+    assert(deep(screen.shift(-1, 0).get()) == deep(screenToLeft))
+    assert(deep(screen.shift(1, 0).get()) == deep(screenToRight))
+    assert(deep(screen.shift(0, -1).get()) == deep(screenToTop))
+    assert(deep(screen.shift(0, 1).get()) == deep(screenToBottom))
 
-    assert(deep(screen.shift(-40, 0).get) == deep(Array.fill(1000){0x00}))
-    assert(deep(screen.shift(40, 0).get) == deep(Array.fill(1000){0x00}))
-    assert(deep(screen.shift(0, -25).get) == deep(Array.fill(1000){0x00}))
-    assert(deep(screen.shift(0, 25).get) == deep(Array.fill(1000){0x00}))
+    assert(deep(screen.shift(-40, 0).get()) == deep(Array.fill(1000){0x00}))
+    assert(deep(screen.shift(40, 0).get()) == deep(Array.fill(1000){0x00}))
+    assert(deep(screen.shift(0, -25).get()) == deep(Array.fill(1000){0x00}))
+    assert(deep(screen.shift(0, 25).get()) == deep(Array.fill(1000){0x00}))
   }
 
   "screen data slice" in {

@@ -1,12 +1,12 @@
 package org.c64.attitude.Afterimage
 package Mode.Data.Row
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
 import Mode.MultiColour
 import Util.ArrayHelper.deep
 
-class RowSpec extends FreeSpec {
+class RowSpec extends AnyFreeSpec {
 
   "get bitmap from negative index row" in {
     intercept[IllegalArgumentException] {

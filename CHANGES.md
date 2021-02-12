@@ -3,11 +3,16 @@ CHANGES
 
 Revision history for `Afterimage`, a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications, entirely written in [Scala](http://www.scala-lang.org/).
 
-0.08-SNAPSHOT (2019-09-21)
+0.08-SNAPSHOT (2021-02-21)
 --------------------------
 
 * Improvement: align exceptions thrown upon failed attempts to load an invalid colour palette to be always `IllegalArgumentException` (previously sometimes a generic `RuntimeException` would have been reported)
 * Enhancement: enable creation of a colour palette from a given plain JSON string (add `fromJson` function to the `Palette` companion object)
+* `Scala` version upgraded to 2.13.4
+* `ScalaTest` version upgraded to 3.2.5
+* `sbt` version upgraded to 1.3.13
+* `sbt-pgp` version upgraded to 2.1.2
+* `JSON4S` version upgraded to 3.6.10
 
 0.07 (2019-06-30)
 -----------------

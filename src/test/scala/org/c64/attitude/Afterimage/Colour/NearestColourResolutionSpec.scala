@@ -1,10 +1,10 @@
 package org.c64.attitude.Afterimage
 package Colour
 
-import org.scalatest.FreeSpec
-import org.scalatest.MustMatchers
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.matchers.must.Matchers
 
-class NearestColourResolutionSpec extends FreeSpec with MustMatchers {
+class NearestColourResolutionSpec extends AnyFreeSpec with Matchers {
 
   private val palette = Palette("default")
 

@@ -1,6 +1,14 @@
 TODO
 ====
 
+* Conversion from ArtStudio to HiResBitmap doesn't work, because selected pixel/background colours
+  may flip between chars. In order to fix it, importing HiResBitmap data should take it into account
+  and fix set/clear pixels accordingly.
+* Importing HiResBitmap from PNG/JPG also doesn't work, because for each 8x8 char the most frequent
+  colour is selected as a background completely independently from the rest of the picture. Instead
+  it should have been first determined globally and applied with the same colour scheme to every 8x8
+  char.
+
 * Build stand-alone JAR:
   - include dependencies to:
     > scala library jar

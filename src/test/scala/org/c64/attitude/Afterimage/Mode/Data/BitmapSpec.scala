@@ -1,11 +1,11 @@
 package org.c64.attitude.Afterimage
 package Mode.Data
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
 import Util.ArrayHelper.deep
 
-class BitmapSpec extends FreeSpec {
+class BitmapSpec extends AnyFreeSpec {
 
   "create default bitmap" in {
 
@@ -273,15 +273,15 @@ class BitmapSpec extends FreeSpec {
 
     val bitmap = setupTestBitmap
 
-    assert(deep(bitmap.shift(-8, 0).get) == deep(bitmapToLeft))
-    assert(deep(bitmap.shift(8, 0).get) == deep(bitmapToRight))
-    assert(deep(bitmap.shift(0, -8).get) == deep(bitmapToTop))
-    assert(deep(bitmap.shift(0, 8).get) == deep(bitmapToBottom))
+    assert(deep(bitmap.shift(-8, 0).get()) == deep(bitmapToLeft))
+    assert(deep(bitmap.shift(8, 0).get()) == deep(bitmapToRight))
+    assert(deep(bitmap.shift(0, -8).get()) == deep(bitmapToTop))
+    assert(deep(bitmap.shift(0, 8).get()) == deep(bitmapToBottom))
 
-    assert(deep(bitmap.shift(-320, 0).get) == deep(Array.fill(8000){0x00}))
-    assert(deep(bitmap.shift(320, 0).get) == deep(Array.fill(8000){0x00}))
-    assert(deep(bitmap.shift(0, -200).get) == deep(Array.fill(8000){0x00}))
-    assert(deep(bitmap.shift(0, 200).get) == deep(Array.fill(8000){0x00}))
+    assert(deep(bitmap.shift(-320, 0).get()) == deep(Array.fill(8000){0x00}))
+    assert(deep(bitmap.shift(320, 0).get()) == deep(Array.fill(8000){0x00}))
+    assert(deep(bitmap.shift(0, -200).get()) == deep(Array.fill(8000){0x00}))
+    assert(deep(bitmap.shift(0, 200).get()) == deep(Array.fill(8000){0x00}))
   }
 
   "bitmap data shift at pixel level" in {
@@ -355,10 +355,10 @@ class BitmapSpec extends FreeSpec {
 
     val bitmap = setupTestBitmap
 
-    assert(deep(bitmap.shift(-1, 0).get) == deep(bitmapToLeft))
-    assert(deep(bitmap.shift(1, 0).get) == deep(bitmapToRight))
-    assert(deep(bitmap.shift(0, -1).get) == deep(bitmapToTop))
-    assert(deep(bitmap.shift(0, 1).get) == deep(bitmapToBottom))
+    assert(deep(bitmap.shift(-1, 0).get()) == deep(bitmapToLeft))
+    assert(deep(bitmap.shift(1, 0).get()) == deep(bitmapToRight))
+    assert(deep(bitmap.shift(0, -1).get()) == deep(bitmapToTop))
+    assert(deep(bitmap.shift(0, 1).get()) == deep(bitmapToBottom))
   }
 
   "bitmap data slice at char level" in {

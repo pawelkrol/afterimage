@@ -6,9 +6,9 @@ import ij.process.ColorProcessor
 
 import org.c64.attitude.Afterimage.Helper.Images.{ emptyImagePlus, testImagePlus }
 
-import org.scalatest.FunSpec
+import org.scalatest.funspec.AnyFunSpec
 
-class HiResSpec extends FunSpec {
+class HiResSpec extends AnyFunSpec {
 
   private def fileImportHiRes(backgroundColour: Option[Byte] = None) = File.Import.HiRes(backgroundColour)
 

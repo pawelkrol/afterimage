@@ -3,13 +3,13 @@ package View
 
 import ij.ImagePlus
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
 import Colour.Palette
 import File.File
 import Mode.{HiRes, MultiColour}
 
-class ImageSpec extends FreeSpec {
+class ImageSpec extends AnyFreeSpec {
 
   def setupEmptyTestMultiColourData() = {
     MultiColour(
@@ -39,7 +39,7 @@ class ImageSpec extends FreeSpec {
     val name = getClass.getResource("/images/niemanazwy-bimber.hpi").toString.replace("file:", "")
     val picture = File.load(name)
     val palette = Palette("default")
-    Image(picture.asInstanceOf[HiRes].invert, palette).show()
+    Image(picture.asInstanceOf[HiRes].invert(), palette).show()
   }
 
   "image multicolour shower view" ignore {

@@ -1,25 +1,25 @@
 attitude-afterimage
 ===================
 
-[Afterimage](https://github.com/pawelkrol/attitude-afterimage/) is a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications and sprites, entirely written in [Scala](http://www.scala-lang.org/). It supports reading, translating, displaying, converting, and writing picture data from/to miscellaneous CBM image files. Since version 0.02 it also provides functionality to import (convert) pictures directly from TIFF, BMP, DICOM, FITS, PGM, GIF, JPEG, and PNG files.
+[Afterimage](https://github.com/pawelkrol/attitude-afterimage) is a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications and sprites, entirely written in [Scala](http://www.scala-lang.org/). It supports reading, translating, displaying, converting, and writing picture data from/to miscellaneous CBM image files. Since version 0.02 it also provides functionality to import (convert) pictures directly from TIFF, BMP, DICOM, FITS, PGM, GIF, JPEG, and PNG files.
 
 VERSION
 -------
 
-Version 0.08-SNAPSHOT (2019-09-21)
+Version 0.08-SNAPSHOT (2021-02-21)
 
 PREREQUISITES
 -------------
 
-Besides `scala-library-2.13.0` and `scalatest_2.13.0-3.0.8`, some of the [Afterimage](https://github.com/pawelkrol/attitude-afterimage/) functionalities rely upon the following Java image processing toolkit: `imagej-1.47`.
+Besides `scala-library-2.13.4` and `scalatest_2.13.4-3.2.5`, some of the [Afterimage](https://github.com/pawelkrol/attitude-afterimage) functionalities rely upon the following Java image processing toolkit: `imagej-1.47`.
 
 Dependency management is normally handled automatically by your build tool.
 
-[Afterimage](https://github.com/pawelkrol/attitude-afterimage/) is by default packaged as a standalone JAR.
+[Afterimage](https://github.com/pawelkrol/attitude-afterimage) is by default packaged as a standalone JAR.
 
-If you plan on using [Afterimage](https://github.com/pawelkrol/attitude-afterimage/) within your program, you have to provide all required dependencies yourself (and the standard Scala library as well, if your project is not developed in Scala, but Java instead). Consult `libraryDependencies` property of a `build.sbt` configuration file for the most recent details.
+If you plan on using [Afterimage](https://github.com/pawelkrol/attitude-afterimage) within your program, you have to provide all required dependencies yourself (and the standard Scala library as well, if your project is not developed in Scala, but Java instead). Consult `libraryDependencies` property of a `build.sbt` configuration file for the most recent details.
 
-Default [Afterimage](https://github.com/pawelkrol/attitude-afterimage/) configuration requires [Scala](http://www.scala-lang.org/) runtime version 2.13.0. Note that compiling against a different version of the standard Scala library than you are using at runtime would lead to a runtime exception upon execution of your program.
+Default [Afterimage](https://github.com/pawelkrol/attitude-afterimage) configuration requires [Scala](http://www.scala-lang.org/) runtime version 2.13.4. Note that compiling against a different version of the standard Scala library than you are using at runtime would lead to a runtime exception upon execution of your program.
 
 INSTALLATION
 ------------
@@ -150,7 +150,7 @@ Combine additional multicolour sprites into a preloaded target image:
 SCRIPTING
 ---------
 
-Using [Afterimage](https://github.com/pawelkrol/attitude-afterimage/) as a standalone library is possible, given that all required dependencies are provided on a classpath. In the following example three PNG pictures named `image-0.png`, `image-1.png` and `image-2.png` are converted into three FacePainter images named `0.fcp`, `1.fcp` and `2.fcp` using a simple Scala script:
+Using [Afterimage](https://github.com/pawelkrol/attitude-afterimage) as a standalone library is possible, given that all required dependencies are provided on a classpath. In the following example three PNG pictures named `image-0.png`, `image-1.png` and `image-2.png` are converted into three FacePainter images named `0.fcp`, `1.fcp` and `2.fcp` using a simple Scala script:
 
     import org.c64.attitude.Afterimage.Colour.Palette
     import org.c64.attitude.Afterimage.File.File
@@ -239,8 +239,8 @@ The list of currently writable PC file format specifications includes:
 COPYRIGHT AND LICENCE
 ---------------------
 
-Copyright (C) 2013-2019 by Pawel Krol.
+Copyright (C) 2013-2021 by Pawel Krol.
 
-This library is free open source software; you can redistribute it and/or modify it under [the same terms](https://github.com/pawelkrol/attitude-afterimage/blob/master/LICENSE.md) as Scala itself, either Scala version 2.13.0 or, at your option, any later version of Scala you may have available.
+This library is free open source software; you can redistribute it and/or modify it under [the same terms](https://github.com/pawelkrol/attitude-afterimage/blob/master/LICENSE.md) as Scala itself, either Scala version 2.13.4 or, at your option, any later version of Scala you may have available.
 
 PLEASE NOTE THAT IT COMES WITHOUT A WARRANTY OF ANY KIND!

@@ -53,7 +53,7 @@ object FacePainter {
       case Some(colour) => colour
       case None         => 0x00
     }
-    val data = image.bitmap.get ++ image.screen.get ++ image.colors.get :+ border :+ image.bckgrd
+    val data = image.bitmap.get() ++ image.screen.get() ++ image.colors.get() :+ border :+ image.bckgrd
     this(load, data)
   }
 }

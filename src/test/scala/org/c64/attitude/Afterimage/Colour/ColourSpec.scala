@@ -3,10 +3,10 @@ package Colour
 
 import org.json4s.native.JsonMethods.{compact, render}
 
-import org.scalatest.FreeSpec
-import org.scalatest.MustMatchers
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.matchers.must.Matchers
 
-class ColourSpec extends FreeSpec with MustMatchers {
+class ColourSpec extends AnyFreeSpec with Matchers {
 
   private val palette = Palette("default")
 

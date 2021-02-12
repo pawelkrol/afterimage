@@ -1,9 +1,9 @@
 package org.c64.attitude.Afterimage
 package Format.Config
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
-class KoalaPainterConfigSpec extends FreeSpec {
+class KoalaPainterConfigSpec extends AnyFreeSpec {
 
   "koala painter bitmap offset" in {
    assert(KoalaPainter.bitmap == 0x0000)

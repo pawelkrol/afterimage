@@ -1,12 +1,12 @@
 package org.c64.attitude.Afterimage
 package Format
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
 import File.File
 import Mode.{HiRes,MultiColour}
 
-class FormatSpec extends FreeSpec {
+class FormatSpec extends AnyFreeSpec {
 
   def setupTempFile() = {
 

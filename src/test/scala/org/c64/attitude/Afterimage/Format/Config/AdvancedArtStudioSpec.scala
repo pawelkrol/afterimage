@@ -1,9 +1,9 @@
 package org.c64.attitude.Afterimage
 package Format.Config
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
-class AdvancedArtStudioSpec extends FreeSpec {
+class AdvancedArtStudioSpec extends AnyFreeSpec {
 
   "advanced art studio bitmap offset" in {
    assert(AdvancedArtStudio.bitmap == 0x0000)

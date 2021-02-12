@@ -6,10 +6,10 @@ import ij.process.ColorProcessor
 
 import java.awt.Color.black
 
-import org.scalatest.FreeSpec
-import org.scalatest.MustMatchers
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.matchers.must.Matchers
 
-class MultiColourSpec extends FreeSpec with MustMatchers {
+class MultiColourSpec extends AnyFreeSpec with Matchers {
 
   private val fileImportMultiColour = File.Import.MultiColour(backgroundColour = 0x00)
 

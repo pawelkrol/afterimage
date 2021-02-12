@@ -1,9 +1,9 @@
 package org.c64.attitude.Afterimage
 package Memory
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
-class MemoryAddressSpec extends FreeSpec {
+class MemoryAddressSpec extends AnyFreeSpec {
 
   "address create from bytes" in {
     val addr = Address(0x00, 0x10)

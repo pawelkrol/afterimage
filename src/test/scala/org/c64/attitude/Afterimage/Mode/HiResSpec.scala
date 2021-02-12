@@ -1,11 +1,11 @@
 package org.c64.attitude.Afterimage
 package Mode
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
 import Mode.Data.{Bitmap,Screen}
 
-class HiResSpec extends FreeSpec {
+class HiResSpec extends AnyFreeSpec {
 
   "hires config bitmap size" in {
     assert(HiRes.size("bitmap") == 0x1f40)
@@ -134,7 +134,7 @@ class HiResSpec extends FreeSpec {
 
   "invert image pixels" in {
     val (bitmap, screen, border) = setupTestData()
-    val hiresImage = HiRes(bitmap).invert
+    val hiresImage = HiRes(bitmap).invert()
     assert(hiresImage.bitmap.get()(0x00) == 0xff.toByte)
     assert(hiresImage.pixel(0, 0) == 0x0b)
   }

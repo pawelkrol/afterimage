@@ -1,12 +1,12 @@
 package org.c64.attitude.Afterimage
 package Mode.Data.Row
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
 import Mode.MultiColour
 import Util.ArrayHelper.deep
 
-class MultiColourRowSpec extends FreeSpec {
+class MultiColourRowSpec extends AnyFreeSpec {
 
   def setupMultiColourImage() = {
     val bitmap = Array.fill(MultiColour.size("bitmap")){0x00}.zipWithIndex.map(zip => {

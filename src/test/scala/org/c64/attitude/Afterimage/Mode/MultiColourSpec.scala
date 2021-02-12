@@ -1,9 +1,9 @@
 package org.c64.attitude.Afterimage
 package Mode
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
-class MultiColourSpec extends FreeSpec {
+class MultiColourSpec extends AnyFreeSpec {
 
   "multicolour config bitmap size" in {
     assert(MultiColour.size("bitmap") == 0x1f40)

@@ -2,7 +2,7 @@ lazy val root = (project in file(".")).settings(
   name := "afterimage",
   organization := "org.c64.attitude",
   scalacOptions ++= Seq("-deprecation", "-feature"),
-  scalaVersion := "2.13.0",
+  scalaVersion := "2.13.4",
   version := "0.08-SNAPSHOT"
 )
 
@@ -10,8 +10,8 @@ maxErrors := 1
 
 libraryDependencies ++= Seq(
   "gov.nih.imagej" % "imagej" % "1.47",
-  "org.json4s" %% "json4s-native" % "3.6.6",
-  "org.scalatest" %% "scalatest" % "3.0.8" % "test"
+  "org.json4s" %% "json4s-native" % "3.6.10",
+  "org.scalatest" %% "scalatest" % "3.2.5" % "test"
 )
 
 // Disable using the Scala version in output paths and artifacts:

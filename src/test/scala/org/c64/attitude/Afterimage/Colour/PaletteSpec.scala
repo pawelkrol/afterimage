@@ -6,13 +6,13 @@ import java.io.File
 import org.json4s.JsonDSL._
 import org.json4s.native.JsonMethods.{compact, render}
 
-import org.scalatest.FreeSpec
-import org.scalatest.MustMatchers
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.matchers.must.Matchers
 
 import scala.io.Codec.UTF8
 import scala.io.Source.fromFile
 
-class PaletteSpec extends FreeSpec with MustMatchers {
+class PaletteSpec extends AnyFreeSpec with Matchers {
 
   private val palette = Palette("default")
 

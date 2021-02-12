@@ -1,12 +1,12 @@
 package org.c64.attitude.Afterimage
 package Format
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
 import Memory.Address
 import Mode.MultiColour
 
-class KoalaPainterFormatSpec extends FreeSpec {
+class KoalaPainterFormatSpec extends AnyFreeSpec {
 
   "koala painter format create" in {
     val addr: Address = KoalaPainter.load

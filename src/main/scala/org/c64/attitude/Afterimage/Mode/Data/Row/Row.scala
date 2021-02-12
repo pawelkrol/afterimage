@@ -1,8 +1,6 @@
 package org.c64.attitude.Afterimage
 package Mode.Data.Row
 
-import java.lang.Math.round
-
 import Util.Util.getOrderedNumbers
 
 /** Single image row data abstraction providing direct access to the bitmap and screen colours. */
@@ -205,7 +203,7 @@ object Row {
   ) = {
     require(data.length > 0, "No data has been provided: cannot process empty data")
 
-    val dataLengthRounded = round((data.length - 1) / numValues) * numValues + numValues
+    val dataLengthRounded = ((data.length - 1).toFloat / numValues).toInt * numValues + numValues
     val numLines = dataLengthRounded / numValues
 
     val indentation = Array.fill(indent){" "}.mkString("")

@@ -1,14 +1,14 @@
 package org.c64.attitude.Afterimage
 package File
 
-import org.scalatest.FreeSpec
-import org.scalatest.MustMatchers
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.matchers.must.Matchers
 
 import Colour.Palette
 
 import Mode.{HiRes,MultiColour}
 
-class FileSpec extends FreeSpec with MustMatchers {
+class FileSpec extends AnyFreeSpec with Matchers {
 
   "load face painter file" in {
     val name = getClass.getResource("/images/frighthof83-yazoo.fcp").toString.replace("file:", "")

@@ -3,14 +3,14 @@ package File.Type
 
 import ij.ImagePlus
 import java.nio.file.FileAlreadyExistsException
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
 import Colour.Palette
 import File.File
 import Mode.MultiColour
 import View.Image
 
-class PNGSpec extends FreeSpec {
+class PNGSpec extends AnyFreeSpec {
 
   def setupTempFile() = {
 

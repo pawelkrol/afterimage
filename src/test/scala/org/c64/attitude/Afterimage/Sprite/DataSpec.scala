@@ -4,7 +4,7 @@ package Sprite
 import ij.ImagePlus
 import ij.process.ImageProcessor
 
-import org.scalatest.FreeSpec
+import org.scalatest.freespec.AnyFreeSpec
 
 import Colour.{ Colour, Palette }
 import File.File
@@ -12,7 +12,7 @@ import Helper.Resources.{ testResourceData, testResourcePath }
 import Mode.CBM
 import View.Image
 
-class DataSpec extends FreeSpec {
+class DataSpec extends AnyFreeSpec {
 
   private val palette = Palette("default")
 

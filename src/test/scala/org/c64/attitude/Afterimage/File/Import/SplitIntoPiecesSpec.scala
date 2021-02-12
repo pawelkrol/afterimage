@@ -4,12 +4,12 @@ package File.Import
 import ij.ImagePlus
 import ij.process.ImageConverter
 
-import org.scalatest.FreeSpec
-import org.scalatest.MustMatchers
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.matchers.must.Matchers
 
 import Colour.Colour
 
-class SplitIntoPiecesSpec extends FreeSpec with MustMatchers {
+class SplitIntoPiecesSpec extends AnyFreeSpec with Matchers {
 
   private val name = getClass.getResource("/images/bandzior-cuc.png").toString.replace("file:", "")
 

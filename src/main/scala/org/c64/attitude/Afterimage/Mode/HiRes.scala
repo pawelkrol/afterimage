@@ -75,7 +75,7 @@ case class HiRes(
 
   /** Returns a new HiRes image with all pixels of bitmap data bits inverted. */
   def invert() = {
-    val inverted = bitmap.get.map(byte => (byte ^ 0xff).toByte)
+    val inverted = bitmap.get().map(byte => (byte ^ 0xff).toByte)
 
     new HiRes(Bitmap(inverted, numCharCols, numCharRows), screen, border)
   }

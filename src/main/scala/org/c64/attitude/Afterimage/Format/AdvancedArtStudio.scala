@@ -49,7 +49,7 @@ object AdvancedArtStudio {
     * @return a new `AdvancedArtStudio` instance with the file data determined by the image data
     */
   def apply(image: MultiColour): AdvancedArtStudio = {
-    val data = image.bitmap.get ++ image.screen.get ++ Array(0x00.toByte) ++ Array(image.bckgrd) ++ Array.fill(0x0e){0x00.toByte} ++ image.colors.get
+    val data = image.bitmap.get() ++ image.screen.get() ++ Array(0x00.toByte) ++ Array(image.bckgrd) ++ Array.fill(0x0e){0x00.toByte} ++ image.colors.get()
     this(load, data)
   }
 }
