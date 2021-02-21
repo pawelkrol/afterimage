@@ -3,7 +3,7 @@ lazy val root = (project in file(".")).settings(
   organization := "org.c64.attitude",
   scalacOptions ++= Seq("-deprecation", "-feature"),
   scalaVersion := "2.13.4",
-  version := "0.08-SNAPSHOT"
+  version := "0.08"
 )
 
 maxErrors := 1
