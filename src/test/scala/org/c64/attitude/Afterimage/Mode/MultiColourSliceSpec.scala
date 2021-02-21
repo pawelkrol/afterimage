@@ -174,7 +174,7 @@ class MultiColourSliceSpec extends AnyFreeSpec {
   def setupMultiColourImage() = {
     val bitmap = Array.fill(MultiColour.size("bitmap")){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0000 => 0xe4 // 11100100
         case 0x0007 => 0x93 // 10010011
         case 0x000f => 0x4e // 01001110
@@ -187,7 +187,7 @@ class MultiColourSliceSpec extends AnyFreeSpec {
 
     val screen = Array.fill(MultiColour.size("screen")){0x00.toByte}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x00 => 0x12
         case 0x01 => 0x34
         case 0x28 => 0x56
@@ -199,7 +199,7 @@ class MultiColourSliceSpec extends AnyFreeSpec {
 
     val colors = Array.fill(MultiColour.size("colors")){0x00.toByte}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x00 => 0x07
         case 0x01 => 0x08
         case 0x28 => 0x09

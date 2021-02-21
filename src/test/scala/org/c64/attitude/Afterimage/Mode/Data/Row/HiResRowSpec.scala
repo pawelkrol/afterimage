@@ -11,7 +11,7 @@ class HiResRowSpec extends AnyFreeSpec {
   def setupHiResImage() = {
     val bitmap = Array.fill(HiRes.size("bitmap")){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0000 => 0x01
         case 0x0001 => 0x0a
         case 0x0002 => 0x04
@@ -50,7 +50,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val bitmapLine1 = Array.fill(0x0140){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0000 => 0x01
         case 0x0001 => 0x0a
         case 0x0002 => 0x04
@@ -64,7 +64,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val bitmapLine2 = Array.fill(0x0140){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0008 => 0x02
         case 0x0010 => 0x80
         case _ => data
@@ -85,7 +85,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val bitmap = emptyBitmap.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0000 => 0x01
         case 0x0087 => 0x80
         case _ => data
@@ -104,7 +104,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val bitmap = Array.fill(0x0140){0x00.toByte}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0010 => 0x18
         case 0x00cc => 0x42
         case _ => data
@@ -150,7 +150,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val bitmapLine1 = Array.fill(0x0080){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0000 => 0x01
         case 0x0001 => 0x0a
         case 0x0002 => 0x04
@@ -164,7 +164,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val bitmapLine2 = Array.fill(0x0080){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0008 => 0x02
         case 0x0010 => 0x80
         case _ => data
@@ -288,7 +288,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val bitmapLineLeft1 = Array.fill(0x0080){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0076 => 0xc0
         case 0x0077 => 0x80
         case _ => data
@@ -298,7 +298,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val screenLineLeft1 = Array.fill(0x0010){0xbc}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x000f => 0x00
         case _ => data
       }
@@ -311,7 +311,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val bitmapLineLeft3 = Array.fill(0x0080){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0076 => 0xc0
         case 0x0077 => 0x80
         case 0x0078 => 0xff
@@ -329,7 +329,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val screenLineLeft3 = Array.fill(0x0010){0xbc}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x000f => 0x01
         case _ => data
       }
@@ -338,7 +338,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val bitmapLineLeft4 = Array.fill(0x0080){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0008 => 0x01
         case 0x0009 => 0x0a
         case 0x000a => 0x04
@@ -350,7 +350,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val screenLineLeft4 = Array.fill(0x0010){0xbc}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0000 => 0x00
         case _ => data
       }
@@ -363,7 +363,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val bitmapLineLeft6 = Array.fill(0x0080){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0000 => 0xff
         case 0x0001 => 0xff
         case 0x0002 => 0xff
@@ -383,7 +383,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val screenLineLeft6 = Array.fill(0x0010){0xbc}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0000 => 0x01
         case _ => data
       }
@@ -392,7 +392,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val bitmapLineLeft7 = Array.fill(0x0080){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0006 => 0xc0
         case 0x0007 => 0x80
         case _ => data
@@ -402,7 +402,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val screenLineLeft7 = Array.fill(0x0010){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0000 => 0xbc
         case _ => data
       }
@@ -411,7 +411,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val bitmapLineLeft8 = Array.fill(0x0080){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0078 => 0x01
         case 0x0079 => 0x0a
         case 0x007a => 0x04
@@ -423,7 +423,7 @@ class HiResRowSpec extends AnyFreeSpec {
 
     val screenLineLeft8 = Array.fill(0x0010){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x000f => 0xbc
         case _ => data
       }

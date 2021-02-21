@@ -58,16 +58,14 @@ case class Screen(data: Array[Byte], cols: Int, rows: Int) {
   }
 
   private def verticalShift(dy: Int, fill: Byte) = {
-    val screenRows = data.sliding(cols, cols)
+    val screenRows = data.sliding(cols, cols).toList
 
     val addedRow = Array.fill(cols){fill}
 
     val newScreen =
       if (dy < 0) {
-        // Advance the iterator past the first dy elements:
-        screenRows.drop(-dy)
-        // Select all remaining values of the iterator:
-        val init = screenRows.take(rows)
+        // Advance the iterator past the first dy elements, and select all remaining values of the iterator:
+        val init = screenRows.drop(-dy).take(rows)
         val tail = Array.fill((-dy).min(rows)){addedRow}
         (init ++ tail).reduce((a, b) => a ++ b)
       }

@@ -224,7 +224,7 @@ class HiResSliceSpec extends AnyFreeSpec {
   def setupHiResImageWithScreen() = {
     val bitmap = Array.fill(HiRes.size("bitmap")){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0000 => 0x80
         case 0x0001 => 0x40
         case 0x0006 => 0x02
@@ -242,7 +242,7 @@ class HiResSliceSpec extends AnyFreeSpec {
 
     val screen = Array.fill(HiRes.size("screen")){0xbc.toByte}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x01 => 0x10
         case 0x28 => 0xd5
         case 0x29 => 0xe6
@@ -257,7 +257,7 @@ class HiResSliceSpec extends AnyFreeSpec {
   def setupHiResImageWithoutScreen() = {
     val bitmap = Array.fill(HiRes.size("bitmap")){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0000 => 0xff
         case 0x0001 => 0xfe
         case 0x0002 => 0xfc

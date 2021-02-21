@@ -1,17 +1,24 @@
 lazy val root = (project in file(".")).settings(
   name := "afterimage",
-  organization := "org.c64.attitude",
-  scalacOptions ++= Seq("-deprecation", "-feature"),
-  scalaVersion := "2.13.4",
-  version := "0.08"
+  organization := "com.github.pawelkrol",
+  scalacOptions ++= Seq(
+    "-deprecation",
+    "-encoding", "UTF-8",
+    "-feature",
+    "-language:implicitConversions",
+    "-unchecked",
+    "-Xfatal-warnings"),
+  scalaVersion := "3.1.3",
+  version := "1.0.0-SNAPSHOT"
 )
 
 maxErrors := 1
 
 libraryDependencies ++= Seq(
+  "org.apache.commons" % "commons-lang3" % "3.12.0",
   "gov.nih.imagej" % "imagej" % "1.47",
-  "org.json4s" %% "json4s-native" % "3.6.10",
-  "org.scalatest" %% "scalatest" % "3.2.5" % "test"
+  "org.json4s" %% "json4s-native" % "4.0.5",
+  "org.scalatest" %% "scalatest" % "3.2.13" % "test"
 )
 
 // Disable using the Scala version in output paths and artifacts:
@@ -27,12 +34,12 @@ publishTo := {
 
 publishMavenStyle := true
 
-publishArtifact in Test := false
+Test / publishArtifact := false
 
 pomIncludeRepository := { _ => false }
 
 pomExtra := (
-  <url>http://attitude.c64.org/afterimage</url>
+  <url>https://github.com/pawelkrol/attitude-afterimage</url>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -48,7 +55,7 @@ pomExtra := (
     <developer>
       <id>pawelkrol</id>
       <name>Pawel Krol</name>
-      <url>http://www.attitude.c64.org</url>
+      <url>https://github.com/pawelkrol</url>
     </developer>
   </developers>
 )

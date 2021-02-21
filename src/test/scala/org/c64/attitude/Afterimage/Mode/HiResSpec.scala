@@ -83,7 +83,7 @@ class HiResSpec extends AnyFreeSpec {
   "get pixel" in {
     val bitmap = Array.fill(HiRes.size("bitmap")){0x00}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x0000 => 0x80
         case 0x0001 => 0x40
         case 0x0006 => 0x02
@@ -99,7 +99,7 @@ class HiResSpec extends AnyFreeSpec {
 
     val screen = Array.fill(HiRes.size("screen")){0xbc.toByte}.zipWithIndex.map(zip => {
       val (data, index) = zip
-      val value = index match {
+      val value: Int = index match {
         case 0x01 => 0x10
         case 0x28 => 0xd5
         case _    => data

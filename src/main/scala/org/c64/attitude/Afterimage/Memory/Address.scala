@@ -44,5 +44,5 @@ object Address {
     * @param addr integer value representing a memory address
     * @return a new `Address` instance with the memory address determined by the integer value
     */
-  implicit def toAddress(addr: Int) = Address(addr)
+  implicit def toAddress(addr: Int): Address = Address(addr)
 }

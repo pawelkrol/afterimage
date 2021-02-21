@@ -1,6 +1,11 @@
 package org.c64.attitude.Afterimage
 package Util
 
+import collection.JavaConverters.{collectionAsScalaIterableConverter, mapAsJavaMapConverter}
+import java.net.{URI, URL}
+import java.nio.file.{FileSystems, Files, Path, Paths}
+import java.util.stream.Collectors
+
 import Mode.{HiRes, MultiColour}
 import Mode.Data.{Bitmap, Screen}
 
@@ -151,4 +156,15 @@ object Util {
     dumpByteData(Some(bckgrd), "BCKGRD")
     println()
   }
+
+  private def getPath(url: URL): Path =
+    if (url.getProtocol == "file")
+      Paths.get(url.toURI)
+    else {
+      val strings = url.toString.split("!")
+      FileSystems.newFileSystem(URI.create(strings(0)), Map[String, String]().asJava).getPath(strings(1))
+    }
+
+  def listResources(path: String) =
+    Files.list(getPath(getClass().getResource("/palettes"))).collect(Collectors.toList()).asScala.toSeq.map(_.getFileName().toString())
 }

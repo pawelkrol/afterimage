@@ -2,9 +2,12 @@ package org.c64.attitude.Afterimage
 package Colour
 
 import org.json4s.{JArray, JObject}
+import org.json4s.MonadicJValue.jvalueToMonadic
 import org.json4s.native.JsonMethods.parse
 
 import scala.math.Ordering.Double.TotalOrdering
+
+import Util.Util.listResources
 
 /** Colour palette which maps C64 colours from/to RGB colours.
   *
@@ -103,6 +106,11 @@ object Palette {
     new Palette(colours)
   }
 
+  import org.apache.commons.lang3.StringUtils
+
+  private val availableColourPalettes =
+    listResources("/palettes").filter(_.endsWith(".json")).map(fileName => "'%s'".format(StringUtils.removeEnd(fileName, ".json"))).mkString(", ")
+
   /** Creates a colour palette from a given JSON configuration file or as
     * a fallback from a pre-configured template name (if file does not exist
     * and template name does not match any predefined colour palette template
@@ -120,8 +128,10 @@ object Palette {
           fromTemplate(name)
         }
         catch {
-          case _: Throwable =>
-            throw new IllegalArgumentException("Invalid colour palette: '%s' (no such file or template found)".format(name))
+          case _: IllegalArgumentException =>
+            throw new IllegalArgumentException("Invalid colour palette: '%s' (no such file or template found, expected one of: %s)".format(name, availableColourPalettes))
+          case e: Throwable =>
+            throw new RuntimeException("Something went wrong: %s".format(e.getMessage()))
         }
     }
   }
@@ -135,7 +145,9 @@ object Palette {
       build(name)
     }
     catch {
-      case _: Throwable =>
+      case e: NoClassDefFoundError =>
+        throw new RuntimeException("Library missing from CLASSPATH: %s".format(e.getMessage()))
+      case e: Throwable =>
         throw new IllegalArgumentException("Invalid colour palette template: check '%s' configuration".format(name))
     }
   }

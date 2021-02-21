@@ -3,6 +3,15 @@ CHANGES
 
 Revision history for `Afterimage`, a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications, entirely written in [Scala](http://www.scala-lang.org/).
 
+1.0.0-SNAPSHOT (2022-08-26)
+---------------------------
+
+* Enhancement: improve error logging by extending `Invalid colour palette: 'foobar' (no such file or template found)` message with a complete list of available colour palette template names
+* `Scala` version upgraded to 3.1.3
+* `ScalaTest` version upgraded to 3.2.13
+* `sbt` version upgraded to 1.7.1
+* `JSON4S` version upgraded to 4.0.5
+
 0.08 (2021-02-21)
 -----------------
 
