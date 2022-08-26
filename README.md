@@ -6,7 +6,7 @@ Afterimage
 VERSION
 -------
 
-Version 1.0.0 (2022-08-26)
+Version 1.0.1-SNAPSHOT (2022-08-26)
 
 PREREQUISITES
 -------------
@@ -28,7 +28,7 @@ You can automatically download and install this library by adding the following 
 
     resolvers += "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
 
-    libraryDependencies += "com.github.pawelkrol" % "afterimage" % "1.0.0"
+    libraryDependencies += "com.github.pawelkrol" % "afterimage" % "1.0.1-SNAPSHOT"
 
 In order to compile and build this library directly from the source code type the following:
 
@@ -168,7 +168,7 @@ Using [Afterimage] as a standalone library is possible, given that all required 
 
 Assuming an above script has been saved into a `convert.scala` file, it can be executed using the following command(s):
 
-    $ export AFTERIMAGE=/home/pkrol/.ivy2/local/com.github.pawelkrol/afterimage/1.0.0/jars/afterimage.jar
+    $ export AFTERIMAGE=/home/pkrol/.ivy2/local/com.github.pawelkrol/afterimage/1.0.1-SNAPSHOT/jars/afterimage.jar
     $ export APACHE_COMMONS=/home/pkrol/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.12.0/commons-lang3-3.12.0.jar
     $ export IMAGEJ=/home/pkrol/.cache/coursier/v1/https/repo1.maven.org/maven2/gov/nih/imagej/imagej/1.47/imagej-1.47.jar
     $ export JSON_4S=/home/pkrol/.cache/coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-ast_3/4.0.5/json4s-ast_3-4.0.5.jar:/home/pkrol/.cache/coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-core_3/4.0.5/json4s-core_3-4.0.5.jar:/home/pkrol/.cache/coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-native_3/4.0.5/json4s-native_3-4.0.5.jar:/home/pkrol/.cache/coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-native-core_3/4.0.5/json4s-native-core_3-4.0.5.jar

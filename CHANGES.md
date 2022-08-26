@@ -3,6 +3,11 @@ CHANGES
 
 Revision history for `Afterimage`, a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications, entirely written in [Scala](http://www.scala-lang.org/).
 
+1.0.1-SNAPSHOT (2022-08-26)
+---------------------------
+
+* TODO
+
 1.0.0 (2022-08-26)
 ------------------
 
