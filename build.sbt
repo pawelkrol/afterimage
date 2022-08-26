@@ -39,7 +39,7 @@ Test / publishArtifact := false
 pomIncludeRepository := { _ => false }
 
 pomExtra := (
-  <url>https://github.com/pawelkrol/attitude-afterimage</url>
+  <url>https://github.com/pawelkrol/afterimage</url>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -48,8 +48,8 @@ pomExtra := (
     </license>
   </licenses>
   <scm>
-    <url>git://github.com/pawelkrol/attitude-afterimage</url>
-    <connection>scm:git:git://github.com/pawelkrol/attitude-afterimage.git</connection>
+    <url>git://github.com/pawelkrol/afterimage</url>
+    <connection>scm:git:git://github.com/pawelkrol/afterimage.git</connection>
   </scm>
   <developers>
     <developer>

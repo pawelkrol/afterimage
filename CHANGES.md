@@ -7,6 +7,7 @@ Revision history for `Afterimage`, a Commodore 64 graphics library with a built-
 ---------------------------
 
 * Enhancement: improve error logging by extending `Invalid colour palette: 'foobar' (no such file or template found)` message with a complete list of available colour palette template names
+* Refactoring: update global namespace from `org.c64.attitude` to `com.github.pawelkrol`
 * `Scala` version upgraded to 3.1.3
 * `ScalaTest` version upgraded to 3.2.13
 * `sbt` version upgraded to 1.7.1
