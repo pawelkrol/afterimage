@@ -9,7 +9,7 @@ lazy val root = (project in file(".")).settings(
     "-unchecked",
     "-Xfatal-warnings"),
   scalaVersion := "3.1.3",
-  version := "1.0.0-SNAPSHOT"
+  version := "1.0.0"
 )
 
 maxErrors := 1
