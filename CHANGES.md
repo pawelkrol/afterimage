@@ -7,6 +7,7 @@ Revision history for `Afterimage`, a Commodore 64 graphics library with a built-
 ---------------------------
 
 * Bug fixed: do not throw `NullPointerException: Cannot invoke "java.net.URL.getProtocol()" because "url" is null` exception when loading `Palette` data `fromJson` string in case package JAR resources could not have been successfully retrieved
+* Enhancement: report malformed JSON input when loading `Palette` data `fromJson` string only if it has been truly malformed (throw all other exceptions in a verbatim mode)
 
 1.0.0 (2022-08-26)
 ------------------

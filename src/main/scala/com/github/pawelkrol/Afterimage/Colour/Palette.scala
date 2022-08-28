@@ -3,6 +3,7 @@ package Colour
 
 import org.json4s.{JArray, JObject}
 import org.json4s.MonadicJValue.jvalueToMonadic
+import org.json4s.ParserUtil.ParseException
 import org.json4s.native.JsonMethods.parse
 
 import scala.math.Ordering.Double.TotalOrdering
@@ -98,8 +99,10 @@ object Palette {
 
     val colours = palette.map(item => {
       item match {
-        case colour: JObject => Colour(colour.values)
-        case _ => throw new RuntimeException
+        case colour: JObject =>
+          Colour(colour.values)
+        case _ =>
+          throw new IllegalArgumentException("Invalid colour palette setup: unexpected colour values")
       }
     }).toArray
 
@@ -175,8 +178,8 @@ object Palette {
       parseJSON(json)
     }
     catch {
-      case _: Throwable =>
-        throw new IllegalArgumentException("Invalid colour palette setup: malformed JSON data in input string")
+      case _: ParseException =>
+        throw new IllegalArgumentException("Invalid colour palette setup: malformed JSON data")
     }
   }
 }
