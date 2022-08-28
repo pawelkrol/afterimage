@@ -108,7 +108,7 @@ object Palette {
 
   import org.apache.commons.lang3.StringUtils
 
-  private val availableColourPalettes =
+  private lazy val availableColourPalettes =
     listResources("/palettes").filter(_.endsWith(".json")).map(fileName => "'%s'".format(StringUtils.removeEnd(fileName, ".json"))).mkString(", ")
 
   /** Creates a colour palette from a given JSON configuration file or as

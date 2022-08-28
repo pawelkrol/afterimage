@@ -4,6 +4,7 @@ lazy val root = (project in file(".")).settings(
   scalacOptions ++= Seq(
     "-deprecation",
     "-encoding", "UTF-8",
+    "-explain",
     "-feature",
     "-language:implicitConversions",
     "-unchecked",
