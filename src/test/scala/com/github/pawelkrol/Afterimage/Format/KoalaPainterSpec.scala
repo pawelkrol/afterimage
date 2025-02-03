@@ -73,6 +73,6 @@ class KoalaPainterFormatSpec extends AnyFreeSpec {
   "multicolour data serialization" in {
     val multiColourImage = setupEmptyTestMultiColourData()
     val koalaPainterImage = setupEmptyTestKoalaPainterData()
-    assert(KoalaPainter(multiColourImage) equals koalaPainterImage)
+    assert(KoalaPainter(multiColourImage).equals(koalaPainterImage))
   }
 }

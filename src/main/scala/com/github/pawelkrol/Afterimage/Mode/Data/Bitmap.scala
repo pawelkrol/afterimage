@@ -142,7 +142,7 @@ case class Bitmap(data: Array[Byte], cols: Int, rows: Int) {
 
   override def equals(other: Any) = other match {
     case that: Bitmap =>
-      (that canEqual this) && (this.data.toList == that.data.toList) && (this.cols == that.cols) && (this.rows == that.rows)
+      that.canEqual(this) && this.data.toList == that.data.toList && this.cols == that.cols && this.rows == that.rows
     case _ =>
       false
   }

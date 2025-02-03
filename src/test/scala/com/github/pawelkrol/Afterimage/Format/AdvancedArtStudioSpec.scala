@@ -73,6 +73,6 @@ class AdvancedArtStudioFormatSpec extends AnyFreeSpec {
   "multicolour data serialization" in {
     val multiColourImage = setupEmptyTestMultiColourData()
     val advancedArtStudioImage = setupEmptyTestAdvancedArtStudioData()
-    assert(AdvancedArtStudio(multiColourImage) equals advancedArtStudioImage)
+    assert(AdvancedArtStudio(multiColourImage).equals(advancedArtStudioImage))
   }
 }

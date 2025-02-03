@@ -50,7 +50,7 @@ case class HiRes(
 
   override def equals(other: Any) = other match {
     case that: HiRes =>
-      (that canEqual this) && (this.palette == that.palette)
+      that.canEqual(this) && this.palette == that.palette
     case _ =>
       false
   }

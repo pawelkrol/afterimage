@@ -44,7 +44,7 @@ case class Colour(red: Byte, green: Byte, blue: Byte, name: Option[String]) {
 
   override def equals(other: Any) = other match {
     case that: Colour =>
-      (that canEqual this) && (this.red == that.red) && (this.green == that.green) && (this.blue == that.blue)
+      that.canEqual(this) && this.red == that.red && this.green == that.green && this.blue == that.blue
     case _ =>
       false
   }

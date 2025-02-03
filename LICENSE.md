@@ -1,8 +1,8 @@
 SCALA LICENSE
 =============
 
-Copyright (c) 2002-2022 [EPFL]  
-Copyright (c) 2011-2022 [Lightbend, Inc.]
+Copyright (c) 2002-2025 [EPFL]  
+Copyright (c) 2011-2025 [Lightbend, Inc.]
 
 Scala is licensed under the [Apache License, Version 2.0] (the "License").
 

@@ -66,6 +66,6 @@ class HiResBitmapFormatSpec extends AnyFreeSpec {
   "hires data serialization" in {
     val hiResImage = setupEmptyTestHiResData()
     val hiResBitmapImage = setupEmptyTestHiResBitmapData()
-    assert(HiResBitmap(hiResImage) equals hiResBitmapImage)
+    assert(HiResBitmap(hiResImage).equals(hiResBitmapImage))
   }
 }

@@ -71,6 +71,6 @@ class ArtStudioFormatSpec extends AnyFreeSpec {
   "hires data serialization" in {
     val hiResImage = setupEmptyTestHiResData()
     val ArtStudioImage = setupEmptyTestArtStudioData()
-    assert(ArtStudio(hiResImage) equals ArtStudioImage)
+    assert(ArtStudio(hiResImage).equals(ArtStudioImage))
   }
 }

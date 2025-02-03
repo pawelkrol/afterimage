@@ -74,6 +74,6 @@ class FacePainterFormatSpec extends AnyFreeSpec {
   "multicolour data serialization" in {
     val multiColourImage = setupEmptyTestMultiColourData()
     val facePainterImage = setupEmptyTestFacePainterData()
-    assert(FacePainter(multiColourImage) equals facePainterImage)
+    assert(FacePainter(multiColourImage).equals(facePainterImage))
   }
 }

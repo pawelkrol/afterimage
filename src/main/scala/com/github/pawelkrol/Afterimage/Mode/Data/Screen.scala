@@ -118,7 +118,7 @@ case class Screen(data: Array[Byte], cols: Int, rows: Int) {
 
   override def equals(other: Any) = other match {
     case that: Screen =>
-      (that canEqual this) && (this.data.toList == that.data.toList) && (this.cols == that.cols) && (this.rows == that.rows)
+      that.canEqual(this) && this.data.toList == that.data.toList && this.cols == that.cols && this.rows == that.rows
     case _ =>
       false
   }

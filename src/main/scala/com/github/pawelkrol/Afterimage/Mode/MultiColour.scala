@@ -130,7 +130,7 @@ case class MultiColour(
 
   override def equals(other: Any) = other match {
     case that: MultiColour =>
-      (that canEqual this) && (this.bitmap == that.bitmap) && (this.screen == that.screen) && (this.colors == that.colors) && (this.border == that.border) && (this.bckgrd == that.bckgrd)
+      that.canEqual(this) && this.bitmap == that.bitmap && this.screen == that.screen && this.colors == that.colors && this.border == that.border && this.bckgrd == that.bckgrd
     case _ =>
       false
   }

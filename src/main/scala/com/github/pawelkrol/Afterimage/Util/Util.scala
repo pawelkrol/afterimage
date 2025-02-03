@@ -1,10 +1,10 @@
 package com.github.pawelkrol.Afterimage
 package Util
 
-import collection.JavaConverters.{collectionAsScalaIterableConverter, mapAsJavaMapConverter}
 import java.net.{URI, URL}
 import java.nio.file.{FileSystems, Files, Path, Paths}
 import java.util.stream.Collectors
+import scala.jdk.CollectionConverters.{ListHasAsScala, MapHasAsJava}
 
 import Mode.{HiRes, MultiColour}
 import Mode.Data.{Bitmap, Screen}

@@ -178,7 +178,7 @@ class Piece(
 
   override def equals(other: Any) = other match {
     case that: Piece =>
-      (that canEqual this) && (this.getPixels == that.getPixels)
+      that.canEqual(this) && this.getPixels == that.getPixels
     case _ =>
       false
   }

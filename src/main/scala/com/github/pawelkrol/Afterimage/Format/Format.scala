@@ -119,7 +119,7 @@ trait Format {
     */
   override def equals(other: Any) = other match {
     case that: Format =>
-      (that canEqual this) && (this.addr == that.addr) && (deep(this.data) == deep(that.data))
+      that.canEqual(this) && this.addr == that.addr && deep(this.data) == deep(that.data)
     case _ =>
       false
   }

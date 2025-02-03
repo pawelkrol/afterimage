@@ -63,7 +63,7 @@ case class Palette(colours: Array[Colour]) {
 
   override def equals(other: Any) = other match {
     case that: Palette =>
-      (that canEqual this) && (this.colours.toList == that.colours.toList)
+      that.canEqual(this) && this.colours.toList == that.colours.toList
     case _ =>
       false
   }

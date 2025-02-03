@@ -1,8 +1,8 @@
 package com.github.pawelkrol.Afterimage
 package Mode
 
-import Mode.Data.{Bitmap,Screen}
-import Mode.Data.Row.{HiResRow,Row}
+import Mode.Data.{Bitmap, Screen}
+import Mode.Data.Row.{HiResRow, Row}
 import Util.Util
 
 /** HiRes image data abstraction providing convenient access to the bitmap and screen colours.
@@ -175,7 +175,7 @@ case class HiRes(
 
   override def equals(other: Any) = other match {
     case that: HiRes =>
-      (that canEqual this) && (this.bitmap == that.bitmap) && (this.screen == that.screen) && (this.border == that.border)
+      that.canEqual(this) && this.bitmap == that.bitmap && this.screen == that.screen && this.border == that.border
     case _ =>
       false
   }

@@ -53,7 +53,7 @@ case class MultiColour(
 
   override def equals(other: Any) = other match {
     case that: MultiColour =>
-      (that canEqual this) && (this.backgroundColour == that.backgroundColour) && (this.palette == that.palette)
+      that.canEqual(this) && this.backgroundColour == that.backgroundColour && this.palette == that.palette
     case _ =>
       false
   }

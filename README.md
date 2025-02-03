@@ -6,7 +6,7 @@ Afterimage
 VERSION
 -------
 
-Version 1.0.1-SNAPSHOT (2022-08-28)
+Version 1.0.1-SNAPSHOT (2025-02-03)
 
 PREREQUISITES
 -------------
@@ -240,7 +240,7 @@ The list of currently writable PC file format specifications includes:
 COPYRIGHT AND LICENCE
 ---------------------
 
-Copyright (C) 2013-2022 by Pawel Krol.
+Copyright (C) 2013-2025 by Pawel Krol.
 
 This library is free open source software; you can redistribute it and/or modify it under [the same terms](https://github.com/pawelkrol/afterimage/blob/master/LICENSE.md) as Scala itself, either Scala version 3.1.3 or, at your option, any later version of Scala you may have available.
 

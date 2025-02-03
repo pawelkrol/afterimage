@@ -79,6 +79,6 @@ class AmicaPaintFormatSpec extends AnyFreeSpec {
   "multicolour data serialization" in {
     val multiColourImage = setupEmptyTestMultiColourData()
     val amicaPaintImage = setupEmptyTestAmicaPaintData()
-    assert(AmicaPaint(multiColourImage) equals amicaPaintImage)
+    assert(AmicaPaint(multiColourImage).equals(amicaPaintImage))
   }
 }
