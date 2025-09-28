@@ -9,15 +9,15 @@ lazy val root = (project in file(".")).settings(
     "-language:implicitConversions",
     "-unchecked",
     "-Xfatal-warnings"),
-  scalaVersion := "3.6.3",
+  scalaVersion := "3.7.3",
   version := "1.0.1-SNAPSHOT"
 )
 
 maxErrors := 1
 
 libraryDependencies ++= Seq(
-  "org.apache.commons" % "commons-lang3" % "3.17.0",
-  "gov.nih.imagej" % "imagej" % "1.47",
+  "org.apache.commons" % "commons-lang3" % "3.19.0",
+  "net.imagej" % "ij" % "1.54p",
   "org.json4s" %% "json4s-native" % "4.0.7",
   "org.scalatest" %% "scalatest" % "3.2.19" % "test"
 )

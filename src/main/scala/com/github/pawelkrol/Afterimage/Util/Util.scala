@@ -162,7 +162,9 @@ object Util {
       Paths.get(url.toURI)
     else {
       val strings = url.toString.split("!")
-      FileSystems.newFileSystem(URI.create(strings(0)), Map[String, String]().asJava).getPath(strings(1))
+      val uri: URI = URI.create(strings(0))
+      val env: Map[String, String] = Map[String, String]()
+      FileSystems.newFileSystem(uri, env.asJava).getPath(strings(1))
     }
 
   def listResources(path: String) =

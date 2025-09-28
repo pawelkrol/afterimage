@@ -1,6 +1,8 @@
 TODO
 ====
 
+* Update imagej library
+
 * Conversion from ArtStudio to HiResBitmap doesn't work, because selected pixel/background colours
   may flip between chars. In order to fix it, importing HiResBitmap data should take it into account
   and fix set/clear pixels accordingly.

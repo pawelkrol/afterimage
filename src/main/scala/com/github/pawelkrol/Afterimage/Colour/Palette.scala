@@ -57,7 +57,7 @@ case class Palette(colours: Array[Colour]) {
     *
     * @param colour RGB colour to be resolved into the closest matching C64 hue
     */
-  def get(colour: Colour) = colours.zipWithIndex.minBy(_._1.delta_to(colour))(TotalOrdering)._2
+  def get(colour: Colour) = colours.zipWithIndex.minBy(_._1.delta_to(colour))(using TotalOrdering)._2
 
   def canEqual(that: Any) = that.isInstanceOf[Palette]
 
@@ -81,14 +81,14 @@ object Palette {
     val filename = "/palettes/%s.json".format(name)
     val inputStream = getClass().getResourceAsStream(filename)
 
-    val source = scala.io.Source.fromInputStream(inputStream)(scala.io.Codec.UTF8)
+    val source = scala.io.Source.fromInputStream(inputStream)(using scala.io.Codec.UTF8)
 
     parseJSON(source.mkString)
   }
 
   private def load(file: String) = {
 
-    val source = scala.io.Source.fromFile(file)(scala.io.Codec.UTF8)
+    val source = scala.io.Source.fromFile(file)(using scala.io.Codec.UTF8)
 
     parseJSON(source.mkString)
   }
@@ -109,10 +109,10 @@ object Palette {
     new Palette(colours)
   }
 
-  import org.apache.commons.lang3.StringUtils
+  import org.apache.commons.lang3.Strings.CS.removeEnd
 
   private lazy val availableColourPalettes =
-    listResources("/palettes").filter(_.endsWith(".json")).map(fileName => "'%s'".format(StringUtils.removeEnd(fileName, ".json"))).mkString(", ")
+    listResources("/palettes").filter(_.endsWith(".json")).map(fileName => "'%s'".format(removeEnd(fileName, ".json"))).mkString(", ")
 
   /** Creates a colour palette from a given JSON configuration file or as
     * a fallback from a pre-configured template name (if file does not exist

@@ -122,13 +122,13 @@ class PaletteSpec extends AnyFreeSpec with Matchers {
 
   "direct create palette from json string success" in {
     val fileName = "%s/src/test/resources/palettes/custom.json".format(new File(".").getAbsolutePath())
-    val json = fromFile(fileName)(UTF8).mkString
+    val json = fromFile(fileName)(using UTF8).mkString
     assert(Palette.fromJson(json).isInstanceOf[Palette])
   }
 
   "direct create palette from json string failure" in {
     val fileName = "%s/src/test/resources/palettes/custom.json".format(new File(".").getAbsolutePath())
-    val json = fromFile(fileName)(UTF8).mkString + "malformed"
+    val json = fromFile(fileName)(using UTF8).mkString + "malformed"
     intercept[IllegalArgumentException] { Palette.fromJson(json) }
   }
 }

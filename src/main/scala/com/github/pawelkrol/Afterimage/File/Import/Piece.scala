@@ -138,7 +138,7 @@ class Piece(
       column.map(pixel => {
         // Find which of the most popular colours (colour, bckgrd, screenLo,
         // screenHi) is the closest one to this currently analysed pixel:
-        imageColours.minBy(_._2.delta_to(pixel))(TotalOrdering)
+        imageColours.minBy(_._2.delta_to(pixel))(using TotalOrdering)
       })
     })
 

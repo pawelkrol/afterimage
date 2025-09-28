@@ -6,12 +6,12 @@ Afterimage
 VERSION
 -------
 
-Version 1.0.1-SNAPSHOT (2025-02-03)
+Version 1.0.1-SNAPSHOT (2025-09-28)
 
 PREREQUISITES
 -------------
 
-Besides `scala-library-3` and `scalatest_3-3.2.13`, some of the [Afterimage] functionalities rely upon the following Java image processing toolkit: `imagej-1.47`.
+Besides `scala-library-3` and `scalatest_3-3.2.19`, some of the [Afterimage] functionalities rely upon the following Java image processing toolkit: `imagej-1.54p`.
 
 Dependency management is normally handled automatically by your build tool.
 

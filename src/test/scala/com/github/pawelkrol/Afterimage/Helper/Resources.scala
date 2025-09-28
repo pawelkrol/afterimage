@@ -12,7 +12,7 @@ object Resources {
 
   def testResourceFile(name: String) = new File(testResourcePath(name))
 
-  def testResourceData(file: File) = fromFile(file)(ISO8859).toList
+  def testResourceData(file: File) = fromFile(file)(using ISO8859).toList
 
-  def testResourceData(name: String) = fromFile(testResourceFile(name))(ISO8859).toList
+  def testResourceData(name: String) = fromFile(testResourceFile(name))(using ISO8859).toList
 }

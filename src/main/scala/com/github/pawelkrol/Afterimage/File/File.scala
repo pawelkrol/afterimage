@@ -19,7 +19,7 @@ object File {
   def load(name: String): CBM = {
 
     val file = new java.io.File(name)
-    val source = scala.io.Source.fromFile(file)(scala.io.Codec.ISO8859).toArray
+    val source = scala.io.Source.fromFile(file)(using scala.io.Codec.ISO8859).toArray
 
     val load = source.take(2).map(_.toByte)
     val addr = Address(load.head, load.last);

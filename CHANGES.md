@@ -3,15 +3,17 @@ CHANGES
 
 Revision history for `Afterimage`, a Commodore 64 graphics library with a built-in support for the most common CBM file format specifications, entirely written in [Scala](http://www.scala-lang.org/).
 
-1.0.1-SNAPSHOT (2025-02-03)
+1.0.1-SNAPSHOT (2025-09-28)
 ---------------------------
 
 * Bug fixed: do not throw `NullPointerException: Cannot invoke "java.net.URL.getProtocol()" because "url" is null` exception when loading `Palette` data `fromJson` string in case package JAR resources could not have been successfully retrieved
 * Enhancement: report malformed JSON input when loading `Palette` data `fromJson` string only if it has been truly malformed (throw all other exceptions in a verbatim mode)
-* `Scala` version upgraded to 3.6.3
+* `Scala` version upgraded to 3.7.3
 * `ScalaTest` version upgraded to 3.2.19
-* `sbt` version upgraded to 1.10.7
-* `commons-lang3` version upgraded to 3.17.0
+* `sbt` version upgraded to 1.11.6
+* `sbt-pgp` version upgraded to 2.3.1
+* `commons-lang3` version upgraded to 3.19.0
+* `ImageJ` version upgraded to 1.54p
 * `JSON4S` version upgraded to 4.0.7
 
 1.0.0 (2022-08-26)
