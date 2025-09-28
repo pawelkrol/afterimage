@@ -6,6 +6,7 @@ import org.json4s.MonadicJValue.jvalueToMonadic
 import org.json4s.ParserUtil.ParseException
 import org.json4s.native.JsonMethods.parse
 
+import scala.io.{BufferedSource, Source}
 import scala.math.Ordering.Double.TotalOrdering
 
 import Util.Util.listResources
@@ -79,16 +80,16 @@ object Palette {
   private def build(name: String) = {
 
     val filename = "/palettes/%s.json".format(name)
-    val inputStream = getClass().getResourceAsStream(filename)
+    val inputStream = getClass.getResourceAsStream(filename)
 
-    val source = scala.io.Source.fromInputStream(inputStream)(using scala.io.Codec.UTF8)
+    val source: BufferedSource = Source.fromInputStream(inputStream)(using scala.io.Codec.UTF8)
 
     parseJSON(source.mkString)
   }
 
   private def load(file: String) = {
 
-    val source = scala.io.Source.fromFile(file)(using scala.io.Codec.UTF8)
+    val source = Source.fromFile(file)(using scala.io.Codec.UTF8)
 
     parseJSON(source.mkString)
   }
@@ -131,7 +132,7 @@ object Palette {
           fromTemplate(name)
         }
         catch {
-          case _: IllegalArgumentException =>
+          case e: IllegalArgumentException =>
             throw new IllegalArgumentException("Invalid colour palette: '%s' (no such file or template found, expected one of: %s)".format(name, availableColourPalettes))
           case e: Throwable =>
             throw new RuntimeException("Something went wrong: %s".format(e.getMessage()))

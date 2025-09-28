@@ -1,6 +1,8 @@
 TODO
 ====
 
+* Update scripting docs for Scala 3
+
 * Update imagej library
 
 * Conversion from ArtStudio to HiResBitmap doesn't work, because selected pixel/background colours

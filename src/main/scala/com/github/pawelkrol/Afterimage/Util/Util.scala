@@ -2,7 +2,7 @@ package com.github.pawelkrol.Afterimage
 package Util
 
 import java.net.{URI, URL}
-import java.nio.file.{FileSystems, Files, Path, Paths}
+import java.nio.file.{FileSystemAlreadyExistsException, FileSystems, Files, Path, Paths}
 import java.util.stream.Collectors
 import scala.jdk.CollectionConverters.{ListHasAsScala, MapHasAsJava}
 
@@ -164,7 +164,13 @@ object Util {
       val strings = url.toString.split("!")
       val uri: URI = URI.create(strings(0))
       val env: Map[String, String] = Map[String, String]()
-      FileSystems.newFileSystem(uri, env.asJava).getPath(strings(1))
+      try {
+        FileSystems.newFileSystem(uri, env.asJava).getPath(strings(1))
+      }
+      catch {
+        case _: FileSystemAlreadyExistsException =>
+          FileSystems.getFileSystem(uri).getPath(strings(1))
+      }
     }
 
   def listResources(path: String) =
