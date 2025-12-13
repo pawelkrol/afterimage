@@ -6,7 +6,7 @@ Afterimage
 VERSION
 -------
 
-Version 1.0.1-SNAPSHOT (2025-09-28)
+Version 1.0.1-SNAPSHOT (2025-12-13)
 
 PREREQUISITES
 -------------
