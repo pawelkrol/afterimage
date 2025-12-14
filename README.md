@@ -43,8 +43,10 @@ $ sbt
 > compile
 > test
 > package
-> publishSigned
 > publishLocal
+> publishSigned
+> sonaUpload
+> sonaRelease
 ```
 
 EXAMPLES
